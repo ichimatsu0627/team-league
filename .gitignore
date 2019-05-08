@@ -1,0 +1,31 @@
+# OS
+.DS_Store
+
+# CodeIgniter
+ci/application/cache/*
+ci/application/logs/*
+!ci/application/*/.htaccess
+/vendor/
+
+# Docker
+.mysql
+environment/production/*
+learning_ci/phpmyadmin/*
+## nginx
+learning_ci/var/log/nginx/*
+
+# IDE Files
+/nbproject/
+.idea/*
+
+## Sublime Text cache files
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+/tests/tests/
+/tests/results/
+
+# Other
+!.gitkeep
