@@ -6,20 +6,24 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Cache-Control" content="no-cache" />
     <meta http-equiv="expires" content="0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="black" />
     <meta name="format-detection" content="telephone=no" />
     <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/vnd.microsoft.icon" />
     <!-- css -->
     <link href="/static/css/base.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <?php
         if (isset($css))
         {
             echo css_nocache_tag("/static/css/{$css}.css");
         }
     ?>
-    <!-- js -->
-    <script type="text/javascript" src="/js/jquery-2.1.0.min.js?lf=1"></script>
+    <!-- jQuery読み込み -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <?php echo js_nocache_tag("/static/js/base.js"); ?>
+    <script type="text/javascript" src="/static/js/bootstrap/bootstrap.min.js"></script>
 </head>
 <body>
 <div id="contents">
