@@ -1,4 +1,6 @@
 <h1>Team League</h1>
-<br>
-<img src="/static/images/Leesin.png" width="55px"/><br>
-<br>
+<img src="/static/images/Leesin.png" width="55px"/>
+
+<ul>
+    <li><a href="/login/index">ログイン</a></li>
+</ul>

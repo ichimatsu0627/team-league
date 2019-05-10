@@ -63,12 +63,12 @@ class Base_model extends CI_Model
         return $this->query($sql, []);
     }
 
-    protected function all()
+    public function all()
     {
         return $this->CI->{$this->db_type}->get($this->_table)->result();
     }
 
-    protected function query($sql, $params = [])
+    public function query($sql, $params = [])
     {
         try
         {
@@ -85,7 +85,19 @@ class Base_model extends CI_Model
         return $result;
     }
 
-    protected function query_to_master($sql, $params)
+    public function query_one($sql, $params = [])
+    {
+        $result = $this->query($sql, $params);
+
+        if (empty($result))
+        {
+            return null;
+        }
+
+        return $result[0];
+    }
+
+    public function query_to_master($sql, $params)
     {
         try
         {
@@ -98,7 +110,7 @@ class Base_model extends CI_Model
         return $result;
     }
 
-    protected function insert($data)
+    public function insert($data)
     {
         $table_obj = $this->_table;
         $this->_get_master_db()->insert($table_obj, $data);
@@ -106,7 +118,7 @@ class Base_model extends CI_Model
         return $this->_get_master_db()->insert_id();
     }
 
-    protected function delete($id)
+    public function delete($id)
     {
         return $this->_get_master_db()->where($this->primary_key, $id)->delete($this->_table);
     }
