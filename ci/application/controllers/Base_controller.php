@@ -23,7 +23,7 @@ class Base_controller extends CI_Controller
         $this->load_db();
         $this->load_libraries();
         $this->set_uri();
-        $this->set_page_message();
+        $this->set_notification();
     }
 
     /**
@@ -51,10 +51,10 @@ class Base_controller extends CI_Controller
         $this->action_name     = $RTR->fetch_method();
     }
 
-    private function set_page_message()
+    private function set_notification()
     {
         $c = $this->input->get("c");
-        $this->view["m"] = $this->page->get_message($this->controller_name, $this->action_name, $c);
+        $this->view["notification"] = $this->page->get_notification($this->controller_name, $this->action_name, $c);
     }
 
     public function _redirect($path)

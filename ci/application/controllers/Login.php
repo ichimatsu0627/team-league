@@ -19,6 +19,11 @@ class Login extends Base_controller
     {
         $user_id = $this->input->post('user_id');
 
+        if (empty($this->input->post('password')))
+        {
+            $this->_redirect("/login/index?c=".Page::CODE_FAILED_BY_INVALID_VALUE);
+        }
+
         try {
 
             $t_member = $this->T_members->get_by_userid($user_id);

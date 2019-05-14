@@ -3286,7 +3286,8 @@ Created using IcoMoon - icomoon.io
   border-radius: 0;
   color: #FFFFFF;
   padding-top: .9rem;
-  padding-bottom: .9rem; }
+  padding-bottom: .9rem;
+  margin-top: -20px; }
   .alert .alert-link {
     color: #FFFFFF;
     opacity: .8; }
@@ -4914,9 +4915,6 @@ img {
       right: 1%;
       max-width: 133px;
       top: 99%; } }
-@media screen and (max-width: 517px) {
-  .alert .alert-icon {
-    margin-top: 10px; } }
 @media screen and (min-width: 1200px) {
   .section-images .hero-images-container-1 {
     top: 51%;

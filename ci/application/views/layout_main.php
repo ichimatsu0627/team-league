@@ -17,9 +17,12 @@
     <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/vnd.microsoft.icon" />
     <!-- css -->
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="/assets/css/now-ui-kit.css" rel="stylesheet" />
-    <link href="/assets/css/base.css" rel="stylesheet" type="text/css" />
+<!--    <link href="/assets/css/now-ui-kit.css" rel="stylesheet" />-->
+<!--    <link href="/assets/css/base.css" rel="stylesheet" type="text/css" />-->
     <?php
+        echo css_nocache_tag("/assets/css/now-ui-kit.css");
+        echo css_nocache_tag("/assets/css/base.css");
+
         if (isset($css))
         {
             echo css_nocache_tag("/assets/css/{$css}.css");
@@ -73,7 +76,19 @@
         </div>
     </div>
 </nav>
-
+<?php if (!empty($notification)) { ?>
+    <div class="alert <?php echo $notification["class"];?>" role="alert">
+        <div class="container">
+            <div class="alert-icon">
+                <i class="now-ui-icons ui-1_bell-53"></i>
+            </div><?php echo $notification["message"];?><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">
+                <i class="now-ui-icons ui-1_simple-remove"></i>
+              </span>
+            </button>
+        </div>
+    </div>
+<?php } ?>
 <div class="wrapper">
     <?php echo $content_for_layout; ?>
 </div>
