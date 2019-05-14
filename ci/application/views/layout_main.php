@@ -17,7 +17,7 @@
     <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/vnd.microsoft.icon" />
     <!-- css -->
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="/assets/css/now-ui-kit.css?v=1.3.3" rel="stylesheet" />
+    <link href="/assets/css/now-ui-kit.css" rel="stylesheet" />
     <link href="/assets/css/base.css" rel="stylesheet" type="text/css" />
     <?php
         if (isset($css))
@@ -41,71 +41,40 @@
     <!-- User js-->
     <?php echo js_nocache_tag("/assets/js/base.js"); ?>
 </head>
-<body>
-
-<div id="contents" class="index-page sidebar-collapse">
-    <nav class="navbar navbar-expand-lg bg-primary fixed-top" color-on-scroll="400" style="">
-        <div class="container">
-            <div class="navbar-translate">
-                <a class="navbar-brand" href="https://demos.creative-tim.com/now-ui-kit/index.html" rel="tooltip" title="" data-placement="bottom" target="_blank" data-original-title="Designed by Invision. Coded by Creative Tim">
-                    Now Ui Kit
-                </a>
-                <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="true" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-bar top-bar"></span>
-                    <span class="navbar-toggler-bar middle-bar"></span>
-                    <span class="navbar-toggler-bar bottom-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse justify-content-end collapse show has-image" id="navigation" style="background: url(&quot;./assets/img/blurred-image-1.jpg&quot;) 0% 0% / cover;">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)" onclick="scrollToDownload()">
-                            <i class="now-ui-icons arrows-1_cloud-download-93"></i>
-                            <p>Download</p>
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink1" data-toggle="dropdown">
-                            <i class="now-ui-icons design_app"></i>
-                            <p>Components</p>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink1">
-                            <a class="dropdown-item" href="./index.html">
-                                <i class="now-ui-icons business_chart-pie-36"></i> All components
-                            </a>
-                            <a class="dropdown-item" target="_blank" href="https://demos.creative-tim.com/now-ui-kit/docs/1.0/getting-started/introduction.html">
-                                <i class="now-ui-icons design_bullet-list-67"></i> Documentation
-                            </a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-neutral" href="https://www.creative-tim.com/product/now-ui-kit-pro" target="_blank">
-                            <i class="now-ui-icons arrows-1_share-66"></i>
-                            <p>Upgrade to PRO</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank" data-original-title="Follow us on Twitter">
-                            <i class="fab fa-twitter"></i>
-                            <p class="d-lg-none d-xl-none">Twitter</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/CreativeTim" target="_blank" data-original-title="Like us on Facebook">
-                            <i class="fab fa-facebook-square"></i>
-                            <p class="d-lg-none d-xl-none">Facebook</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com/CreativeTimOfficial" target="_blank" data-original-title="Follow us on Instagram">
-                            <i class="fab fa-instagram"></i>
-                            <p class="d-lg-none d-xl-none">Instagram</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+<body class="sidebar-collapse">
+<nav class="navbar navbar-expand-lg bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="/top/index"><?php echo SITE_TITLE;?></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-bar bar1"></span>
+            <span class="navbar-toggler-bar bar2"></span>
+            <span class="navbar-toggler-bar bar3"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="example-navbar" data-nav-image="assets/img/blurred-image-1.jpg">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <p>Link</p>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <p>
+                            Dropdown
+                        </p>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
+
+<div class="wrapper">
     <?php echo $content_for_layout; ?>
 </div>
 </body>

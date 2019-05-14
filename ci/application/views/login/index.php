@@ -1,7 +1,5 @@
 <div class="container">
-
     <div class="row">
-
         <div class="card card-signup" data-background-color="black">
             <form class="form" action="/login/exec" method="POST">
                 <div class="card-header text-center">
