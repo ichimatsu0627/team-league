@@ -1,6 +1,10 @@
 <?php
 require_once(APPPATH."controllers/Base_controller.php");
 
+/**
+ * Login Controller
+ * @package controllers
+ */
 class Login extends Base_controller
 {
     public function __construct()
@@ -27,18 +31,25 @@ class Login extends Base_controller
         try {
 
             $t_member = $this->T_members->get_by_userid($user_id);
+
+            if (empty($t_member))
+            {
+                throw new Exception("not found t_member");
+            }
+
             if(!password_verify($this->input->post('password'), $t_member->password))
             {
                 throw new Exception("invalid password");
             }
 
-            // セッション保存
+            // ログイン
+            $this->login_lib->save($t_member);
         }
         catch(Exception $e)
         {
             $this->_redirect("/login/index?c=".Page::CODE_FAILED_BY_INVALID_VALUE);
         }
 
-        $this->_redirect("/top/index?c=".Page::CODE_SUCCESS);
+        $this->_redirect("/top/index?c=".Page::CODE_LOGIN);
     }
 }

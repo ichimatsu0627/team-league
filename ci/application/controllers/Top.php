@@ -1,6 +1,10 @@
 <?php
 require_once(APPPATH."controllers/Base_controller.php");
 
+/**
+ * Top Controller
+ * @package controllers
+ */
 class Top extends Base_controller
 {
     public function __construct()
@@ -8,8 +12,8 @@ class Top extends Base_controller
         parent::__construct();
     }
 
-    public function index($my_param = null)
+    public function index()
     {
-        $this->layout->view('top/index', ["my_param" => $my_param]);
+        $this->layout->view('top/index', $this->view);
     }
 }

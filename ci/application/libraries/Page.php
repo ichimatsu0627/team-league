@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Page Library
+ * @package libraries
+ * @property array $messages
+ */
 class Page
 {
     const CODE_NONE                    = 0;
@@ -29,6 +33,13 @@ class Page
         ],
     ];
 
+    /**
+     * get_notification
+     * @param string $controller
+     * @param string $action
+     * @param $code
+     * @return array
+     */
     public function get_notification($controller, $action, $code) : array
     {
         $message = $this->get_message($controller, $action, $code);
@@ -44,6 +55,13 @@ class Page
         ];
     }
 
+    /**
+     * get_message
+     * @param string $controller
+     * @param string $action
+     * @param $code
+     * @return array
+     */
     private function get_message($controller, $action, $code) : string
     {
         if (!isset($this->messages[$controller]))
@@ -64,6 +82,11 @@ class Page
         return $this->messages[$controller][$action][$code];
     }
 
+    /**
+     * get_class
+     * @param $code
+     * @return string
+     */
     private function get_class($code) : string
     {
         if (between($code, 1, 10000))

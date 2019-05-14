@@ -25,7 +25,7 @@
                 </div>
                 <div class="card-footer text-center">
                     <input type="submit" value="Login" class="btn btn-info btn-round btn-lg"><br />
-                    <a href="/account/regist_form"><button class="btn btn-link btn-info">アカウント作成</button></a>
+                    <a href="/account/regist_form" class="btn btn-link btn-info">アカウント作成</a>
                 </div>
             </form>
         </div>

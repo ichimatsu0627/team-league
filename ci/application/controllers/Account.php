@@ -1,8 +1,15 @@
 <?php
 require_once(APPPATH."controllers/Base_controller.php");
 
+/**
+ * Account Controller
+ * @package controllers
+ */
 class Account extends Base_controller
 {
+    /**
+     * Account constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -10,16 +17,25 @@ class Account extends Base_controller
         $this->load->model("T_members");
     }
 
+    /**
+     * regist_form
+     */
     public function regist_form()
     {
         $this->layout->view('account/regist_form', $this->view);
     }
 
+    /**
+     * edit_form
+     */
     public function edit_form()
     {
         $this->layout->view('account/edit_form', $this->view);
     }
 
+    /**
+     * regist
+     */
     public function regist()
     {
         $user_id       = $this->input->post('user_id');
@@ -65,6 +81,9 @@ class Account extends Base_controller
         $this->_redirect("/top/index?c=".Page::CODE_REGISTED);
     }
 
+    /**
+     * edit
+     */
     public function edit()
     {
 
