@@ -46,7 +46,6 @@
 </head>
 <body class="sidebar-collapse">
 <nav class="navbar navbar-expand-lg bg-primary">
-    <div class="container">
         <a class="navbar-brand" href="/top/index"><?php echo SITE_TITLE;?></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar bar1"></span>
@@ -55,7 +54,7 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="example-navbar" data-nav-image="assets/img/blurred-image-1.jpg">
             <ul class="navbar-nav">
-                <?php if (isset($t_member) && !empty($t_member)) { ?>
+                <?php if (isset($member_id) && !empty($member_id)) { ?>
                     <li class="nav-item">
                         <form action="#" method="post">
                             <div class="header-input">
@@ -70,35 +69,46 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <p>Team</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <p>Search</p>
+                            <p>Scrim</p>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="navbarSearchBoardMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <p>
+                                Search Board
+                            </p>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarSearchBoardMenuLink">
+                            <a class="dropdown-item" href="#">Members</a>
+                            <a class="dropdown-item" href="#">Teams</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarAccountMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <p>
                                 Account
                             </p>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <div class="dropdown-menu" aria-labelledby="navbarAccountMenuLink">
                             <a class="dropdown-item" href="#">Profile</a>
                             <a class="dropdown-item" href="#">Team</a>
+                            <a class="dropdown-item" href="/account/logout">Logout</a>
                         </div>
                     </li>
                 <?php } else { ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login/index">
-                            <p>sign in</p>
+                        <a class="nav-link" href="/account/login_form">
+                            <p>Login</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/account/regist_form">
+                            <p>Regist</p>
                         </a>
                     </li>
                 <?php } ?>
             </ul>
         </div>
-    </div>
 </nav>
 <?php if (!empty($notification)) { ?>
     <div class="alert <?php echo $notification["class"];?>" role="alert">

@@ -1,24 +1,26 @@
 <?php
+require_once(APPPATH."libraries/Base_lib.php");
+
 /**
  * Login Library
  * @package libraries
  * @property CI_Controller $CI
  */
-class Login_lib
+class Login_lib extends \Base_lib
 {
-    private $CI;
+    protected $_libraries = [
+        "member_lib",
+    ];
 
     private $nologin_page = [
         "top" => [
             "index",
         ],
-        "login" => [
-            "index",
-            "exec",
-        ],
         "account" => [
             "regist_form",
             "regist",
+            "login_form",
+            "login",
         ],
     ];
 
@@ -27,26 +29,26 @@ class Login_lib
      */
     public function __construct()
     {
-        $this->CI = get_instance();
+        parent::__construct();
     }
 
     /**
      * save
      * @param $t_member
      */
-    public function save($t_member)
+    public function save($member_data)
     {
         // セッション保存
-        $this->CI->session->set_userdata('t_member', $t_member);
+        $this->CI->session->set_userdata(Member_lib::SESSION_KEY, $member_data);
     }
 
     /**
-     * get
-     * @return mixed
+     * validate
+     * @return boolean
      */
-    public function get()
+    public function validate()
     {
-        return $this->CI->session->userdata('t_member');
+        return $this->CI->session->userdata(Member_lib::SESSION_KEY) ? true: false;
     }
 
     /**
@@ -54,7 +56,7 @@ class Login_lib
      */
     public function refresh()
     {
-        $this->CI->session->unsert_userdata('t_member');
+        $this->CI->session->unsert_userdata(Member_lib::SESSION_KEY);
     }
 
     /**

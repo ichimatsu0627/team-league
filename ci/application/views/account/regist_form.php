@@ -1,33 +1,38 @@
-<div class="content-center brand">
+<div class="container">
 
-    <h2>account regist</h2>
+    <h3>Account Regist</h3>
 
-    <form action="/account/regist" method="POST">
-        <table>
-            <tr>
-                <th>user_id</th>
-                <td><input type="text" name="user_id" size="30" maxlength="20"></td>
-            </tr>
-            <tr>
-                <th>name</th>
-                <td><input type="text" name="name" size="20"></td>
-            </tr>
-            <tr>
-                <th>email</th>
-                <td><input type="text" name="email" size="100"></td>
-            </tr>
-            <tr>
-                <th>password</th>
-                <td><input type="password" name="password" size="20"></td>
-            </tr>
-            <tr>
-                <th>confirm password</th>
-                <td><input type="password" name="conf_password" size="20"></td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="submit" value="regist"></td>
-            </tr>
-        </table>
+    <form class="form" action="/account/regist" method="POST">
+        <div class="form-group">
+            <label for="user_id">User id</label>
+            <input type="text" class="form-control" name="user_id" placeholder="user id">
+        </div>
+        <div class="form-group">
+            <label for="name">Nickname</label>
+            <input type="text" class="form-control" name="name" placeholder="nickname">
+        </div>
+        <div class="form-group">
+            <label for="email">email</label>
+            <input type="text" class="form-control" name="email" placeholder="email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" placeholder="password">
+        </div>
+        <div class="form-group">
+            <label for="conf_password">Confirm password</label>
+            <input type="password" class="form-control" name="conf_password" placeholder="confirm password">
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="check">
+                <span class="form-check-sign"></span>
+                Check me out
+            </label>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
     </form>
 
 </div>

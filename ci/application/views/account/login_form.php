@@ -1,9 +1,9 @@
 <div class="container">
     <div class="row">
         <div class="card card-signup" data-background-color="black">
-            <form class="form" action="/login/exec" method="POST">
+            <form class="form" action="/account/login" method="POST">
                 <div class="card-header text-center">
-                    <h3 class="card-title title-up">Sign Up</h3>
+                    <h3 class="card-title title-up">Login</h3>
                 </div>
                 <div class="card-body">
                     <div class="input-group no-border">

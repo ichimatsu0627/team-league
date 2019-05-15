@@ -6,12 +6,12 @@
  * @property Page             $page
  * @property CI_Session       $session
  * @property Login_lib        $login_lib
+ * @property Member_lib       $member_lib
  */
 class Base_controller extends CI_Controller
 {
     public $view = [];
 
-    public $t_member;
     public $controller_name;
     public $action_name;
 
@@ -25,8 +25,9 @@ class Base_controller extends CI_Controller
         $this->load_db();
         $this->load_libraries();
         $this->set_uri();
-        $this->login();
+        $this->login_validate();
         $this->set_notification();
+        $this->set_member_id();
     }
 
     /**
@@ -46,6 +47,7 @@ class Base_controller extends CI_Controller
         $this->load->library("page");
         $this->load->library("session");
         $this->load->library("login_lib");
+        $this->load->library("member_lib");
     }
 
     /**
@@ -61,15 +63,12 @@ class Base_controller extends CI_Controller
     /**
      * ログイン
      */
-    private function login()
+    private function login_validate()
     {
-        $this->t_member = $this->login_lib->get();
-
-        if (empty($this->t_member) && $this->login_lib->is_need_login($this->controller_name, $this->action_name))
+        if ($this->login_lib->is_need_login($this->controller_name, $this->action_name) && $this->login_lib->validate())
         {
-            $this->_redirect("/login/index");
+            $this->_redirect("/account/login_form");
         }
-        $this->view["t_member"] = $this->t_member;
     }
 
     /**
@@ -79,6 +78,15 @@ class Base_controller extends CI_Controller
     {
         $c = $this->input->get("c");
         $this->view["notification"] = $this->page->get_notification($this->controller_name, $this->action_name, $c);
+    }
+
+    /**
+     * 会員情報をviewにセットする
+     */
+    private function set_member_id()
+    {
+        $this->member_id = $this->member_lib->get_id_by_session();
+        $this->view["member_id"] = $this->member_id;
     }
 
     /**

@@ -10,9 +10,11 @@ class Page
     const CODE_SUCCESS                 = 1;
     const CODE_FAILED                  = 2;
     const CODE_LOGIN                   = 10001;
-    const CODE_REGISTED                = 10002;
+    const CODE_LOGOUT                  = 10002;
+    const CODE_REGISTED                = 10003;
     const CODE_FAILED_BY_INVALID_VALUE = 20001;
-    const CODE_FAILED_BY_NOT_ENOUGHT   = 20002;
+    const CODE_FAILED_BY_NOT_ENOUGH    = 20002;
+    const CODE_FAILED_BY_EXISTS        = 20003;
 
     private $messages = [
         "top" => [
@@ -21,14 +23,15 @@ class Page
                 self::CODE_REGISTED => "登録完了",
             ],
         ],
-        "login" => [
-            "index" => [
-                self::CODE_FAILED_BY_INVALID_VALUE => "認証に失敗しました",
-            ],
-        ],
-        "user" => [
+        "account" => [
             "regist_form" => [
+                self::CODE_FAILED_BY_NOT_ENOUGH    => "入力項目に誤りがあります",
                 self::CODE_FAILED_BY_INVALID_VALUE => "アカウントの作成に失敗しました",
+                self::CODE_FAILED_BY_EXISTS        => "指定された User Id は既に登録されています",
+            ],
+            "login_form" => [
+                self::CODE_LOGOUT                  => "ログアウトしました",
+                self::CODE_FAILED_BY_INVALID_VALUE => "認証に失敗しました",
             ],
         ],
     ];
