@@ -48,11 +48,11 @@ class Login_lib extends \Base_lib
      */
     public function validate()
     {
-        return $this->CI->session->userdata(Member_lib::SESSION_KEY) ? true: false;
+        return $this->CI->session->has_userdata(Member_lib::SESSION_KEY);
     }
 
     /**
-     *refresh
+     * refresh
      */
     public function refresh()
     {
