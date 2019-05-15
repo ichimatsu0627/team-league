@@ -65,7 +65,7 @@ class Base_controller extends CI_Controller
      */
     private function login_validate()
     {
-        if ($this->login_lib->is_need_login($this->controller_name, $this->action_name) && $this->login_lib->validate())
+        if ($this->login_lib->is_need_login($this->controller_name, $this->action_name) && !$this->login_lib->validate())
         {
             $this->_redirect("/account/login_form");
         }

@@ -56,7 +56,7 @@ class Login_lib extends \Base_lib
      */
     public function refresh()
     {
-        $this->CI->session->unsert_userdata(Member_lib::SESSION_KEY);
+        $this->CI->session->unset_userdata(Member_lib::SESSION_KEY);
     }
 
     /**
