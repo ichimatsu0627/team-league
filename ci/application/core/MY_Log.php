@@ -3,9 +3,15 @@ class MY_Log extends CI_Log {
 
     private function _write_log($level, $msg)
     {
-        $category = isset($this->_levels[$level]) ? '' : $level.'-';
+        if (isset($this->_levels[$level]))
+        {
+            $filepath = $this->_log_path.'log-'.date('Y-m-d').'.'.$this->_file_ext;
+        }
+        else
+        {
+            $filepath = $this->_log_path.$level.'.'.$this->_file_ext;
+        }
 
-        $filepath = $this->_log_path.'log-'.$category.date('Y-m-d').'.'.$this->_file_ext;
         $message = '';
 
         if ( ! file_exists($filepath))
@@ -75,12 +81,14 @@ class MY_Log extends CI_Log {
             return FALSE;
         }
 
-        $level = strtoupper($level);
+        $upper_level = strtoupper($level);
 
-        if ( ! isset($this->_levels[$level]))
+        if ( ! isset($this->_levels[$upper_level]))
         {
             return $this->_write_log($level, $msg);
         }
+
+        $level = $upper_level;
 
         if (
             isset($this->_levels[$level])
