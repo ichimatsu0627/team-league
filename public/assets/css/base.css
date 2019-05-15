@@ -1,4 +1,12 @@
 .wrapper {
   margin-top: 5%; }
 
+.header-thumbnail {
+  width: 30px;
+  height: 30px; }
+
+.header-input {
+  padding: 0.5rem 0.7rem;
+  line-height: 1.625rem; }
+
 /*# sourceMappingURL=base.css.map */

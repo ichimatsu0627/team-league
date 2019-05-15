@@ -53,25 +53,49 @@
             <span class="navbar-toggler-bar bar2"></span>
             <span class="navbar-toggler-bar bar3"></span>
         </button>
-        <div class="collapse navbar-collapse" id="example-navbar" data-nav-image="assets/img/blurred-image-1.jpg">
+        <div class="collapse navbar-collapse justify-content-end" id="example-navbar" data-nav-image="assets/img/blurred-image-1.jpg">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <p>Link</p>
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <p>
-                            Dropdown
-                        </p>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
+                <?php if (isset($t_member) && !empty($t_member)) { ?>
+                    <li class="nav-item">
+                        <form action="#" method="post">
+                            <div class="header-input">
+                                <input type="text" class="form-control" name="keyword" placeholder="keyword">
+                            </div>
+                        </form>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <p>League</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <p>Team</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <p>Search</p>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <p>
+                                Account
+                            </p>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Profile</a>
+                            <a class="dropdown-item" href="#">Team</a>
+                        </div>
+                    </li>
+                <?php } else { ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login/index">
+                            <p>sign in</p>
+                        </a>
+                    </li>
+                <?php } ?>
             </ul>
         </div>
     </div>
