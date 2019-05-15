@@ -12,6 +12,7 @@ class Base_controller extends CI_Controller
 {
     public $view = [];
 
+    public $member_id;
     public $controller_name;
     public $action_name;
 
@@ -87,6 +88,15 @@ class Base_controller extends CI_Controller
     {
         $this->member_id = $this->member_lib->get_id_by_session();
         $this->view["member_id"] = $this->member_id;
+    }
+
+    /**
+     * requireする
+     * @param $filepath
+     */
+    public function require_lib($filepath)
+    {
+        require_once(APPPATH."library/".$filepath.".php");
     }
 
     /**

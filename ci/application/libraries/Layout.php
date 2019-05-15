@@ -3,7 +3,7 @@
 /**
  * Layout Library
  * @package libraries
- * @property $obj
+ * @property CI_Controller $obj
  * @property $layout
  */
 class Layout

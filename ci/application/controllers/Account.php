@@ -43,7 +43,9 @@ class Account extends Base_controller
      */
     public function edit_form()
     {
-        $this->load->model("T_member_platforms");
+        $member = $this->member_lib->get_member($this->member_id);
+
+        $this->view["member"] = $member;
         $this->layout->view('account/edit_form', $this->view);
     }
 
@@ -145,7 +147,7 @@ class Account extends Base_controller
             }
 
             // ログイン
-            $this->login_lib->save($t_member);
+            $this->login_lib->save($t_member->id);
         }
         catch(Exception $e)
         {

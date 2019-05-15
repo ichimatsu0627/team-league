@@ -23,6 +23,16 @@ class Member_lib extends Base_lib
     }
 
     /**
+     * 会員ID取得
+     * @param $id
+     * @return mixed
+     */
+    public function get_member($id)
+    {
+        return $this->CI->T_members->get_by_id($id);
+    }
+
+    /**
      * save
      * @param $t_member
      */
@@ -31,6 +41,11 @@ class Member_lib extends Base_lib
         return $this->CI->session->userdata(self::SESSION_KEY);
     }
 
+    /**
+     * regist
+     * @param array $data
+     * @return null
+     */
     public function regist($data = [])
     {
         if (empty($data))
