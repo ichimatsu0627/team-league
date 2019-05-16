@@ -3,10 +3,8 @@ require_once(APPPATH."libraries/Base_lib.php");
 
 /**
  * Login Library
- * @package libraries
- * @property CI_Controller $CI
  */
-class Login_lib extends \Base_lib
+class Login_lib extends Base_lib
 {
     protected $_libraries = [
         "member_lib",
@@ -21,6 +19,10 @@ class Login_lib extends \Base_lib
             "regist",
             "login_form",
             "login",
+        ],
+        "err" => [
+            "general",
+            "not_found",
         ],
     ];
 

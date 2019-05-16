@@ -3,7 +3,6 @@ require_once(APPPATH."controllers/Base_controller.php");
 
 /**
  * Account Controller
- * @package controllers
  */
 class Account extends Base_controller
 {
@@ -18,8 +17,22 @@ class Account extends Base_controller
     /**
      * profile
      */
-    public function profile()
+    public function profile($member_id = null)
     {
+        if (empty($member_id))
+        {
+            $member_id = $this->member_id;
+        }
+        $member = $this->member_lib->get_member($member_id);
+
+        if (empty($member))
+        {
+            $this->_redirect("/err/not_found");
+        }
+
+        $this->view["member"] = $member;
+        $this->view["platforms"] = $this->platform_lib->platforms;
+        $this->layout->view('account/profile', $this->view);
     }
 
     /**
@@ -35,6 +48,7 @@ class Account extends Base_controller
      */
     public function regist_form()
     {
+        $this->view["platforms"] = $this->platform_lib->platforms;
         $this->layout->view('account/regist_form', $this->view);
     }
 
@@ -46,6 +60,7 @@ class Account extends Base_controller
         $member = $this->member_lib->get_member($this->member_id);
 
         $this->view["member"] = $member;
+        $this->view["platforms"] = $this->platform_lib->platforms;
         $this->layout->view('account/edit_form', $this->view);
     }
 
@@ -54,18 +69,31 @@ class Account extends Base_controller
      */
     public function regist()
     {
-        $user_id       = $this->input->post('user_id');
-        $name          = $this->input->post('name');
-        $email         = $this->input->post('email');
-        $password_hash = password_hash($this->input->post('password'), PASSWORD_BCRYPT);
-        $check         = $this->input->post('check');
+        $member_data = [
+            "user_id"  => $this->input->post('user_id'),
+            "name"     => $this->input->post('name'),
+            "email"    => $this->input->post('email'),
+            "password" => password_hash($this->input->post('password'), PASSWORD_BCRYPT)
+        ];
 
-        if (empty($user_id) ||
-            empty($name) ||
-            empty($email) ||
-            empty($check) ||
-            empty($this->input->post('password')) ||
-            empty($this->input->post('conf_password')))
+        $platform_data = [];
+        foreach($this->platform_lib->platforms as $pf)
+        {
+            $pfid = $this->input->post("pf-".$pf->id);
+            if (isset($pfid))
+            {
+                $platform_data[$pf->id] = $pfid;
+            }
+        }
+
+        $check = $this->input->post('check');
+
+        if (!$this->member_lib->validate_regist_memberdata($member_data))
+        {
+            $this->_redirect("/account/regist_form?c=".Page::CODE_FAILED_BY_NOT_ENOUGH);
+        }
+
+        if (empty($check))
         {
             $this->_redirect("/account/regist_form?c=".Page::CODE_FAILED_BY_NOT_ENOUGH);
         }
@@ -78,27 +106,21 @@ class Account extends Base_controller
         try
         {
             $c = Page::CODE_NONE;
-            $t_member = $this->T_members->get_by_userid($user_id);
 
-            if (!empty($t_member))
+            if ($this->member_lib->exists_member($member_data["user_id"]))
             {
                 $c = Page::CODE_FAILED_BY_EXISTS;
                 throw new Exception("already used id");
             }
 
-            if(!password_verify($this->input->post('conf_password'), $password_hash))
+            if(!password_verify($this->input->post('conf_password'), $member_data["password"]))
             {
                 $c = Page::CODE_FAILED_BY_INVALID_VALUE;
                 throw new Exception("invalid password");
             }
 
             // データ作成
-            $id = $this->member_lib->regist([
-                "user_id"  => $user_id,
-                "name"     => $name,
-                "email"    => $email,
-                "password" => $password_hash
-            ]);
+            $id = $this->member_lib->regist($member_data, $platform_data);
 
             if (empty($id))
             {
@@ -175,7 +197,7 @@ class Account extends Base_controller
     /**
      * edit_profile
      */
-    public function edit_profile()
+    public function edit()
     {
 
     }

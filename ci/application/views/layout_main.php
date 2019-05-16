@@ -56,9 +56,14 @@
             <ul class="navbar-nav">
                 <?php if (isset($member_id) && !empty($member_id)) { ?>
                     <li class="nav-item">
-                        <form action="#" method="post">
-                            <div class="header-input">
-                                <input type="text" class="form-control" name="keyword" placeholder="keyword">
+                        <form action="#" method="post" style="margin: auto 7px;">
+                            <div class="input-group no-border" style="margin-bottom: 0px;">
+                                <div class="input-group-prepend search-keyword-form">
+                                  <span class="input-group-text">
+                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
+                                  </span>
+                                </div>
+                                <input type="text" class="form-control search-keyword-form" style="padding: 11px 5px;" name="keyword" placeholder="keyword">
                             </div>
                         </form>
                     </li>
@@ -90,7 +95,7 @@
                             </p>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarAccountMenuLink">
-                            <a class="dropdown-item" href="#">Profile</a>
+                            <a class="dropdown-item" href="/account/profile">Profile</a>
                             <a class="dropdown-item" href="#">Team</a>
                             <a class="dropdown-item" href="/account/logout">Logout</a>
                         </div>

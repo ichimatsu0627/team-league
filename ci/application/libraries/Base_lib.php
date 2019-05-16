@@ -8,6 +8,7 @@
 
 /**
  * Class Base_lib
+ * @property CI_Controller $CI
  * @property array $modals
  * @property array $libraries
  */

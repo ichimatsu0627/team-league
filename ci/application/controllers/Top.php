@@ -3,7 +3,6 @@ require_once(APPPATH."controllers/Base_controller.php");
 
 /**
  * Top Controller
- * @package controllers
  */
 class Top extends Base_controller
 {

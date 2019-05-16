@@ -12,7 +12,7 @@
                             <i class="now-ui-icons users_circle-08"></i>
                           </span>
                         </div>
-                        <input type="text" name="user_id" maxlength="30" value="" placeholder="User ID" class="form-control" >
+                        <input type="text" name="user_id" maxlength="30" value="" placeholder="<?php echo mb_strtolower(USER_ID_NAME);?>" class="form-control" >
                     </div>
                     <div class="input-group no-border">
                         <div class="input-group-prepend">
@@ -20,12 +20,12 @@
                                 <i class="now-ui-icons text_caps-small"></i>
                               </span>
                         </div>
-                        <input type="password" name="password" maxlength="20" value="" placeholder="Password" class="form-control" >
+                        <input type="password" name="password" maxlength="20" value="" placeholder="<?php echo mb_strtolower(PASSWORD_NAME);?>" class="form-control" >
                     </div>
                 </div>
                 <div class="card-footer text-center">
                     <input type="submit" value="Login" class="btn btn-info btn-round btn-lg"><br />
-                    <a href="/account/regist_form" class="btn btn-link btn-info">アカウント作成</a>
+                    <a href="/account/regist_form" class="btn btn-link btn-info">create account</a>
                 </div>
             </form>
         </div>

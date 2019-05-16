@@ -49,6 +49,7 @@ class Base_controller extends CI_Controller
         $this->load->library("session");
         $this->load->library("login_lib");
         $this->load->library("member_lib");
+        $this->load->library("platform_lib");
     }
 
     /**
