@@ -23,7 +23,7 @@
             <input type="text" class="form-control" name="user_id" placeholder="<?php echo mb_strtolower(USER_ID_NAME);?>">
         </div>
         <div class="form-group">
-            <label for="password"><?php echo PASSWORD_NAME;?><small style="color: red;"> ※ required</small></label>
+            <label for="password"><?php echo PASSWORD_NAME;?><small style="color: red;"> ※ required</small><br /><small>Make sure it's at least 8 characters.</small></label>
             <input type="password" class="form-control" name="password" placeholder="<?php echo mb_strtolower(PASSWORD_NAME);?>">
         </div>
         <div class="form-group">

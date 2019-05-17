@@ -14,6 +14,9 @@ class Member_lib extends Base_lib
 
     const SESSION_KEY = "member";
 
+    const PASSWORD_CHARA_MIN = 6;
+    const PASSWORD_CHARA_MAX = 20;
+
     /**
      * Login constructor.
      */
@@ -46,6 +49,11 @@ class Member_lib extends Base_lib
         return $this->CI->session->userdata(self::SESSION_KEY);
     }
 
+    /**
+     * 入力値 チェック
+     * @param $data
+     * @return bool
+     */
     public function validate_regist_memberdata($data)
     {
         if (!isset($data["user_id"]) || empty($data["user_id"]))
@@ -76,9 +84,24 @@ class Member_lib extends Base_lib
      * @param $user_id
      * @return bool
      */
-    public function exists_member($user_id)
+    public function exists_member_by_user_id($user_id)
     {
         if (!empty($this->CI->T_members->get_by_user_id($user_id)))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * メールアドレスが重複していないか
+     * @param $email
+     *
+     */
+    public function exists_member_by_email($email)
+    {
+        if (!empty($this->CI->T_members->get_by_email($email)))
         {
             return true;
         }

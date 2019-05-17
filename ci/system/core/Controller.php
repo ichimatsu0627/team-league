@@ -95,6 +95,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property CI_Utf8             $utf8                                Provides support for UTF-8 environments
  * @property Ispconfig           $ispconfig                           This class enables you to use the ISPConfig 3 Remote API
  * @property Boleto              $boleto                              Boleto Class
+ *
+ * ---- models ----
+ * @property M_platforms        $M_platforms
+ * @property T_members          $T_members
+ * @property T_member_platforms $T_member_platforms
+ * @property T_teams            $T_teams
+ * @property T_team_members     $T_team_members
  */
 class CI_Controller {
 

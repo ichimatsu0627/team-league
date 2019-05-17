@@ -107,10 +107,16 @@ class Account extends Base_controller
         {
             $c = Page::CODE_NONE;
 
-            if ($this->member_lib->exists_member($member_data["user_id"]))
+            if ($this->member_lib->exists_member_by_user_id($member_data["user_id"]))
             {
-                $c = Page::CODE_FAILED_BY_EXISTS;
-                throw new Exception("already used id");
+                $c = Page::CODE_FAILED_BY_EXISTS_USER_ID;
+                throw new Exception("duplicate used id");
+            }
+
+            if ($this->member_lib->exists_member_by_email($member_data["email"]))
+            {
+                $c = Page::CODE_FAILED_BY_EXISTS_EMAIL;
+                throw new Exception("duplicate email");
             }
 
             if(!password_verify($this->input->post('conf_password'), $member_data["password"]))
