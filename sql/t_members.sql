@@ -8,5 +8,6 @@ CREATE TABLE `t_members` (
   `ban` tinyint(1) NOT NULL DEFAULT '0',
   `del_flg` tinyint(1) NOT NULL DEFAULT '0' COMMENT '削除フラグ',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
