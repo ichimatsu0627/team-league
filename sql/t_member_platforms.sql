@@ -7,6 +7,6 @@ CREATE TABLE `t_member_platforms` (
   `created` datetime NOT NULL COMMENT '作成日時',
   `modified` datetime NOT NULL COMMENT '更新日時',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `platform_id` (`m_platform_id`,`pfid`),
-  KEY `t_member_id` (`t_member_id`)
+  KEY `t_member_id` (`t_member_id`),
+  KEY `platform` (`m_platform_id`,`pfid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -4,7 +4,7 @@ CREATE TABLE `m_platforms` (
   `id_name` varchar(100) NOT NULL COMMENT 'プラットフォームのIDの名前',
   `del_flg` tinyint(1) NOT NULL DEFAULT '0' COMMENT '削除フラグ',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `m_platforms` (`id`, `name`, `id_name`, `del_flg`)
 VALUES
