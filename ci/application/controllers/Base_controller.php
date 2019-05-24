@@ -11,7 +11,7 @@
  * @property Page             $page
  * @property Login_lib        $login_lib
  * @property Member_lib       $member_lib
- *
+ * @property Platform_lib     $platform_lib
  */
 class Base_controller extends CI_Controller
 {
@@ -49,9 +49,9 @@ class Base_controller extends CI_Controller
      */
     private function load_libraries()
     {
+        $this->load->library("session");
         $this->load->library("layout");
         $this->load->library("page");
-        $this->load->library("session");
         $this->load->library("login_lib");
         $this->load->library("member_lib");
         $this->load->library("platform_lib");
@@ -63,12 +63,12 @@ class Base_controller extends CI_Controller
     private function set_uri()
     {
         $RTR                   =& load_class('Router', 'core');
-        $this->controller_name = $RTR->fetch_class();
-        $this->action_name     = $RTR->fetch_method();
+        $this->controller_name =  $RTR->fetch_class();
+        $this->action_name     =  $RTR->fetch_method();
     }
 
     /**
-     * ログイン
+     * ログイン チェック
      */
     private function login_validate()
     {

@@ -90,26 +90,21 @@ class Account extends Base_controller
 
         try
         {
-            $this->T_members->trans_begin();
+            $this->member_lib->begin();
 
-            $c = Page::CODE_NONE;
-
-            if ($this->member_lib->exists_member_by_user_id($member_data["user_id"]))
+            if ($this->member_lib->exists_member_by_login_id($member_data["login_id"]))
             {
-                $c = Page::CODE_FAILED_BY_EXISTS_USER_ID;
-                throw new Exception("duplicate used id");
+                throw new Exception("duplicate used id", Page::CODE_FAILED_BY_EXISTS_USER_ID);
             }
 
             if ($this->member_lib->exists_member_by_email($member_data["email"]))
             {
-                $c = Page::CODE_FAILED_BY_EXISTS_EMAIL;
-                throw new Exception("duplicate email");
+                throw new Exception("duplicate email", Page::CODE_FAILED_BY_EXISTS_EMAIL);
             }
 
             if(!password_verify($this->input->post('conf_password'), $member_data["password"]))
             {
-                $c = Page::CODE_FAILED_BY_INVALID_VALUE;
-                throw new Exception("invalid password");
+                throw new Exception("invalid password", Page::CODE_FAILED_BY_INVALID_VALUE);
             }
 
             // データ作成
@@ -117,18 +112,18 @@ class Account extends Base_controller
 
             if (empty($id))
             {
-                $c = Page::CODE_FAILED_BY_INVALID_VALUE;
-                throw new Exception("Fail regist");
+                throw new Exception("Fail regist", Page::CODE_FAILED_BY_INVALID_VALUE);
             }
 
             // ログインしとく
             $this->login_lib->save($id);
 
-            $this->T_members->trans_commit();
+            $this->member_lib->commit();
         }
         catch (Exception $e)
         {
-            $this->T_members->trans_rollback();
+            $this->member_lib->rollback();
+            $c = $e->getCode();
             $this->_redirect("/account/regist_form?c=".$c);
         }
 
@@ -136,11 +131,53 @@ class Account extends Base_controller
     }
 
     /**
+     * edit_profile
+     */
+    public function edit()
+    {
+        $id = $this->input->post("id");
+
+        if (empty($id))
+        {
+            $this->_redirect("/account/profile");
+        }
+
+        if ($id != $this->member_id)
+        {
+            $this->_redirect("/account/profile/".$id);
+        }
+
+        $member = $this->member_lib->get_member($this->member_id);
+
+        $member_data   = $this->input_member_post();
+        $platform_data = $this->input_platform_post();
+
+        try
+        {
+            $this->member_lib->begin();
+
+            $this->member_lib->lock($this->member_id);
+
+            $this->member_lib->update($member, $member_data, $platform_data);
+
+            $this->member_lib->commit();
+        }
+        catch(Exception $e)
+        {
+            $this->member_lib->rollback();
+            $c = $e->getCode() ?? Page::CODE_FAILED_BY_INVALID_VALUE;
+            $this->_redirect("/account/edit_form?c=".$c);
+        }
+
+        $this->_redirect("/account/profile?c=".Page::CODE_EDITED);
+    }
+
+    /**
      * login
      */
     public function login()
     {
-        $user_id = $this->input->post('user_id');
+        $login_id = $this->input->post('login_id');
 
         if (empty($this->input->post('password')))
         {
@@ -149,7 +186,7 @@ class Account extends Base_controller
 
         try
         {
-            $t_member = $this->member_lib->get_by_userid($user_id);
+            $t_member = $this->member_lib->get_by_login_id($login_id);
 
             if (empty($t_member))
             {
@@ -188,53 +225,13 @@ class Account extends Base_controller
     }
 
     /**
-     * edit_profile
-     */
-    public function edit()
-    {
-        $id = $this->input->post("id");
-
-        if (empty($id))
-        {
-            $this->_redirect("/account/profile");
-        }
-
-        if ($id != $this->member_id)
-        {
-            $this->_redirect("/account/profile/".$id);
-        }
-
-        $member = $this->member_lib->get_member($this->member_id);
-
-        $member_data   = $this->input_member_post();
-        $platform_data = $this->input_platform_post();
-
-        try
-        {
-            $this->T_members->trans_begin();
-
-            $this->member_lib->update($member, $member_data, $platform_data);
-
-            $this->T_members->trans_commit();
-        }
-        catch(Exception $e)
-        {
-            $this->T_members->trans_rollback();
-
-            $this->_redirect("/account/edit_form?c=".Page::CODE_FAILED_BY_INVALID_VALUE);
-        }
-
-        // $this->_redirect("/account/profile?c=".Page::CODE_EDITED);
-    }
-
-    /**
      * 会員データPOST取得
      * @return array
      */
     private function input_member_post()
     {
         $member_data = [
-            "user_id"  => $this->input->post('user_id'),
+            "login_id"  => $this->input->post('login_id'),
             "name"     => $this->input->post('name'),
             "email"    => $this->input->post('email'),
             "password" => password_hash($this->input->post('password'), PASSWORD_BCRYPT)

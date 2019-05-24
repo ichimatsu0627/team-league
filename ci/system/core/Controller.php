@@ -102,6 +102,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property T_member_platforms $T_member_platforms
  * @property T_teams            $T_teams
  * @property T_team_members     $T_team_members
+ * @property T_member_locks     $T_member_locks
  */
 class CI_Controller {
 

@@ -10,6 +10,7 @@ class Member_lib extends Base_lib
     protected $_models = [
         "T_members",
         "T_member_platforms",
+        "T_member_locks",
     ];
 
     const SESSION_KEY = "member";
@@ -40,12 +41,12 @@ class Member_lib extends Base_lib
 
     /**
      * ユーザーIDで会員データを取得
-     * @param $user_id
+     * @param $login_id
      * @return object
      */
-    public function get_by_userid($user_id)
+    public function get_by_login_id($login_id)
     {
-        $member = $this->CI->T_members->get_by_user_id($user_id);
+        $member = $this->CI->T_members->get_by_login_id($login_id);
         $member = $this->add_platform($member);
 
         return $member;
@@ -67,7 +68,7 @@ class Member_lib extends Base_lib
      */
     public function validate_regist_memberdata($data)
     {
-        if (!isset($data["user_id"]) || empty($data["user_id"]))
+        if (!isset($data["login_id"]) || empty($data["login_id"]))
         {
             return false;
         }
@@ -92,12 +93,12 @@ class Member_lib extends Base_lib
 
     /**
      * ユーザーIDが重複してないか
-     * @param $user_id
+     * @param $login_id
      * @return bool
      */
-    public function exists_member_by_user_id($user_id)
+    public function exists_member_by_login_id($login_id)
     {
-        if (!empty($this->CI->T_members->get_by_user_id($user_id)))
+        if (!empty($this->CI->T_members->get_by_login_id($login_id)))
         {
             return true;
         }
@@ -159,8 +160,6 @@ class Member_lib extends Base_lib
             return true;
         }, ARRAY_FILTER_USE_BOTH);
 
-        print_r($update_platform_data);
-
         $insert_platform_data = array_filter($platform_data, function($v, $k) use($member) {
             if ($v == null) return false;
             if (isset($member->platforms[$k])) return false;
@@ -169,13 +168,18 @@ class Member_lib extends Base_lib
 
         if (!empty($update_member_data))
         {
-            $this->CI->T_members->update($member->id, $update_member_data);
+            $this->CI->T_members->update($member->id, array_merge($update_member_data, ["modified" => now()]));
         }
 
         if (!empty($update_platform_data))
         {
             foreach($update_platform_data as $m_platform_id => $pfid)
             {
+                if (!empty($this->CI->T_member_platforms->get_by_platform_id($m_platform_id, $pfid)))
+                {
+                    throw new Exception("already registed", Page::CODE_FAILED_BY_EXISTS_PLATFORM_ID);
+                }
+
                 $this->CI->T_member_platforms->update_platform($member->id, $m_platform_id, $pfid);
             }
         }
@@ -193,15 +197,56 @@ class Member_lib extends Base_lib
      */
     public function regist($member_data, $platform_data)
     {
+        // 会員データ作成
         $id = $this->CI->T_members->insert([
-            "user_id"  => $member_data["use_id"],
+            "login_id"  => $member_data["login_id"],
             "name"     => $member_data["name"],
             "email"    => $member_data["email"],
             "password" => $member_data["password"],
+            "created"  => now(),
+            "modified" => now(),
         ]);
+
+        // プラットフォームデータ作成
         $this->CI->T_member_platforms->regist($id, $platform_data);
 
+        // ロックデータ作成
+        $this->CI->T_member_locks->insert(["id" => $id, "created" => now(), "modified" => now()]);
+
         return $id;
+    }
+
+    /**
+     * トランザクション開始
+     */
+    public function begin()
+    {
+        return $this->CI->T_members->trans_begin();
+    }
+
+    /**
+     * コミット
+     */
+    public function commit()
+    {
+        return $this->CI->T_members->trans_commit();
+    }
+
+    /**
+     * ロールバック
+     */
+    public function rollback()
+    {
+        return $this->CI->T_members->trans_rollback();
+    }
+
+    /**
+     * ロック
+     * @param $id
+     */
+    public function lock($id)
+    {
+        $this->CI->T_member_locks->get_lock($id);
     }
 
     /**

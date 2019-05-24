@@ -11,7 +11,7 @@
     </div>
     <div class="form-group">
         <label><?php echo USER_ID_NAME;?></label>
-        <p><?php echo $member->user_id;?></p>
+        <p><?php echo $member->login_id;?></p>
     </div>
     <?php if ($member_id == $member->id) { ?>
         <div class="form-group">

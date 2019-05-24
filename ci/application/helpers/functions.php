@@ -25,3 +25,17 @@ if ( ! function_exists('between'))
         return true;
     }
 }
+
+if ( ! function_exists('now'))
+{
+    /**
+     * 現在の日時取得
+     *
+     * @return string
+     */
+    function now()
+    {
+        return date("Y-m-d H:i:s");
+    }
+}
+

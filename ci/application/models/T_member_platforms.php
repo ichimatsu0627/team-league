@@ -7,7 +7,7 @@ require_once(APPPATH."models/Tran_model.php");
 class T_member_platforms extends Tran_model
 {
     /**
-     * get_by_userid
+     * get_by_member_id
      * @param int $member_id
      * @return array
      */
@@ -19,10 +19,10 @@ class T_member_platforms extends Tran_model
             FROM
                 `{$this->_table}`
             WHERE
-                `t_member_id` = ?;
+                `t_member_id` = ? AND del_flg = ?;
         ";
 
-        return $this->query($sql, [$member_id]);
+        return $this->query($sql, [$member_id, FLG_OFF]);
     }
 
     /**
@@ -40,11 +40,11 @@ class T_member_platforms extends Tran_model
             FROM
                 `{$this->_table}`
             WHERE
-                `m_platform_id` = ? AND `pfid` = ?
+                `m_platform_id` = ? AND `pfid` = ? AND del_flg = ?
             LIMIT 1;
         ";
 
-        return $this->query_one($sql, [$m_platform_id, $pfid]);
+        return $this->query_one($sql, [$m_platform_id, $pfid, FLG_OFF]);
     }
 
     /**
@@ -61,10 +61,22 @@ class T_member_platforms extends Tran_model
 
         foreach($platform_ids as $m_platform_id => $pfid)
         {
+            if (empty($pfid))
+            {
+                continue;
+            }
+
+            if (!empty($this->get_by_platform_id($m_platform_id, $pfid)))
+            {
+                throw new Exception("already registed", Page::CODE_FAILED_BY_EXISTS_PLATFORM_ID);
+            }
+
             $this->insert([
                 "t_member_id" => $member_id,
                 "m_platform_id" => $m_platform_id,
                 "pfid" => $pfid,
+                "created" => now(),
+                "modified" => now(),
             ]);
         }
     }
@@ -78,15 +90,21 @@ class T_member_platforms extends Tran_model
      */
     public function update_platform($member_id, $m_platform_id, $pfid)
     {
+        if (!empty($this->get_by_platform_id($m_platform_id, $pfid)))
+        {
+            throw new Exception("already registed", Page::CODE_FAILED_BY_EXISTS_PLATFORM_ID);
+        }
+
         $sql = "
             UPDATE
                 `{$this->_table}`
             SET
-                `pfid` = ?
+                `pfid` = ?,
+                `modified` = ?
             WHERE
-                `t_member_id` = ? AND `m_platform_id` = ? 
+                `t_member_id` = ? AND `m_platform_id` = ? AND del_flg = ?
         ";
 
-        $this->query_to_master($sql, [$pfid, $member_id, $m_platform_id]);
+        $this->query_to_master($sql, [$pfid, now(), $member_id, $m_platform_id, FLG_OFF]);
     }
 }

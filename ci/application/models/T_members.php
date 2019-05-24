@@ -7,11 +7,11 @@ require_once(APPPATH."models/Tran_model.php");
 class T_members extends Tran_model
 {
     /**
-     * get_by_user_id
-     * @param int $user_id
+     * get_by_login_id
+     * @param int $login_id
      * @return object|null
      */
-    public function get_by_user_id($user_id)
+    public function get_by_login_id($login_id)
     {
         $sql = "
             SELECT
@@ -19,16 +19,16 @@ class T_members extends Tran_model
             FROM
                 `{$this->_table}`
             WHERE
-                `user_id` = ?
+                `login_id` = ? AND del_flg = ?
             LIMIT 1;
         ";
 
-        return $this->query_one($sql, [$user_id]);
+        return $this->query_one($sql, [$login_id, FLG_OFF]);
     }
 
     /**
-     * get_by_user_id
-     * @param int $user_id
+     * get_by_login_id
+     * @param int $login_id
      * @return object|null
      */
     public function get_by_email($email)
@@ -39,10 +39,10 @@ class T_members extends Tran_model
             FROM
                 `{$this->_table}`
             WHERE
-                `email` = ?
+                `email` = ? AND del_flg = ?
             LIMIT 1;
         ";
 
-        return $this->query_one($sql, [$email]);
+        return $this->query_one($sql, [$email, FLG_OFF]);
     }
 }

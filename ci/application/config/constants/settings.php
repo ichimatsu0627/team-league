@@ -5,6 +5,10 @@ define("SITE_URL", "http://localhost:12000");
 define("APP_LOCAL_PATH", "/var/www/html/teamleague.com");
 define("DOCUMENT_ROOT_PATH", APP_LOCAL_PATH . "/public");
 
+// common
+define("FLG_ON", 1);
+define("FLG_OFF", 0);
+
 // Member
 define("USER_ID_NAME", "Login ID");
 define("USER_NAME_NAME", "Name");

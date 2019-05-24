@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: matsumoto
- * Date: 2019/05/15
- * Time: 15:06
- */
 
 /**
  * Class Base_lib

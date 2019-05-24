@@ -15,8 +15,8 @@ class Tran_model extends Base_model
         $args = array(
             $id,
         );
-        $data = $this->query($sql, $args);
-        return $data[0]->id;
+        $data = $this->query_one($sql, $args);
+        return $data->id;
     }
 
     public function trans_begin()

@@ -12,7 +12,7 @@
                             <i class="now-ui-icons users_circle-08"></i>
                           </span>
                         </div>
-                        <input type="text" name="user_id" maxlength="30" value="" placeholder="<?php echo mb_strtolower(USER_ID_NAME);?>" class="form-control" >
+                        <input type="text" name="login_id" maxlength="30" value="" placeholder="<?php echo mb_strtolower(USER_ID_NAME);?>" class="form-control" >
                     </div>
                     <div class="input-group no-border">
                         <div class="input-group-prepend">
