@@ -19,11 +19,12 @@
             <label for="platform"><?php echo PLATFORM_NAME;?></label>
             <ul class="list-inline" style="margin-left: 20px">
             <?php foreach($platforms as $id => $platform) { ?>
-                <li><?php echo $platform->name;?>:<input type="text" class="form-control" name="pf-<?php echo $id; ?>" placeholder="<?php echo $platform->id_name;?> if you have."></li>
+                <li><?php echo $platform->name;?>:<input type="text" class="form-control" name="pf-<?php echo $id; ?>" placeholder="<?php echo $platform->id_name;?> if you have." <?php if (isset($member->platforms[$id])) { echo "value=\"".$member->platforms[$id]."\""; }?>></li>
             <?php } ?>
             </ul>
         </div>
         <div class="form-group">
+            <input type="hidden" name="id" value="<?php echo $member_id;?>">
             <button type="submit" class="btn btn-success btn-round">Submit</button>
         </div>
     </form>

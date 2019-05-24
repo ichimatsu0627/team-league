@@ -69,24 +69,9 @@ class Account extends Base_controller
      */
     public function regist()
     {
-        $member_data = [
-            "user_id"  => $this->input->post('user_id'),
-            "name"     => $this->input->post('name'),
-            "email"    => $this->input->post('email'),
-            "password" => password_hash($this->input->post('password'), PASSWORD_BCRYPT)
-        ];
-
-        $platform_data = [];
-        foreach($this->platform_lib->platforms as $pf)
-        {
-            $pfid = $this->input->post("pf-".$pf->id);
-            if (isset($pfid))
-            {
-                $platform_data[$pf->id] = $pfid;
-            }
-        }
-
-        $check = $this->input->post('check');
+        $member_data   = $this->input_member_post();
+        $platform_data = $this->input_platform_post();
+        $check         = $this->input->post('check');
 
         if (!$this->member_lib->validate_regist_memberdata($member_data))
         {
@@ -105,6 +90,8 @@ class Account extends Base_controller
 
         try
         {
+            $this->T_members->trans_begin();
+
             $c = Page::CODE_NONE;
 
             if ($this->member_lib->exists_member_by_user_id($member_data["user_id"]))
@@ -162,7 +149,7 @@ class Account extends Base_controller
 
         try
         {
-            $t_member = $this->T_members->get_by_userid($user_id);
+            $t_member = $this->member_lib->get_by_userid($user_id);
 
             if (empty($t_member))
             {
@@ -205,6 +192,72 @@ class Account extends Base_controller
      */
     public function edit()
     {
+        $id = $this->input->post("id");
 
+        if (empty($id))
+        {
+            $this->_redirect("/account/profile");
+        }
+
+        if ($id != $this->member_id)
+        {
+            $this->_redirect("/account/profile/".$id);
+        }
+
+        $member = $this->member_lib->get_member($this->member_id);
+
+        $member_data   = $this->input_member_post();
+        $platform_data = $this->input_platform_post();
+
+        try
+        {
+            $this->T_members->trans_begin();
+
+            $this->member_lib->update($member, $member_data, $platform_data);
+
+            $this->T_members->trans_commit();
+        }
+        catch(Exception $e)
+        {
+            $this->T_members->trans_rollback();
+
+            $this->_redirect("/account/edit_form?c=".Page::CODE_FAILED_BY_INVALID_VALUE);
+        }
+
+        // $this->_redirect("/account/profile?c=".Page::CODE_EDITED);
+    }
+
+    /**
+     * 会員データPOST取得
+     * @return array
+     */
+    private function input_member_post()
+    {
+        $member_data = [
+            "user_id"  => $this->input->post('user_id'),
+            "name"     => $this->input->post('name'),
+            "email"    => $this->input->post('email'),
+            "password" => password_hash($this->input->post('password'), PASSWORD_BCRYPT)
+        ];
+
+        return $member_data;
+    }
+
+    /**
+     * 会員プラットフォームデータPOST取得
+     * @return array
+     */
+    private function input_platform_post()
+    {
+        $platform_data = [];
+        foreach($this->platform_lib->platforms as $pf)
+        {
+            $pfid = $this->input->post("pf-".$pf->id);
+            if (isset($pfid))
+            {
+                $platform_data[$pf->id] = $pfid;
+            }
+        }
+        return $platform_data;
     }
 }

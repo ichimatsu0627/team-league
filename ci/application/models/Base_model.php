@@ -118,6 +118,16 @@ class Base_model extends CI_Model
         return $this->_get_master_db()->insert_id();
     }
 
+    public function update($primary_value, $data)
+    {
+        $primary_value = (int)$primary_value;
+
+        return $this->_get_master_db()->where($this->primary_key, $primary_value)
+                    ->set($data)
+                    ->update($this->_table);
+    }
+
+
     public function delete($id)
     {
         return $this->_get_master_db()->where($this->primary_key, $id)->delete($this->_table);

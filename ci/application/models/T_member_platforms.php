@@ -46,4 +46,47 @@ class T_member_platforms extends Tran_model
 
         return $this->query_one($sql, [$m_platform_id, $pfid]);
     }
+
+    /**
+     * 複数レコード登録
+     * @param $member_id
+     * @param $platform_ids
+     */
+    public function regist($member_id, $platform_ids)
+    {
+        if (empty($platform_ids))
+        {
+            return;
+        }
+
+        foreach($platform_ids as $m_platform_id => $pfid)
+        {
+            $this->insert([
+                "t_member_id" => $member_id,
+                "m_platform_id" => $m_platform_id,
+                "pfid" => $pfid,
+            ]);
+        }
+    }
+
+    /**
+     * プラットフォームデータ更新
+     * @param $member_id
+     * @param $m_platform_id
+     * @param $pfid
+     * @throws Exception
+     */
+    public function update_platform($member_id, $m_platform_id, $pfid)
+    {
+        $sql = "
+            UPDATE
+                `{$this->_table}`
+            SET
+                `pfid` = ?
+            WHERE
+                `t_member_id` = ? AND `m_platform_id` = ? 
+        ";
+
+        $this->query_to_master($sql, [$pfid, $member_id, $m_platform_id]);
+    }
 }

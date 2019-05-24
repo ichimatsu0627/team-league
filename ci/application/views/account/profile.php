@@ -18,7 +18,7 @@
             <label><?php echo PLATFORM_NAME;?></label>
             <ul class="list-inline" style="margin-left: 20px">
                 <?php foreach($platforms as $id => $platform) { ?>
-                    <li><?php echo $platform->name;?>:<p><?php echo isset($member->platforms[$id]) ? $member->platforms[$id] : "-";?></p></li>
+                    <li><?php echo $platform->name;?>:<p><?php echo isset($member->platforms[$id]) && !empty($member->platforms[$id]) ? $member->platforms[$id] : "-";?></p></li>
                 <?php } ?>
             </ul>
         </div>

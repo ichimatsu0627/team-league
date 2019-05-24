@@ -12,6 +12,7 @@ class Page
     const CODE_LOGIN                    = 10001;
     const CODE_LOGOUT                   = 10002;
     const CODE_REGISTED                 = 10003;
+    const CODE_EDITED                   = 10004;
     const CODE_FAILED_BY_INVALID_VALUE  = 20001;
     const CODE_FAILED_BY_NOT_ENOUGH     = 20002;
     const CODE_FAILED_BY_EXISTS_USER_ID = 20003;
@@ -25,6 +26,10 @@ class Page
             ],
         ],
         "account" => [
+            "profile" => [
+                self::CODE_EDITED => "編集しました",
+                self::CODE_FAILED_BY_INVALID_VALUE => "編集に失敗しました",
+            ],
             "regist_form" => [
                 self::CODE_FAILED_BY_NOT_ENOUGH      => "入力項目に誤りがあります",
                 self::CODE_FAILED_BY_INVALID_VALUE   => "アカウントの作成に失敗しました",
