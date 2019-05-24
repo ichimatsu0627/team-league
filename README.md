@@ -126,7 +126,7 @@
 - twitter
 - email
 - password
-- login_
+- login_id
 - is_admin
 - del
 - created
