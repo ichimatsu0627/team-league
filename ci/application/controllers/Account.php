@@ -7,14 +7,6 @@ require_once(APPPATH."controllers/Base_controller.php");
 class Account extends Base_controller
 {
     /**
-     * Account constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * profile
      */
     public function profile($member_id = null)
