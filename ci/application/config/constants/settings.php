@@ -18,3 +18,22 @@ define("DISCORD_NAME", "Discord");
 define("PLATFORM_NAME", "Platform");
 define("PASSWORD_NAME", "Password");
 define("CONFIRM_PASSWORD_NAME", "Confirm Password");
+
+// Team
+define("TEAM_NAME_NAME", "Name");
+define("TEAM_DESCRIPTION_NAME", "Description");
+define("TEAM_MEMBERS_NAME", "Members");
+define("TEAM_RANK_NAME", "Rank");
+define("TEAM_RATING_NUMERIC_NAME", "Rating");
+
+// Rank
+define("RANK_NAME_LIST", [
+    1 => "Bronze",
+    2 => "Silver",
+    3 => "Gold",
+    4 => "Platinum",
+    5 => "Diamond",
+    6 => "Champion",
+    7 => "Grand Champion",
+]);
+

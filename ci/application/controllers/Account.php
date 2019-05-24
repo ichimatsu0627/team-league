@@ -98,7 +98,7 @@ class Account extends Base_controller
             {
                 throw new Exception("invalid password", Page::CODE_FAILED_BY_INVALID_VALUE);
             }
-            
+
             // データ作成
             $id = $this->member_lib->regist($member_data, $platform_data);
 
