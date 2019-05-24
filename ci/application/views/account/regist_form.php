@@ -12,6 +12,14 @@
             <input type="text" class="form-control" name="email" placeholder="<?php echo mb_strtolower(MAIL_ADDRESS_NAME);?>">
         </div>
         <div class="form-group">
+            <label for="twitter"><?php echo TWITTER_NAME;?></label>
+            <input type="text" class="form-control" name="twitter" placeholder="@twitter_id">
+        </div>
+        <div class="form-group">
+            <label for="discord"><?php echo DISCORD_NAME;?></label>
+            <input type="text" class="form-control" name="discord" placeholder="discord#1234">
+        </div>
+        <div class="form-group">
             <label for="platform"><?php echo PLATFORM_NAME;?></label>
             <ul class="list-inline" style="margin-left: 20px">
             <?php foreach($platforms as $id => $platform) { ?>

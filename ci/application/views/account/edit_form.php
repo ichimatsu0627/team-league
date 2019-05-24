@@ -12,6 +12,14 @@
             <input type="text" class="form-control" name="email" placeholder="<?php echo mb_strtolower(MAIL_ADDRESS_NAME);?>" value="<?php echo $member->email;?>">
         </div>
         <div class="form-group">
+            <label for="twitter"><?php echo TWITTER_NAME;?></label>
+            <input type="text" class="form-control" name="twitter" placeholder="@twitter_id" value="<?php echo $member->twitter ?? "-";?>">
+        </div>
+        <div class="form-group">
+            <label for="discord"><?php echo DISCORD_NAME;?></label>
+            <input type="text" class="form-control" name="discord" placeholder="discord#1234" value="<?php echo $member->discord ?? "-";?>">
+        </div>
+        <div class="form-group">
             <label for="login_id"><?php echo USER_ID_NAME;?></label>
             <input type="text" class="form-control" name="login_id" placeholder="<?php echo mb_strtolower(USER_ID_NAME);?>" value="<?php echo $member->login_id;?>">
         </div>
@@ -19,7 +27,7 @@
             <label for="platform"><?php echo PLATFORM_NAME;?></label>
             <ul class="list-inline" style="margin-left: 20px">
             <?php foreach($platforms as $id => $platform) { ?>
-                <li><?php echo $platform->name;?>:<input type="text" class="form-control" name="pf-<?php echo $id; ?>" placeholder="<?php echo $platform->id_name;?> if you have." <?php if (isset($member->platforms[$id])) { echo "value=\"".$member->platforms[$id]."\""; }?>></li>
+                <li><?php echo $platform->name;?>:<input type="text" class="form-control" name="pf-<?php echo $id; ?>" placeholder="<?php echo $platform->id_name;?>" <?php if (isset($member->platforms[$id])) { echo "value=\"".$member->platforms[$id]."\""; }?>></li>
             <?php } ?>
             </ul>
         </div>

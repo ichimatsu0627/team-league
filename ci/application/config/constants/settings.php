@@ -13,6 +13,8 @@ define("FLG_OFF", 0);
 define("USER_ID_NAME", "Login ID");
 define("USER_NAME_NAME", "Name");
 define("MAIL_ADDRESS_NAME", "E-mail");
+define("TWITTER_NAME", "Twitter");
+define("DISCORD_NAME", "Discord");
 define("PLATFORM_NAME", "Platform");
 define("PASSWORD_NAME", "Password");
 define("CONFIRM_PASSWORD_NAME", "Confirm Password");

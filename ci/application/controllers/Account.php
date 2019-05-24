@@ -98,7 +98,7 @@ class Account extends Base_controller
             {
                 throw new Exception("invalid password", Page::CODE_FAILED_BY_INVALID_VALUE);
             }
-
+            
             // データ作成
             $id = $this->member_lib->regist($member_data, $platform_data);
 
@@ -228,6 +228,19 @@ class Account extends Base_controller
             "email"    => $this->input->post('email'),
             "password" => password_hash($this->input->post('password'), PASSWORD_BCRYPT)
         ];
+
+        $twitter = $this->input->post('twitter');
+        $discord = $this->input->post('discord');
+
+        if (!empty($twitter))
+        {
+            $member_data["twitter"] = mb_convert_kana($twitter, "a");
+        }
+
+        if (!empty($discord))
+        {
+            $member_data["discord"] = mb_convert_kana($discord, "a");
+        }
 
         return $member_data;
     }

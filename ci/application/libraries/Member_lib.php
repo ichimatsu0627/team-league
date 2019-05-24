@@ -184,10 +184,7 @@ class Member_lib extends Base_lib
             }
         }
 
-        if (!empty($insert_platform_data))
-        {
-            $this->CI->T_member_platforms->regist($member->id, $insert_platform_data);
-        }
+        $this->CI->T_member_platforms->regist($member->id, $insert_platform_data);
     }
 
     /**
@@ -199,10 +196,12 @@ class Member_lib extends Base_lib
     {
         // 会員データ作成
         $id = $this->CI->T_members->insert([
-            "login_id"  => $member_data["login_id"],
+            "login_id" => $member_data["login_id"],
             "name"     => $member_data["name"],
             "email"    => $member_data["email"],
             "password" => $member_data["password"],
+            "twitter"  => $member_data["twitter"] ?: "",
+            "discord"  => $member_data["discord"] ?: "",
             "created"  => now(),
             "modified" => now(),
         ]);

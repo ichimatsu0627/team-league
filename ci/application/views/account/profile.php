@@ -13,6 +13,18 @@
         <label><?php echo USER_ID_NAME;?></label>
         <p><?php echo $member->login_id;?></p>
     </div>
+    <div class="form-group">
+        <label><?php echo TWITTER_NAME;?></label>
+        <?php if (empty($member->twitter)) { ?>
+            <p>-</p>
+        <?php } else { ?>
+            <p><a href="https://twitter.com/<?php echo str_replace("@", "", $member->twitter);?>"><?php echo $member->twitter;?></a></p>
+        <?php } ?>
+    </div>
+    <div class="form-group">
+        <label><?php echo DISCORD_NAME;?></label>
+        <p><?php echo $member->discord ?? "-";?></p>
+    </div>
     <?php if ($member_id == $member->id) { ?>
         <div class="form-group">
             <label><?php echo PLATFORM_NAME;?></label>
