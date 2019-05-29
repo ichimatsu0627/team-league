@@ -3,7 +3,6 @@ require_once(APPPATH."libraries/Base_lib.php");
 
 /**
  * Member Library
- *
  */
 class Member_lib extends Base_lib
 {
@@ -28,7 +27,7 @@ class Member_lib extends Base_lib
 
     /**
      * 会員IDで会員データを取得
-     * @param $id
+     * @param int $id
      * @return mixed
      */
     public function get_member($id)
@@ -41,7 +40,7 @@ class Member_lib extends Base_lib
 
     /**
      * ユーザーIDで会員データを取得
-     * @param $login_id
+     * @param int $login_id
      * @return object
      */
     public function get_by_login_id($login_id)
@@ -54,7 +53,7 @@ class Member_lib extends Base_lib
 
     /**
      * get_id_by_session
-     * @param $t_member
+     * @return object|null
      */
     public function get_id_by_session()
     {
@@ -63,7 +62,7 @@ class Member_lib extends Base_lib
 
     /**
      * 入力値 チェック
-     * @param $data
+     * @param array $data
      * @return bool
      */
     public function validate_regist_memberdata($data)
@@ -93,7 +92,7 @@ class Member_lib extends Base_lib
 
     /**
      * ユーザーIDが重複してないか
-     * @param $login_id
+     * @param int $login_id
      * @return bool
      */
     public function exists_member_by_login_id($login_id)
@@ -108,8 +107,8 @@ class Member_lib extends Base_lib
 
     /**
      * メールアドレスが重複していないか
-     * @param $email
-     *
+     * @param string $email
+     * @return bool
      */
     public function exists_member_by_email($email)
     {
@@ -123,7 +122,7 @@ class Member_lib extends Base_lib
 
     /**
      * 指定されたプラットフォームのIDが重複してないか
-     * @param $platforms
+     * @param array $platforms
      * @return bool
      */
     public function exists_platform_id($platforms)
@@ -141,9 +140,9 @@ class Member_lib extends Base_lib
 
     /**
      * 更新
-     * @param $member
-     * @param $member_data
-     * @param $platform_data
+     * @param object $member
+     * @param array  $member_data
+     * @param array  $platform_data
      */
     public function update($member, $member_data, $platform_data)
     {
@@ -189,7 +188,8 @@ class Member_lib extends Base_lib
 
     /**
      * 登録
-     * @param array $data
+     * @param array $member_data
+     * @param array $platform_data
      * @return int
      */
     public function regist($member_data, $platform_data)

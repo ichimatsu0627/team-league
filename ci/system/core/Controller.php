@@ -99,10 +99,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * ---- models ----
  * @property M_platforms        $M_platforms
  * @property T_members          $T_members
+ * @property T_member_locks     $T_member_locks
  * @property T_member_platforms $T_member_platforms
  * @property T_teams            $T_teams
+ * @property T_team_locks       $T_team_locks
  * @property T_team_members     $T_team_members
- * @property T_member_locks     $T_member_locks
+ *
+ * ---- libraries ----
+ * @property Layout           $layout
+ * @property Page             $page
+ * @property Login_lib        $login_lib
+ * @property Member_lib       $member_lib
+ * @property Platform_lib     $platform_lib
  */
 class CI_Controller {
 

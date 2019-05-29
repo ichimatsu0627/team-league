@@ -5,13 +5,6 @@
  *
  * ---- CI_Class ----
  * @property CI_Session       $session
- *
- * ---- libraries ----
- * @property Layout           $layout
- * @property Page             $page
- * @property Login_lib        $login_lib
- * @property Member_lib       $member_lib
- * @property Platform_lib     $platform_lib
  */
 class Base_controller extends CI_Controller
 {

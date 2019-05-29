@@ -18,6 +18,7 @@ class Page
     const CODE_FAILED_BY_EXISTS_USER_ID     = 20003;
     const CODE_FAILED_BY_EXISTS_EMAIL       = 20004;
     const CODE_FAILED_BY_EXISTS_PLATFORM_ID = 20005;
+    const CODE_FAILED_BY_JOINED             = 20006;
 
     private $messages = [
         "top" => [
@@ -44,6 +45,11 @@ class Page
             "login_form" => [
                 self::CODE_LOGOUT                  => "ログアウトしました",
                 self::CODE_FAILED_BY_INVALID_VALUE => "認証に失敗しました",
+            ],
+        ],
+        "team" => [
+            "detail" => [
+                self::CODE_FAILED_BY_JOINED => "既にチームに所属しています",
             ],
         ],
     ];

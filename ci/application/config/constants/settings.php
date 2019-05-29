@@ -21,10 +21,15 @@ define("CONFIRM_PASSWORD_NAME", "Confirm Password");
 
 // Team
 define("TEAM_NAME_NAME", "Name");
-define("TEAM_DESCRIPTION_NAME", "Description");
+define("TEAM_DESCRIPTION_NAME", "Introduction");
 define("TEAM_MEMBERS_NAME", "Members");
 define("TEAM_RANK_NAME", "Rank");
 define("TEAM_RATING_NUMERIC_NAME", "Rating");
+define("TEAM_ROLE_LIST", [
+    1 => "Leader",
+    2 => "Sub-Leader",
+    0 => "Member",
+]);
 
 // Rank
 define("RANK_NAME_LIST", [

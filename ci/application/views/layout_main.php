@@ -63,7 +63,7 @@
                                     <i class="now-ui-icons ui-1_zoom-bold"></i>
                                   </span>
                                 </div>
-                                <input type="text" class="form-control search-keyword-form" style="padding: 11px 5px;" name="keyword" placeholder="keyword">
+                                <input type="text" class="form-control search-keyword-form" style="padding: 11px 5px;" name="keyword" placeholder="search">
                             </div>
                         </form>
                     </li>
@@ -96,7 +96,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarAccountMenuLink">
                             <a class="dropdown-item" href="/account/profile">Profile</a>
-                            <a class="dropdown-item" href="#">Team</a>
+                            <a class="dropdown-item" href="/team/detail">Team</a>
                             <a class="dropdown-item" href="/account/logout">Logout</a>
                         </div>
                     </li>
