@@ -21,27 +21,45 @@ class Team_lib extends Base_lib
      * @param int $id
      * @return obj|null
      */
-    public function get_team($id)
+    public function get_team($id, $add_members = true)
     {
         $team = $this->CI->T_teams->get_by_id($id);
-        $team->members = $this->get_members($id);
+        if ($add_members)
+        {
+            $team->members = $this->get_members($id);
+        }
 
         return $team;
     }
 
     /**
+     * 複数チーム取得
+     * @param array $ids
+     * @return array
+     */
+    public function get_teams($ids, $add_members = false)
+    {
+        $teams = [];
+        foreach($ids as $id)
+        {
+            $teams[$id] = $this->get_team($id, $add_members);
+        }
+        return $teams;
+    }
+
+    /**
      * チーム情報を取得
      * @param int $id
-     * @return obj|null
+     * @return array
      */
-    public function get_team_by_member_id($member_id)
+    public function get_teams_by_member_id($member_id, $add_members = false)
     {
-        $t_team_member = $this->CI->T_team_members->get_by_member_id($member_id);
-        if (empty($t_team_member))
+        $t_team_members = $this->CI->T_team_members->get_by_member_id($member_id);
+        if (empty($t_team_members))
         {
-            return null;
+            return [];
         }
-        return $this->get_team($t_team_member->t_team_id);
+        return $this->get_teams(array_keys($t_team_members), $add_members);
     }
 
     /**

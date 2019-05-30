@@ -9,8 +9,8 @@ CREATE TABLE `t_members` (
   `admin` tinyint(1) NOT NULL DEFAULT '0',
   `ban` tinyint(1) NOT NULL DEFAULT '0',
   `del_flg` tinyint(1) NOT NULL DEFAULT '0' COMMENT '削除フラグ',
-  `created` datetime NOT NULL COMMENT '作成日時',
-  `modified` datetime NOT NULL COMMENT '更新日時',
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '作成日時',
+  `modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   KEY `user_id` (`login_id`)

@@ -30,7 +30,7 @@ class T_team_members extends Tran_model
     /**
      * 個人のチームデータを取得
      * @param $member_id
-     * @return obj|null
+     * @return array
      */
     public function get_by_member_id($member_id)
     {
@@ -41,12 +41,18 @@ class T_team_members extends Tran_model
               t_team_members
             WHERE
               t_member_id = ? AND del_flg = ?
-            LIMIT 1
         ";
 
         $params = [$member_id, FLG_OFF];
 
-        return $this->query_one($sql, $params);
+        $t_team_members = $this->query($sql, $params);
+
+        if (!empty($t_team_members))
+        {
+            $t_team_members = array_column($t_team_members, null, "t_team_id");
+        }
+
+        return $t_team_members;
     }
 
     /**
@@ -70,14 +76,10 @@ class T_team_members extends Tran_model
             }
 
             $tmp = $this->get_by_member_id($team_member_id);
-            if (!empty($tmp))
+            // 同じチームなら見なかったことにする
+            if (isset($tmp[$id]))
             {
-                // 同じチームなら見なかったことにする
-                if ($tmp->t_team_id == $id)
-                {
-                    continue;
-                }
-                throw new Exception("already joined mID:".$team_member_id." teamID:".$tmp->t_team_id, Page::CODE_FAILED_BY_JOINED);
+                continue;
             }
 
             $this->insert([

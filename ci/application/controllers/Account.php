@@ -22,7 +22,11 @@ class Account extends Base_controller
             $this->_redirect("/err/not_found");
         }
 
+        $this->load->library("team_lib");
+        $teams = $this->team_lib->get_teams_by_member_id($member_id);
+
         $this->view["member"] = $member;
+        $this->view["teams"]  = $teams;
         $this->view["platforms"] = $this->platform_lib->platforms;
         $this->layout->view('account/profile', $this->view);
     }

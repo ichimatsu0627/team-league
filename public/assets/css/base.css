@@ -1,8 +1,18 @@
+@charset "UTF-8";
 .wrapper {
   margin-top: 2%; }
 
 .search-keyword-form {
   margin-top: 2px;
   height: 33px; }
+
+.no-gutters {
+  margin: 0;
+  padding: 0; }
+
+.no-gutters　 > .col,
+.no-gutters　 > [class*="col-"] {
+  margin: 0;
+  padding: 0; }
 
 /*# sourceMappingURL=base.css.map */

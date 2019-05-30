@@ -25,20 +25,13 @@ class Team extends Base_controller
     {
         if (empty($id))
         {
-            $team = $this->team_lib->get_team_by_member_id($this->member_id);
-            if (empty($team))
-            {
-                $this->_redirect("/team/regist_form");
-            }
-        }
-        else
-        {
-            $team = $this->team_lib->get_team($id);
             if (empty($team))
             {
                 $this->_redirect("/err/not_found");
             }
         }
+
+        $team = $this->team_lib->get_team($id);
 
         $this->view["team"] = $team;
         $this->view["is_my_team"] = $this->team_lib->is_team_member($this->member_id, $team);
@@ -76,13 +69,6 @@ class Team extends Base_controller
      */
     public function regist()
     {
-        $team = $this->team_lib->get_team_by_member_id($this->member_id);
-
-        if (!empty($team))
-        {
-            $this->_redirect("/team/detail?c=".Page::FAILED_BY_JOINED);
-        }
-
         $team_data = $this->input_team_data();
 
         /* TODO: バリデート */

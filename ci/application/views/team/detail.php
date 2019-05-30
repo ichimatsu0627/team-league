@@ -19,20 +19,27 @@
         <div class="col-lg-9">
             <div class="form-group">
                 <label><?php echo TEAM_MEMBERS_NAME;?></label>
-                <table class="table table-striped text-center">
-                    <tr>
-                        <th>No.</th>
-                        <th>Name</th>
-                        <th>Rank</th>
-                    </tr>
-                    <?php $i = 0; ?>
-                    <?php foreach($team->members as $team_member_id => $team_member) { ?>
+                <table class="table text-center">
+                    <thead class="thead-dark">
                         <tr>
-                            <td><?php echo ++$i;?></td>
-                            <td><?php echo $team_member->detail->name;?><?php if ($team_member->role != 0) { echo " <span style='color: red; font-size: .7rem;'>".TEAM_ROLE_LIST[$team_member->role]."</span>"; } ?></td>
-                            <td><span class="badge badge-info"><?php echo RANK_NAME_LIST[5];?></span></td>
+                            <th>No.</th>
+                            <th>Name</th>
+                            <th>Rank</th>
                         </tr>
-                    <?php } ?>
+                    </thead>
+                    <tbody>
+                        <?php $i = 0; ?>
+                        <?php foreach($team->members as $team_member_id => $team_member) { ?>
+                            <tr>
+                                <th><?php echo ++$i;?></th>
+                                <td>
+                                    <?php echo $team_member->detail->name;?>
+                                    <?php if ($team_member->role != 0) { echo " <span style='color: red; font-size: .7rem;'>".TEAM_ROLE_LIST[$team_member->role]."</span>"; } ?>
+                                </td>
+                                <td><span class="badge badge-info"><?php echo RANK_NAME_LIST[5];?></span></td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
                 </table>
             </div>
         </div>

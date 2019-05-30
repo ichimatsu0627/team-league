@@ -110,6 +110,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Page             $page
  * @property Login_lib        $login_lib
  * @property Member_lib       $member_lib
+ * @property Team_lib         $team_lib
  * @property Platform_lib     $platform_lib
  */
 class CI_Controller {
