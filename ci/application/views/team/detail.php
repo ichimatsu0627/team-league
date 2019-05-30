@@ -12,7 +12,7 @@
                 <label><?php echo TEAM_DESCRIPTION_NAME;?></label>
                 <p style="font-size: .9rem; min-height: 90px;"><?php echo str_replace(["\r\n", "\n", "\r"], "<br>", $team->description);?></p>
                 <?php if ($is_my_team) { ?>
-                    <a href="/team/edit_form"><button class="btn btn-primary btn-round"><i class="now-ui-icons ui-2_settings-90"></i> Edit Profile</button></a>
+                    <a href="/team/edit_form"><button class="btn btn-primary btn-round"><i class="now-ui-icons ui-2_settings-90"></i> Edit</button></a>
                 <?php } ?>
             </div>
         </div>
@@ -33,7 +33,7 @@
                             <tr>
                                 <th><?php echo ++$i;?></th>
                                 <td>
-                                    <?php echo $team_member->detail->name;?>
+                                    <a href="/account/profile/<?php echo $team_member_id;?>"><?php echo $team_member->detail->name;?>
                                     <?php if ($team_member->role != 0) { echo " <span style='color: red; font-size: .7rem;'>".TEAM_ROLE_LIST[$team_member->role]."</span>"; } ?>
                                 </td>
                                 <td><span class="badge badge-info"><?php echo RANK_NAME_LIST[5];?></span></td>

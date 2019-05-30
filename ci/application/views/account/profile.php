@@ -21,12 +21,12 @@
                     <?php if (empty($member->twitter)) { ?>
                         <td>-</td>
                     <?php } else { ?>
-                        <td><a href="https://twitter.com/<?php echo str_replace("@", "", $member->twitter);?>"><?php echo $member->twitter;?></a></td>
+                        <td><a href="https://twitter.com/<?php echo str_replace("@", "", $member->twitter);?>"><?php echo "@".$member->twitter;?></a></td>
                     <?php } ?>
                 </tr>
                 <tr>
                     <th><?php echo DISCORD_NAME;?></th>
-                    <td><?php echo $member->discord;?></td>
+                    <td><?php echo $member->discord ?: "-";?></td>
                 </tr>
                 <?php foreach($platforms as $id => $platform) { ?>
                     <tr>
