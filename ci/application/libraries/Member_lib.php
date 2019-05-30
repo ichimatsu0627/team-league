@@ -200,8 +200,8 @@ class Member_lib extends Base_lib
             "name"     => $member_data["name"],
             "email"    => $member_data["email"],
             "password" => $member_data["password"],
-            "twitter"  => $member_data["twitter"] ?: "",
-            "discord"  => $member_data["discord"] ?: "",
+            "twitter"  => $member_data["twitter"] ?? "",
+            "discord"  => $member_data["discord"] ?? "",
             "created"  => now(),
             "modified" => now(),
         ]);

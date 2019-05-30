@@ -3,10 +3,10 @@
 
     <div class="row">
         <div class="col-lg-3 row">
-            <div class="form-group col-6 col-lg-12">
+            <div class="form-group col-6 col-md-3 col-lg-12">
                 <img src="/assets/img/icon.png" class="rounded" width="128" height="128">
             </div>
-            <div class="form-group col-6 col-lg-12">
+            <div class="form-group col-6 col-md-9 col-lg-12">
                 <label><?php echo TEAM_NAME_NAME;?></label>
                 <p><?php echo $team->name;?></p>
                 <label><?php echo TEAM_DESCRIPTION_NAME;?></label>

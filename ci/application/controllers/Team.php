@@ -25,13 +25,24 @@ class Team extends Base_controller
     {
         if (empty($id))
         {
+            $member_teams = $this->team_lib->get_teams_by_member_id($this->member_id, true);
+
+            if (empty($member_teams))
+            {
+                $this->_redirect("/team/regist_form");
+            }
+
+            $team = array_shift($member_teams);
+        }
+        else
+        {
+            $team = $this->team_lib->get_team($id);
+
             if (empty($team))
             {
                 $this->_redirect("/err/not_found");
             }
         }
-
-        $team = $this->team_lib->get_team($id);
 
         $this->view["team"] = $team;
         $this->view["is_my_team"] = $this->team_lib->is_team_member($this->member_id, $team);

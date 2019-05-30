@@ -96,6 +96,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarAccountMenuLink">
                             <a class="dropdown-item" href="/account/profile">Profile</a>
+                            <a class="dropdown-item" href="/team/detail">Team</a>
                             <a class="dropdown-item" href="/account/logout">Logout</a>
                         </div>
                     </li>
