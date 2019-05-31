@@ -6,6 +6,13 @@ require_once(APPPATH."models/Tran_model.php");
  */
 class T_members extends Tran_model
 {
+    const REQUIRED_COLUMNS = [
+        "login_id",
+        "name",
+        "email",
+        "password",
+    ];
+
     /**
      * get_by_login_id
      * @param int $login_id

@@ -12,7 +12,7 @@
                 <label><?php echo TEAM_DESCRIPTION_NAME;?></label>
                 <p style="font-size: .9rem; min-height: 90px;"><?php echo str_replace(["\r\n", "\n", "\r"], "<br>", $team->description);?></p>
                 <?php if ($is_my_team) { ?>
-                    <a href="/team/edit_form"><button class="btn btn-primary btn-round"><i class="now-ui-icons ui-2_settings-90"></i> Edit</button></a>
+                    <a href="/team/edit_form/<?php echo $team->id;?>"><button class="btn btn-primary btn-round"><i class="now-ui-icons ui-2_settings-90"></i> Edit</button></a>
                 <?php } ?>
             </div>
         </div>

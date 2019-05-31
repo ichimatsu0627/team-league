@@ -65,6 +65,7 @@ class Team extends Base_controller
     public function edit_form($id = null)
     {
         $team = $this->team_lib->get_team($id);
+
         if (empty($team))
         {
             $this->_redirect("/err/not_found");
@@ -108,6 +109,14 @@ class Team extends Base_controller
      */
     public function edit()
     {
+        $id = $this->input->post("id");
+
+        $team = $this->team_lib->get_team($id);
+
+        if (empty($team))
+        {
+            $this->_redirect("/err/not_found");
+        }
 
     }
 
@@ -117,7 +126,12 @@ class Team extends Base_controller
      */
     public function request_join($id)
     {
+        $team = $this->team_lib->get_team($id);
 
+        if (empty($team))
+        {
+            $this->_redirect("/err/not_found");
+        }
     }
 
     /**

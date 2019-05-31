@@ -3,6 +3,7 @@
     <h3>Account Regist</h3>
 
     <form class="form" action="/account/regist" method="POST">
+        <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
         <div class="form-group">
             <label for="name"><?php echo USER_NAME_NAME;?><small style="color: red;"> ※ required</small></label>
             <input type="text" class="form-control" name="name" placeholder="<?php echo mb_strtolower(USER_NAME_NAME);?>">

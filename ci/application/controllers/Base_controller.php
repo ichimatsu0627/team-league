@@ -20,9 +20,10 @@ class Base_controller extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-
+        
         $this->load_db();
         $this->load_libraries();
+        $this->set_csrf_token();
         $this->set_uri();
         $this->login_validate();
         $this->set_notification();
@@ -58,6 +59,19 @@ class Base_controller extends CI_Controller
         $RTR                   =& load_class('Router', 'core');
         $this->controller_name =  $RTR->fetch_class();
         $this->action_name     =  $RTR->fetch_method();
+    }
+
+    /**
+     * CSRF対策
+     * POST時には、下記フォームを使うこと
+     * <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
+     */
+    public function set_csrf_token()
+    {
+        $this->view["csrf"] = [
+            "name" => $this->security->get_csrf_token_name(),
+            "hash" => $this->security->get_csrf_hash(),
+        ];
     }
 
     /**

@@ -24,7 +24,7 @@ class Team_lib extends Base_lib
     public function get_team($id, $add_members = true)
     {
         $team = $this->CI->T_teams->get_by_id($id);
-        if ($add_members)
+        if (!empty($team) && $add_members)
         {
             $team->members = $this->get_members($id);
         }

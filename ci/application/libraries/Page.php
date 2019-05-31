@@ -8,17 +8,18 @@ class Page
 {
     const CODE_NONE                         = 0;
     const CODE_SUCCESS                      = 1;
-    const CODE_FAILED                       = 2;
     const CODE_LOGIN                        = 10001;
     const CODE_LOGOUT                       = 10002;
     const CODE_REGISTED                     = 10003;
     const CODE_EDITED                       = 10004;
+    const CODE_FAILED                       = 20000;
     const CODE_FAILED_BY_INVALID_VALUE      = 20001;
     const CODE_FAILED_BY_NOT_ENOUGH         = 20002;
     const CODE_FAILED_BY_EXISTS_USER_ID     = 20003;
     const CODE_FAILED_BY_EXISTS_EMAIL       = 20004;
     const CODE_FAILED_BY_EXISTS_PLATFORM_ID = 20005;
-    const CODE_FAILED_BY_JOINED             = 20006;
+    const CODE_FAILED_BY_NOT_MATCH_PASSWORD = 20006;
+    const CODE_FAILED_BY_JOINED             = 20007;
 
     private $messages = [
         "top" => [
@@ -36,11 +37,13 @@ class Page
                 self::CODE_FAILED_BY_EXISTS_PLATFORM_ID => "指定された Platform id の中に既に登録済みのものがあります",
             ],
             "regist_form" => [
-                self::CODE_FAILED_BY_NOT_ENOUGH      => "入力項目に誤りがあります",
+                self::CODE_FAILED                    => "登録に失敗しました",
+                self::CODE_FAILED_BY_NOT_ENOUGH      => "必須項目に入力漏れがありました",
                 self::CODE_FAILED_BY_INVALID_VALUE   => "アカウントの作成に失敗しました",
                 self::CODE_FAILED_BY_EXISTS_USER_ID  => "指定された User Id は既に登録されています",
                 self::CODE_FAILED_BY_EXISTS_EMAIL    => "指定された Email は既に登録されています",
                 self::CODE_FAILED_BY_EXISTS_PLATFORM_ID => "指定された Platform id の中に既に登録済みのものがあります",
+                self::CODE_FAILED_BY_NOT_MATCH_PASSWORD => "パスワードが一致しませんでした",
             ],
             "login_form" => [
                 self::CODE_LOGOUT                  => "ログアウトしました",

@@ -67,24 +67,15 @@ class Member_lib extends Base_lib
      */
     public function validate_regist_memberdata($data)
     {
-        if (!isset($data["login_id"]) || empty($data["login_id"]))
+        foreach($data as $key => $value)
         {
-            return false;
-        }
-
-        if (!isset($data["name"]) || empty($data["name"]))
-        {
-            return false;
-        }
-
-        if (!isset($data["email"]) || empty($data["email"]))
-        {
-            return false;
-        }
-
-        if (!isset($data["password"]) || empty($data["password"]))
-        {
-            return false;
+            if (in_array($key, T_members::REQUIRED_COLUMNS))
+            {
+                if (empty($value))
+                {
+                    return false;
+                }
+            }
         }
 
         return true;
@@ -147,7 +138,7 @@ class Member_lib extends Base_lib
     public function update($member, $member_data, $platform_data)
     {
         $update_member_data = array_filter($member_data, function($v, $k) use($member) {
-            if ($v == null) return false;
+            if (in_array($k, T_members::REQUIRED_COLUMNS) && $v == null) return false;
             if ($k == "password") return false; // 専用の更新にする
             if ($member->{$k} == $v) return false;
             return true;

@@ -100,7 +100,7 @@ class Account extends Base_controller
 
             if(!password_verify($this->input->post('conf_password'), $member_data["password"]))
             {
-                throw new Exception("invalid password", Page::CODE_FAILED_BY_INVALID_VALUE);
+                throw new Exception("invalid password", Page::CODE_FAILED_BY_NOT_MATCH_PASSWORD);
             }
 
             // データ作成
@@ -108,7 +108,7 @@ class Account extends Base_controller
 
             if (empty($id))
             {
-                throw new Exception("Fail regist", Page::CODE_FAILED_BY_INVALID_VALUE);
+                throw new Exception("Fail regist", Page::CODE_FAILED);
             }
 
             // ログインしとく
@@ -236,14 +236,14 @@ class Account extends Base_controller
         $twitter = $this->input->post('twitter');
         $discord = $this->input->post('discord');
 
-        if (!empty($twitter))
+        if (isset($twitter))
         {
-            $member_data["twitter"] = mb_convert_kana($twitter, "a");
+            $member_data["twitter"] = $twitter;
         }
 
-        if (!empty($discord))
+        if (isset($discord))
         {
-            $member_data["discord"] = mb_convert_kana($discord, "a");
+            $member_data["discord"] = $discord;
         }
 
         return $member_data;

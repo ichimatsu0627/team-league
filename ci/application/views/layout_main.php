@@ -56,7 +56,8 @@
             <ul class="navbar-nav">
                 <?php if (isset($member_id) && !empty($member_id)) { ?>
                     <li class="nav-item">
-                        <form action="#" method="post" style="margin: auto 7px;">
+                        <form action="#" method="POST" style="margin: auto 7px;">
+                            <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
                             <div class="input-group no-border" style="margin-bottom: 0px;">
                                 <div class="input-group-prepend search-keyword-form">
                                   <span class="input-group-text">

@@ -2,6 +2,7 @@
     <div class="row">
         <div class="card card-signup" data-background-color="black">
             <form class="form" action="/account/login" method="POST">
+                <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
                 <div class="card-header text-center">
                     <h3 class="card-title title-up">Login</h3>
                 </div>
