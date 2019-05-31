@@ -241,7 +241,7 @@ if (ENVIRONMENT == "testing")
 }
 else
 {
-    $config['log_path'] = '/var/logs/';
+    $config['log_path'] = '/var/log/';
 }
 
 /*
