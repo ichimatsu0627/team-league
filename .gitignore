@@ -118,4 +118,6 @@ typings/
 # FuseBox cache
 .fusebox/
 
+# gae
+gae/secret.yaml
 
