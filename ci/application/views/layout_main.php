@@ -55,19 +55,22 @@
         <div class="collapse navbar-collapse justify-content-end" id="example-navbar" data-nav-image="assets/img/blurred-image-1.jpg">
             <ul class="navbar-nav">
                 <?php if (isset($member_id) && !empty($member_id)) { ?>
-                    <li class="nav-item">
-                        <form action="#" method="POST" style="margin: auto 7px;">
-                            <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
-                            <div class="input-group no-border" style="margin-bottom: 0px;">
-                                <div class="input-group-prepend search-keyword-form">
-                                  <span class="input-group-text">
-                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
-                                  </span>
-                                </div>
-                                <input type="text" class="form-control search-keyword-form" style="padding: 11px 5px;" name="keyword" placeholder="search">
+                    <?php if (!empty($information)) { ?>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link" id="icon-information" data-toggle="dropdown">
+                                <i class="now-ui-icons ui-1_bell-53" aria-hidden="true"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="icon-information">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <?php foreach($information as $v) { ?>
+                                            <a class="dropdown-item" href="<?php echo $v["link"];?>"><?php echo $v["text"];?></a>
+                                        <?php } ?>
+                                    </li>
+                                </ul>
                             </div>
-                        </form>
-                    </li>
+                        </li>
+                    <?php } ?>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <p>League</p>
@@ -81,7 +84,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarSearchBoardMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <p>
-                                Search Board
+                                Search
                             </p>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarSearchBoardMenuLink">
@@ -116,12 +119,12 @@
             </ul>
         </div>
 </nav>
-<?php if (!empty($notification)) { ?>
-    <div class="alert <?php echo $notification["class"];?>" role="alert">
+<?php if (!empty($alerts)) { ?>
+    <div class="alert <?php echo $alerts["class"];?>" role="alert">
         <div class="container">
             <div class="alert-icon">
                 <i class="now-ui-icons ui-1_bell-53"></i>
-            </div><?php echo $notification["message"];?><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            </div><?php echo $alerts["message"];?><button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">
                 <i class="now-ui-icons ui-1_simple-remove"></i>
               </span>

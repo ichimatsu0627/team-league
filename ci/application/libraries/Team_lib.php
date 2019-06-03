@@ -9,12 +9,15 @@ class Team_lib extends Base_lib
     protected $_models = [
         "T_teams",
         "T_team_members",
+        "T_team_requests",
         "T_team_locks",
     ];
 
     protected $_libraries = [
         "member_lib",
     ];
+
+    const MAX_JOIN_TEAM_PER_MEMBER = 5;
 
     /**
      * チーム情報を取得
@@ -91,6 +94,15 @@ class Team_lib extends Base_lib
     }
 
     /**
+     * @param $team_id
+     */
+    public function get_requests_by_team_id($team_id)
+    {
+        $requests = $this->CI->T_team_requests->get_by_team_id($team_id);
+        return array_column($requests, null, "t_team_id");
+    }
+
+    /**
      * 登録
      * @param array $team_data
      * @param array $team_member_data
@@ -110,6 +122,26 @@ class Team_lib extends Base_lib
         $this->CI->T_team_locks->insert(["id" => $id, "created" => now(), "modified" => now()]);
 
         return $id;
+    }
+
+    /**
+     * チーム申請を登録
+     * @param $id
+     * @param $member_id
+     */
+    public function regist_request($id, $member_id)
+    {
+        $request = $this->CI->T_team_requests->get_by_member_id($member_id);
+        $request = array_column($request, null, "t_team_id");
+
+        if (!isest($request[$id]))
+        {
+            $this->CI->T_team_requests->insert([
+                "t_team_id"   => $id,
+                "t_member_id" => $member_id,
+                "status"      => T_team_requests::STATUS_TYPE_NONE
+            ]);
+        }
     }
 
     /**

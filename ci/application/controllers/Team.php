@@ -45,9 +45,31 @@ class Team extends Base_controller
         }
 
         $this->view["team"] = $team;
+        if (!empty($this->team_lib->get_requests_by_team_id($team->id)))
+        {
+            $this->view["information"][] = ["text" => "Join Request", "link" => "/team/request_list/".$team->id];
+        }
         $this->view["is_my_team"] = $this->team_lib->is_team_member($this->member_id, $team);
 
         $this->layout->view("team/detail", $this->view);
+    }
+
+    public function request_list($id = null)
+    {
+        if (empty($id))
+        {
+            $this->_redirect("/err/not_found");
+        }
+
+        $team =  $this->team_lib->get_team($id);
+
+        if (empty($team))
+        {
+            $this->_redirect("/err/not_found");
+        }
+
+        $this->view["requests"] = $this->team_lib->get_requests_by_team_id($team->id);
+        $this->layout->view("team/request_list", $this->view);
     }
 
     /**
@@ -83,7 +105,11 @@ class Team extends Base_controller
     {
         $team_data = $this->input_team_data();
 
-        /* TODO: バリデート */
+        $teams = $this->team_lib->get_teams_by_member_id($this->member_id);
+        if (count($teams) >= Team_lib::MAX_JOIN_TEAM_PER_MEMBER)
+        {
+            $this->_redirect("/team/detail?c=".Page::CODE_FAILED_BY_MAX_JOINED);
+        }
 
         try
         {
@@ -101,7 +127,6 @@ class Team extends Base_controller
         }
 
         $this->_redirect("/team/detail?c=".Page::CODE_REGISTED);
-
     }
 
     /**
@@ -132,6 +157,29 @@ class Team extends Base_controller
         {
             $this->_redirect("/err/not_found");
         }
+
+        $teams = $this->team_lib->get_teams_by_member_id($this->member_id);
+        if (count($teams) >= Team_lib::MAX_JOIN_TEAM_PER_MEMBER)
+        {
+            $this->_redirect("/team/detail?c=".Page::CODE_FAILED_BY_MAX_JOINED);
+        }
+
+        try
+        {
+            $this->member_lib->begin();
+
+            $this->member_lib->lock($this->member_id);
+
+            $this->team_lib->regist_request($id, $this->member_id);
+
+            $this->member_lib->commit();
+        }
+        catch (Exception $e)
+        {
+            $this->member_lib->rollback();
+        }
+
+        $this->_redirect("/team/detail/?c=".Page::CODE_REQUESTS);
     }
 
     /**

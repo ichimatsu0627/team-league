@@ -1,5 +1,7 @@
 <div class="container">
-    <h3>Team</h3>
+    <h3>
+        Team
+    </h3>
 
     <div class="row">
         <div class="col-lg-3 row">
@@ -12,6 +14,10 @@
                 <label><?php echo TEAM_DESCRIPTION_NAME;?></label>
                 <p style="font-size: .9rem; min-height: 90px;"><?php echo str_replace(["\r\n", "\n", "\r"], "<br>", $team->description);?></p>
                 <?php if ($is_my_team) { ?>
+                    <?php if (!empty($requests)) { ?>
+                        <a href="/team/request_list/<?php echo $team->id;?>"><button class="btn btn-info btn-icon btn-round"><i class="now-ui-icons users_single-02"></i></button></a>
+                    <?php } ?><br />
+
                     <a href="/team/edit_form/<?php echo $team->id;?>"><button class="btn btn-primary btn-round"><i class="now-ui-icons ui-2_settings-90"></i> Edit</button></a>
                 <?php } ?>
             </div>

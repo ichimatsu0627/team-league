@@ -12,6 +12,7 @@ class Page
     const CODE_LOGOUT                       = 10002;
     const CODE_REGISTED                     = 10003;
     const CODE_EDITED                       = 10004;
+    const CODE_REQUESTS                     = 10005;
     const CODE_FAILED                       = 20000;
     const CODE_FAILED_BY_INVALID_VALUE      = 20001;
     const CODE_FAILED_BY_NOT_ENOUGH         = 20002;
@@ -20,6 +21,7 @@ class Page
     const CODE_FAILED_BY_EXISTS_PLATFORM_ID = 20005;
     const CODE_FAILED_BY_NOT_MATCH_PASSWORD = 20006;
     const CODE_FAILED_BY_JOINED             = 20007;
+    const CODE_FAILED_BY_MAX_JOINED         = 20008;
 
     private $messages = [
         "top" => [
@@ -52,19 +54,21 @@ class Page
         ],
         "team" => [
             "detail" => [
+                self::CODE_REQUESTS         => "申請しました",
                 self::CODE_FAILED_BY_JOINED => "既にチームに所属しています",
+                self::CODE_FAILED_BY_MAX_JOINED => "同時に掛け持ちできるチームは5チームまでです",
             ],
         ],
     ];
 
     /**
-     * get_notification
+     * get_alerts
      * @param string $controller
      * @param string $action
      * @param $code
      * @return array
      */
-    public function get_notification($controller, $action, $code) : array
+    public function get_alerts($controller, $action, $code) : array
     {
         $message = $this->get_message($controller, $action, $code);
 

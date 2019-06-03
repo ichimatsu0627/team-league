@@ -102,6 +102,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property T_member_locks     $T_member_locks
  * @property T_member_platforms $T_member_platforms
  * @property T_teams            $T_teams
+ * @property T_team_requests    $T_team_requests
  * @property T_team_locks       $T_team_locks
  * @property T_team_members     $T_team_members
  *

@@ -26,6 +26,7 @@ class Base_controller extends CI_Controller
         $this->set_csrf_token();
         $this->set_uri();
         $this->login_validate();
+        $this->set_alerts();
         $this->set_notification();
         $this->set_member_id();
     }
@@ -88,10 +89,18 @@ class Base_controller extends CI_Controller
     /**
      * 通知情報を設定
      */
-    private function set_notification()
+    private function set_alerts()
     {
         $c = $this->input->get("c");
-        $this->view["notification"] = $this->page->get_notification($this->controller_name, $this->action_name, $c);
+        $this->view["alerts"] = $this->page->get_alerts($this->controller_name, $this->action_name, $c);
+    }
+
+    /**
+     * ベルによる通知
+     */
+    private function set_notification()
+    {
+        $this->view["notification"] = [];
     }
 
     /**
