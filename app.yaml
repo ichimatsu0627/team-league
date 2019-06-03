@@ -5,21 +5,21 @@ automatic_scaling:
 
 handlers:
 
-#- url: /assets/img/(.*\.(bmp|gif|ico|jpeg|jpg|png))
-#  static_files: img/\1
-#  upload: public/assets/img/(.*\.(bmp|gif|ico|jpeg|jpg|png))
-#
-#- url: /assets/css/(.*\.css)
-#  static_files: css/\1
-#  upload: public/assets/css/(.*\.css)
-#
-#- url: /assets/fonts/(.*\.(md|eot|ttf|woff|woffw))
-#  static_files: fonts/\1
-#  upload: public/assets/fonts/(.*\.(md|eot|ttf|woff|woffw))
-#
-#- url: /assets/js/(.*\.(js))
-#  static_files: js/\1
-#  upload: public/assets/js/(.*\.(js))
+- url: /assets/img/(.*\.(bmp|gif|ico|jpeg|jpg|png))
+  static_files: public/assets/img/\1
+  upload: public/assets/img/(.*\.(bmp|gif|ico|jpeg|jpg|png))
+
+- url: /assets/css/(.*\.css)
+  static_files: public/assets/css/\1
+  upload: public/assets/css/(.*\.css)
+
+- url: /assets/fonts/(.*\.(md|eot|ttf|woff|woffw))
+  static_files: public/assets/fonts/\1
+  upload: public/assets/fonts/(.*\.(md|eot|ttf|woff|woffw))
+
+- url: /assets/js/(.*\.(js))
+  static_files: public/assets/js/\1
+  upload: public/assets/js/(.*\.(js))
 
 - url: .*
   script: auto
