@@ -235,7 +235,7 @@ $config['log_threshold'] = 1;
 |
 */
 
-if (ENVIRONMENT == "testing")
+if (ENVIRONMENT == "development")
 {
     $config['log_path'] = '/var/www/html/teamleague.com/ci/application/logs/';
 }
