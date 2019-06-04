@@ -17,8 +17,6 @@
     <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/vnd.microsoft.icon" />
     <!-- css -->
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<!--    <link href="/assets/css/now-ui-kit.css" rel="stylesheet" />-->
-<!--    <link href="/assets/css/base.css" rel="stylesheet" type="text/css" />-->
     <?php
         echo css_nocache_tag("/assets/css/now-ui-kit.css");
         echo css_nocache_tag("/assets/css/base.css");
@@ -45,103 +43,107 @@
     <?php echo js_nocache_tag("/assets/js/base.js"); ?>
 </head>
 <body class="sidebar-collapse">
-<nav class="navbar navbar-expand-lg bg-primary">
-        <a class="navbar-brand" href="/top/index"><?php echo SITE_TITLE;?></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-bar bar1"></span>
-            <span class="navbar-toggler-bar bar2"></span>
-            <span class="navbar-toggler-bar bar3"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="example-navbar" data-nav-image="assets/img/blurred-image-1.jpg">
-            <form class="form-inline my-4 mx-3 my-lg-0" action="#" method="POST">
-                <input class="form-control" name="keyword" type="search" placeholder="Search" aria-label="Search">
-            </form>
-            <ul class="navbar-nav mt-2">
-                <?php if (isset($member_id) && !empty($member_id)) { ?>
-                    <li class="nav-item dropdown">
-                        <?php if (!empty($notification)) { ?>
-                            <a href="#" class="nav-link" id="icon-information" data-toggle="dropdown">
-                                <i class="now-ui-icons ui-1_bell-53" aria-hidden="true"></i>
-                                <span class="badge badge-pill badge-danger"><?php echo count($notification); ?></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="icon-information">
-                                <ul class="navbar-nav">
-                                    <li class="nav-item">
-                                        <?php foreach($notification as $v) { ?>
-                                            <a class="dropdown-item" href="<?php echo $v["link"];?>"><?php echo $v["text"];?></a>
-                                        <?php } ?>
-                                    </li>
-                                </ul>
-                            </div>
-                        <?php } else { ?>
-                            <a class="nav-link">
-                                <i class="now-ui-icons ui-1_bell-53" aria-hidden="true"></i>
-                            </a>
-                        <?php } ?>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <p>League</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <p>Scrim</p>
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarSearchBoardMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <p>
-                                Search
-                            </p>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarSearchBoardMenuLink">
-                            <a class="dropdown-item" href="#">Members</a>
-                            <a class="dropdown-item" href="#">Teams</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarAccountMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <p>
-                                Account
-                            </p>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarAccountMenuLink">
-                            <a class="dropdown-item" href="/account/profile">Profile</a>
-                            <a class="dropdown-item" href="/team/detail">Team</a>
-                            <a class="dropdown-item" href="/account/logout">Logout</a>
-                        </div>
-                    </li>
-                <?php } else { ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/account/login_form">
-                            <p>Login</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/account/regist_form">
-                            <p>Regist</p>
-                        </a>
-                    </li>
-                <?php } ?>
-            </ul>
-        </div>
-</nav>
-<?php if (!empty($alerts)) { ?>
-    <div class="alert <?php echo $alerts["class"];?>" role="alert">
+    <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container">
-            <div class="alert-icon">
-                <i class="now-ui-icons ui-1_bell-53"></i>
-            </div><?php echo $alerts["message"];?><button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">
-                <i class="now-ui-icons ui-1_simple-remove"></i>
-              </span>
+            <a class="navbar-brand" href="/top/index"><?php echo SITE_TITLE;?></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
             </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbar" data-nav-image="assets/img/blurred-image-1.jpg">
+                <?php if (isset($member_id) && !empty($member_id)) { ?>
+                    <form class="form-inline my-4 mx-3 my-lg-0" action="#" method="POST">
+                        <input class="form-control" name="keyword" type="search" placeholder="Search" aria-label="Search">
+                    </form>
+                    <ul class="navbar-nav mt-2">
+                        <li class="nav-item dropdown">
+                            <?php if (!empty($notification)) { ?>
+                                <a href="#" class="nav-link" id="icon-information" data-toggle="dropdown">
+                                    <i class="now-ui-icons ui-1_bell-53" aria-hidden="true"></i>
+                                    <span class="badge badge-pill badge-danger"><?php echo count($notification); ?></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="icon-information">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item">
+                                            <?php foreach($notification as $v) { ?>
+                                                <a class="dropdown-item" href="<?php echo $v["link"];?>"><?php echo $v["text"];?></a>
+                                            <?php } ?>
+                                        </li>
+                                    </ul>
+                                </div>
+                            <?php } else { ?>
+                                <a class="nav-link">
+                                    <i class="now-ui-icons ui-1_bell-53" aria-hidden="true"></i>
+                                </a>
+                            <?php } ?>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <p>League</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <p>Scrim</p>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarSearchBoardMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <p>
+                                    Search
+                                </p>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarSearchBoardMenuLink">
+                                <a class="dropdown-item" href="#">Members</a>
+                                <a class="dropdown-item" href="#">Teams</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarAccountMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <p>
+                                    Account
+                                </p>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarAccountMenuLink">
+                                <a class="dropdown-item" href="/account/profile">Profile</a>
+                                <a class="dropdown-item" href="/team/detail">Team</a>
+                                <a class="dropdown-item" href="/account/logout">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                <?php } else { ?>
+                    <ul class="navbar-nav mt-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/account/login_form">
+                                <p>Login</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/account/regist_form">
+                                <p>Regist</p>
+                            </a>
+                        </li>
+                    </ul>
+                <?php } ?>
+            </div>
         </div>
+    </nav>
+    <?php if (!empty($alerts)) { ?>
+        <div class="alert <?php echo $alerts["class"];?>" role="alert">
+            <div class="container">
+                <div class="alert-icon">
+                    <i class="now-ui-icons ui-1_bell-53"></i>
+                </div><?php echo $alerts["message"];?><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">
+                    <i class="now-ui-icons ui-1_simple-remove"></i>
+                  </span>
+                </button>
+            </div>
+        </div>
+    <?php } ?>
+    <div class="wrapper">
+        <?php echo $content_for_layout; ?>
     </div>
-<?php } ?>
-<div class="wrapper">
-    <?php echo $content_for_layout; ?>
-</div>
 </body>
 </html>
