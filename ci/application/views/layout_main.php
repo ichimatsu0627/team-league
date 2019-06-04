@@ -55,22 +55,27 @@
         <div class="collapse navbar-collapse justify-content-end" id="example-navbar" data-nav-image="assets/img/blurred-image-1.jpg">
             <ul class="navbar-nav">
                 <?php if (isset($member_id) && !empty($member_id)) { ?>
-                    <?php if (!empty($information)) { ?>
-                        <li class="nav-item dropdown">
+                    <li class="nav-item dropdown">
+                        <?php if (!empty($notification)) { ?>
                             <a href="#" class="nav-link" id="icon-information" data-toggle="dropdown">
                                 <i class="now-ui-icons ui-1_bell-53" aria-hidden="true"></i>
+                                <span class="badge badge-pill badge-danger"><?php echo count($notification); ?></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="icon-information">
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
-                                        <?php foreach($information as $v) { ?>
+                                        <?php foreach($notification as $v) { ?>
                                             <a class="dropdown-item" href="<?php echo $v["link"];?>"><?php echo $v["text"];?></a>
                                         <?php } ?>
                                     </li>
                                 </ul>
                             </div>
-                        </li>
-                    <?php } ?>
+                        <?php } else { ?>
+                            <a class="nav-link">
+                                <i class="now-ui-icons ui-1_bell-53" aria-hidden="true"></i>
+                            </a>
+                        <?php } ?>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <p>League</p>

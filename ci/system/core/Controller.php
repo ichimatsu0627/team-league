@@ -113,6 +113,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Member_lib       $member_lib
  * @property Team_lib         $team_lib
  * @property Platform_lib     $platform_lib
+ * @property Notice_lib       $notice_lib
  */
 class CI_Controller {
 

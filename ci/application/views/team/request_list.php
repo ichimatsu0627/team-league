@@ -1,7 +1,7 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: matsumoto
- * Date: 2019/06/03
- * Time: 17:43
- */
+<div class="container">
+    <h3>
+        Join Requests
+    </h3>
+
+
+</div>

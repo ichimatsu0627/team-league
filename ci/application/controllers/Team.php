@@ -45,10 +45,6 @@ class Team extends Base_controller
         }
 
         $this->view["team"] = $team;
-        if (!empty($this->team_lib->get_requests_by_team_id($team->id)))
-        {
-            $this->view["information"][] = ["text" => "Join Request", "link" => "/team/request_list/".$team->id];
-        }
         $this->view["is_my_team"] = $this->team_lib->is_team_member($this->member_id, $team);
 
         $this->layout->view("team/detail", $this->view);

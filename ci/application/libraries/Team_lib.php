@@ -96,9 +96,9 @@ class Team_lib extends Base_lib
     /**
      * @param $team_id
      */
-    public function get_requests_by_team_id($team_id)
+    public function get_requests_by_team_id($team_id, $status = T_team_requests::STATUS_TYPE_NONE)
     {
-        $requests = $this->CI->T_team_requests->get_by_team_id($team_id);
+        $requests = $this->CI->T_team_requests->get_by_team_id($team_id, $status);
         return array_column($requests, null, "t_team_id");
     }
 

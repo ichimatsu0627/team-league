@@ -26,9 +26,9 @@ class Base_controller extends CI_Controller
         $this->set_csrf_token();
         $this->set_uri();
         $this->login_validate();
+        $this->set_member_id();
         $this->set_alerts();
         $this->set_notification();
-        $this->set_member_id();
     }
 
     /**
@@ -50,6 +50,7 @@ class Base_controller extends CI_Controller
         $this->load->library("login_lib");
         $this->load->library("member_lib");
         $this->load->library("platform_lib");
+        $this->load->library("notice_lib");
     }
 
     /**
@@ -100,7 +101,7 @@ class Base_controller extends CI_Controller
      */
     private function set_notification()
     {
-        $this->view["notification"] = [];
+        $this->view["notification"] = $this->notice_lib->get($this->member_id);
     }
 
     /**
