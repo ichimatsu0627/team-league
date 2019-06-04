@@ -17,8 +17,6 @@ class Notice_lib extends Base_lib
      */
     public function get($member_id)
     {
-        log_message('m', $member_id);
-
         $notices = [];
 
         $notices[] = $this->get_notice_by_join_requests($member_id);
