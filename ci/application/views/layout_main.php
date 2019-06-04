@@ -53,10 +53,10 @@
             <span class="navbar-toggler-bar bar3"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="example-navbar" data-nav-image="assets/img/blurred-image-1.jpg">
-            <form class="form-inline d-none d-lg-inline-block" action="#" method="POST">
+            <form class="form-inline my-4 mx-3 my-lg-0" action="#" method="POST">
                 <input class="form-control" name="keyword" type="search" placeholder="Search" aria-label="Search">
             </form>
-            <ul class="navbar-nav">
+            <ul class="navbar-nav mt-2">
                 <?php if (isset($member_id) && !empty($member_id)) { ?>
                     <li class="nav-item dropdown">
                         <?php if (!empty($notification)) { ?>
