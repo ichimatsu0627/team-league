@@ -57,17 +57,6 @@
                             </td>
                         </tr>
                     <?php } ?>
-                    <?php foreach($teams as $team) { ?>
-                        <tr>
-                            <td class="h4"><a href="/team/detail/<?php echo $team->id;?>"><?php echo $team->name; ?></a></td>
-                        </tr>
-                        <tr>
-                            <td class="row">
-                                <div class="col-3"><img src="/assets/img/icon.png" class="rounded" width="80" height="80"></div>
-                                <p class="col-8"><?php echo $team->description; ?></p>
-                            </td>
-                        </tr>
-                    <?php } ?>
                 </table>
             </div>
         <?php } ?>
