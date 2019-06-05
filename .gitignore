@@ -10,15 +10,15 @@ ci/application/logs/*
 # Docker
 .mysql
 environment/production/*
-learning_ci/phpmyadmin/*
+team_league/phpmyadmin/*
 ## nginx
-learning_ci/var/log/nginx/*
+team_league/var/log/nginx/*
 
 # IDE Files
 /nbproject/
 .idea/*
 
-## Sublime Text cache files
+# Sublime Text cache files
 *.tmlanguage.cache
 *.tmPreferences.cache
 *.stTheme.cache
@@ -27,26 +27,18 @@ learning_ci/var/log/nginx/*
 /tests/tests/
 /tests/results/
 
+# Google App Engine
+gae/secret.yaml
+
 # Other
 package-lock.json
-
 !.gitkeep
-### https://raw.github.com/github/gitignore/c2bb55b891e67c8c43e731ccb6b8a4f3b6b02fd0/Sass.gitignore
 
+# Sass
 .sass-cache/
 *.css.map
 *.sass.map
 *.scss.map
-
-
-### https://raw.github.com/github/gitignore/c2bb55b891e67c8c43e731ccb6b8a4f3b6b02fd0/Node.gitignore
-
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 # Runtime data
 pids
@@ -117,7 +109,3 @@ typings/
 
 # FuseBox cache
 .fusebox/
-
-# gae
-gae/secret.yaml
-

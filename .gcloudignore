@@ -17,11 +17,19 @@
 /vendor/
 
 # Docker
-learning_ci
+team_league
+.mysql
 
 # CodeIgniter
 ci/application/cache/*
 ci/application/logs/*
+
+# SCSS
+assets/scss/*
+assets/.sass-cache/*
+*.css.map
+*.sass.map
+*.scss.map
 
 # OS
 .DS_Store
@@ -34,3 +42,5 @@ ci/application/logs/*
 
 # other
 gae/secret.yaml
+/sql
+gulpfile.js
