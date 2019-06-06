@@ -94,12 +94,77 @@ class Team_lib extends Base_lib
     }
 
     /**
+     * 管理者かどうか
+     * @param $member_id
+     * @param $team
+     * @return bool
+     */
+    public function is_admin($member_id, $team)
+    {
+        return $this->is_leader($member_id, $team) || $this->is_sub_leader($member_id, $team);
+    }
+
+    /**
+     * リーダーかどうか
+     * @param $member_id
+     * @param $team
+     * @return bool
+     */
+    public function is_leader($member_id, $team)
+    {
+        if (!$this->is_team_member($member_id, $team))
+        {
+            return false;
+        }
+
+        return $team->members[$member_id]->role == T_team_members::ROLE_LEADER;
+    }
+
+    /**
+     * サブリーダーかどうか
+     * @param $member_id
+     * @param $team
+     * @return bool
+     */
+    public function is_sub_leader($member_id, $team)
+    {
+        if (!$this->is_team_member($member_id, $team))
+        {
+            return false;
+        }
+
+        return $team->members[$member_id]->role == T_team_members::ROLE_SUB_LEADER;
+    }
+
+    /**
      * @param $team_id
+     * @param $status
      */
     public function get_requests_by_team_id($team_id, $status = T_team_requests::STATUS_TYPE_NONE)
     {
         $requests = $this->CI->T_team_requests->get_by_team_id($team_id, $status);
         return array_column($requests, null, "t_team_id");
+    }
+
+    /**
+     * @param $team_id
+     * @param $member_id
+     * @return obj|null
+     */
+    public function get_requests_by_team_member($team_id, $member_id)
+    {
+        $request = $this->CI->T_team_requests->get_by_team_member($team_id, $member_id);
+        return $request;
+    }
+
+    /**
+     * @param $team_id
+     * @param $member_id
+     * @return bool
+     */
+    public function is_already_request($team_id, $member_id)
+    {
+        return $this->get_teams_by_member_id($team_id, $member_id) ? true : false;
     }
 
     /**
@@ -144,6 +209,16 @@ class Team_lib extends Base_lib
     }
 
     /**
+     * リーダーへ更新する
+     * @param $member_id
+     * @param $team_id
+     */
+    public function update_member_role($team_id, $member_id, $role)
+    {
+        $this->CI->T_team_members->update_role($member_id, $team_id, $role);
+    }
+
+    /**
      * チーム申請を登録
      * @param $id
      * @param $member_id
@@ -153,7 +228,7 @@ class Team_lib extends Base_lib
         $request = $this->CI->T_team_requests->get_by_member_id($member_id);
         $request = array_column($request, null, "t_team_id");
 
-        if (!isest($request[$id]))
+        if (!isset($request[$id]))
         {
             $this->CI->T_team_requests->insert([
                 "t_team_id"   => $id,

@@ -38,4 +38,24 @@ class T_team_requests extends Tran_model
 
         return $this->query($sql, [$team_id, $status, FLG_OFF]);
     }
+
+    public function get_by_team_member($team_id, $member_id, $status = self::STATUS_TYPE_NONE)
+    {
+        $sql = "
+            SELECT
+                *
+            FROM
+                t_team_requests
+           WHERE
+                t_team_id = ? AND
+                t_member_id = ? AND
+                status = ? AND 
+                del_flg = ?
+            LIMIT
+                1
+        ";
+
+        return $this->query_one($sql, [$team_id, $member_id, $status, FLG_OFF]);
+    }
+
 }

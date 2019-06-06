@@ -13,13 +13,8 @@
                 <p><?php echo $team->name;?></p>
                 <label><?php echo TEAM_DESCRIPTION_NAME;?></label>
                 <p style="font-size: .9rem; min-height: 90px;"><?php echo str_replace(["\r\n", "\n", "\r"], "<br>", $team->description);?></p>
-                <?php if ($is_my_team) { ?>
-                    <?php if (!empty($requests)) { ?>
-                        <a href="/team/request_list/<?php echo $team->id;?>"><button class="btn btn-info btn-icon btn-round"><i class="now-ui-icons users_single-02"></i></button></a>
-                    <?php } ?><br />
-
-                    <a href="/team/edit_form/<?php echo $team->id;?>"><button class="btn btn-primary btn-round"><i class="now-ui-icons ui-2_settings-90"></i> Edit</button></a>
-                <?php } ?>
+                <?php if ($is_admin) { ?><a href="/team/edit_form/<?php echo $team->id;?>"><button class="btn btn-primary btn-round"><i class="now-ui-icons ui-2_settings-90"></i> Edit</button></a><?php } ?>
+                <?php if (!$is_team_member && !$is_already_request) { ?><a href="/team/request_join/<?php echo $team->id;?>"><button class="btn btn-success btn-round">Request Join</button></a><?php } ?>
             </div>
         </div>
         <div class="col-lg-9">
@@ -40,7 +35,7 @@
                                 <th><?php echo ++$i;?></th>
                                 <td>
                                     <a href="/account/profile/<?php echo $team_member_id;?>"><?php echo $team_member->detail->name;?>
-                                    <?php if ($team_member->role != 0) { echo " <span style='color: red; font-size: .7rem;'>".TEAM_ROLE_LIST[$team_member->role]."</span>"; } ?>
+                                    <?php if ($team_member->role != 0) { echo " <span style='color: red; font-size: .7rem;'>".T_team_members::ROLE_LIST[$team_member->role]."</span>"; } ?>
                                 </td>
                                 <td><span class="badge badge-info"><?php echo RANK_NAME_LIST[5];?></span></td>
                             </tr>

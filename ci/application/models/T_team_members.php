@@ -6,6 +6,15 @@ require_once(APPPATH."models/Tran_model.php");
  */
 class T_team_members extends Tran_model
 {
+    const ROLE_LEADER     = 1;
+    const ROLE_SUB_LEADER = 2;
+    const ROLE_MEMBER     = 3;
+    const ROLE_LIST = [
+        1 => "Leader",
+        2 => "Sub-Leader",
+        0 => "Member",
+    ];
+
     /**
      * チームメンバー一覧を取得
      * @param $t_team_id
@@ -53,6 +62,52 @@ class T_team_members extends Tran_model
         }
 
         return $t_team_members;
+    }
+
+    /**
+     * 指定したロールのチームメンバーデータ取得
+     * @param $t_team_id
+     * @param $role
+     * @return mixed|null
+     */
+    public function get_by_team_role($t_team_id, $role)
+    {
+        $sql = "
+            SELECT
+              *
+            FROM
+              t_team_members
+            WHERE
+              t_team_id = ? AND role = ? AND del_flg = ?
+        ";
+
+        $params = [$t_team_id, $role, FLG_OFF];
+
+        return $this->query($sql, $params);
+    }
+
+    /**
+     * 権限更新
+     * @param $member_id
+     * @param $team_id
+     * @param $role
+     * @throws Exception
+     */
+    public function update_role($member_id, $team_id, $role)
+    {
+        $sql = "
+            UPDATE
+              t_team_members
+            SET
+              role = ?
+            WHERE
+              t_member_id = ? AND 
+              t_team_id = ?
+        ";
+
+        $params = [$member_id, $team_id, $role];
+
+        $this->query_to_master($sql, $params);
     }
 
     /**

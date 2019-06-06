@@ -45,7 +45,9 @@ class Team extends Base_controller
         }
 
         $this->view["team"] = $team;
-        $this->view["is_my_team"] = $this->team_lib->is_team_member($this->member_id, $team);
+        $this->view["is_team_member"] = $this->team_lib->is_team_member($this->member_id, $team);
+        $this->view["is_admin"] = $this->team_lib->is_admin($this->member_id, $team);
+        $this->view["is_already_request"] = $this->team_lib->is_already_request($team->id, $this->member_id);
 
         $this->layout->view("team/detail", $this->view);
     }
@@ -111,7 +113,8 @@ class Team extends Base_controller
         {
             $this->team_lib->begin();
 
-            $this->team_lib->regist($team_data, [$this->member_id]);
+            $id = $this->team_lib->regist($team_data, [$this->member_id]);
+            $this->team_lib->update_member_role($id, $this->member_id, T_team_members::ROLE_LEADER);
 
             $this->team_lib->commit();
         }
@@ -203,7 +206,7 @@ class Team extends Base_controller
             $this->member_lib->rollback();
         }
 
-        $this->_redirect("/team/detail/?c=".Page::CODE_REQUESTS);
+        $this->_redirect("/team/detail/".$id."?c=".Page::CODE_REQUESTS);
     }
 
     /**
