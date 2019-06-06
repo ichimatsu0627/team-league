@@ -131,6 +131,7 @@ class Team extends Base_controller
     public function edit()
     {
         $id = $this->input->post("id");
+        $team_data = $this->input_team_data();
 
         $team = $this->team_lib->get_team($id);
 
@@ -139,6 +140,33 @@ class Team extends Base_controller
             $this->_redirect("/err/not_found");
         }
 
+        if (!$this->team_lib->is_team_member($this->member_id, $team))
+        {
+            $this->_redirect("/team/edit_form/".$id."?c=".Page::CODE_FAILED);
+        }
+
+        if (empty($team_data["name"]))
+        {
+            $this->_redirect("/team/edit_form/".$id."?c=".Page::CODE_FAILED);
+        }
+
+        try
+        {
+            $this->team_lib->begin();
+
+            $this->team_lib->lock($id);
+
+            $this->team_lib->update($team, $team_data);
+
+            $this->team_lib->commit();
+        }
+        catch(Exception $e)
+        {
+            $this->team_lib->rollback();
+            $this->_redirect("/team/edit_form/".$id."?c=".Page::CODE_FAILED);
+        }
+
+        $this->_redirect("/team/detail/".$id."?c=".Page::CODE_SUCCESS);
     }
 
     /**

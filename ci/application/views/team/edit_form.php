@@ -11,7 +11,7 @@
         </div>
         <div class="form-group">
             <label for="description"><?php echo TEAM_DESCRIPTION_NAME;?></label>
-            <textarea type="text" class="form-control" name="description" maxlength="75" placeholder="<?php echo mb_strtolower(TEAM_DESCRIPTION_NAME);?> max 75 characters"><?php echo $team->description; ?>"</textarea>
+            <textarea type="text" class="form-control" name="description" maxlength="75" placeholder="<?php echo mb_strtolower(TEAM_DESCRIPTION_NAME);?> max 75 characters"><?php echo $team->description; ?></textarea>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-success btn-round">Submit</button>

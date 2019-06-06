@@ -138,7 +138,7 @@ class Member_lib extends Base_lib
     public function update($member, $member_data, $platform_data)
     {
         $update_member_data = array_filter($member_data, function($v, $k) use($member) {
-            if (in_array($k, T_members::REQUIRED_COLUMNS) && $v == null) return false;
+            if (in_array($k, T_members::REQUIRED_COLUMNS) && empty($v)) return false;
             if ($k == "password") return false; // 専用の更新にする
             if ($member->{$k} == $v) return false;
             return true;

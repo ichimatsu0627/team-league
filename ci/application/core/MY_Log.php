@@ -12,6 +12,11 @@ class MY_Log extends CI_Log {
             $filepath = $this->_log_path.$level.'.'.$this->_file_ext;
         }
 
+        if (!is_string($msg)) {
+
+            $msg = print_r($msg, true);
+        }
+
         $message = '';
 
         if ( ! file_exists($filepath))

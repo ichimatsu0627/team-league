@@ -125,6 +125,25 @@ class Team_lib extends Base_lib
     }
 
     /**
+     * 更新
+     * @param $team
+     * @param $team_data
+     */
+    public function update($team, $team_data)
+    {
+        $update_team_data = array_filter($team_data, function($v, $k) use ($team) {
+            if (in_array($k, T_teams::REQUIRED_COLUMNS) && empty($v)) return false;
+            if ($team->{$k} == $v) return false;
+            return true;
+        }, ARRAY_FILTER_USE_BOTH);
+
+        if (!empty($update_team_data))
+        {
+            $this->CI->T_teams->update($team->id, $update_team_data);
+        }
+    }
+
+    /**
      * チーム申請を登録
      * @param $id
      * @param $member_id
