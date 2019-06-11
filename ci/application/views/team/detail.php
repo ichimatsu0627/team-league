@@ -13,8 +13,15 @@
                 <p><?php echo $team->name;?></p>
                 <label><?php echo TEAM_DESCRIPTION_NAME;?></label>
                 <p style="font-size: .9rem; min-height: 90px;"><?php echo str_replace(["\r\n", "\n", "\r"], "<br>", $team->description);?></p>
-                <?php if ($is_admin) { ?><a href="/team/edit_form/<?php echo $team->id;?>"><button class="btn btn-primary btn-round"><i class="now-ui-icons ui-2_settings-90"></i> Edit</button></a><?php } ?>
-                <?php if (!$is_team_member && !$is_already_request) { ?><a href="/team/request_join/<?php echo $team->id;?>"><button class="btn btn-success btn-round">Request Join</button></a><?php } ?>
+                <?php if ($is_admin) { ?>
+                    <a href="/team/edit_form/<?php echo $team->id;?>"><button class="btn btn-primary btn-round"><i class="now-ui-icons ui-2_settings-90"></i> Edit</button></a>
+                <?php } else if (!$is_team_member) { ?>
+                    <?php if ($is_already_request) { ?>
+                        <button class="btn btn-secondary btn-round">Waiting for a response</button>
+                    <?php } else { ?>
+                        <a href="/team/request_join/<?php echo $team->id;?>"><button class="btn btn-success btn-round">Request Join</button></a>
+                    <?php } ?>
+                <?php } ?>
             </div>
         </div>
         <div class="col-lg-9">

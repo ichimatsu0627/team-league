@@ -143,7 +143,7 @@ class Team_lib extends Base_lib
     public function get_requests_by_team_id($team_id, $status = T_team_requests::STATUS_TYPE_NONE)
     {
         $requests = $this->CI->T_team_requests->get_by_team_id($team_id, $status);
-        return array_column($requests, null, "t_team_id");
+        return array_column($requests, null, "t_member_id");
     }
 
     /**
@@ -164,7 +164,7 @@ class Team_lib extends Base_lib
      */
     public function is_already_request($team_id, $member_id)
     {
-        return $this->get_teams_by_member_id($team_id, $member_id) ? true : false;
+        return $this->get_requests_by_team_member($team_id, $member_id) ? true : false;
     }
 
     /**
