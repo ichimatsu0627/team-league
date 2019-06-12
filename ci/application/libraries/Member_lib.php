@@ -39,6 +39,33 @@ class Member_lib extends Base_lib
     }
 
     /**
+     * 会員情報をまとめて取得
+     * @param $ids
+     * @return array
+     */
+    public function get_members($ids)
+    {
+        if (empty($ids))
+        {
+            return [];
+        }
+
+        $members = $this->CI->T_members->get_by_ids($ids);
+
+        if (empty($members))
+        {
+            return [];
+        }
+
+        foreach($members as $k => $member)
+        {
+            $members[$k] = $this->add_platform($member);
+        }
+
+        return array_column($members, null, "id");
+    }
+
+    /**
      * ユーザーIDで会員データを取得
      * @param int $login_id
      * @return object

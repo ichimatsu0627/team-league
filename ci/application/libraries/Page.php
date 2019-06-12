@@ -13,6 +13,8 @@ class Page
     const CODE_REGISTED                     = 10003;
     const CODE_EDITED                       = 10004;
     const CODE_REQUESTS                     = 10005;
+    const CODE_ACCEPT                       = 10006;
+    const CODE_REFUSE                       = 10007;
     const CODE_FAILED                       = 20000;
     const CODE_FAILED_BY_INVALID_VALUE      = 20001;
     const CODE_FAILED_BY_NOT_ENOUGH         = 20002;
@@ -22,6 +24,7 @@ class Page
     const CODE_FAILED_BY_NOT_MATCH_PASSWORD = 20006;
     const CODE_FAILED_BY_JOINED             = 20007;
     const CODE_FAILED_BY_MAX_JOINED         = 20008;
+    const CODE_FAILED_BY_PERMISSION_DENIED  = 20009;
 
     private $messages = [
         "top" => [
@@ -55,8 +58,13 @@ class Page
         "team" => [
             "detail" => [
                 self::CODE_REQUESTS         => "申請しました",
+                self::CODE_ACCEPT           => "承認しました",
                 self::CODE_FAILED_BY_JOINED => "既にチームに所属しています",
                 self::CODE_FAILED_BY_MAX_JOINED => "同時に掛け持ちできるチームは5チームまでです",
+            ],
+            "request_list" => [
+                self::CODE_REFUSE                      => "却下しました",
+                self::CODE_FAILED_BY_PERMISSION_DENIED => "権限がありません",
             ],
         ],
     ];

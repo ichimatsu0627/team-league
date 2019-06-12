@@ -52,4 +52,23 @@ class T_members extends Tran_model
 
         return $this->query_one($sql, [$email, FLG_OFF]);
     }
+
+    /**
+     * get_by_ids
+     * @param $ids
+     * @return array
+     */
+    public function get_by_ids($ids)
+    {
+        $sql = "
+            SELECT
+              *
+            FROM
+              `{$this->_table}`
+            WHERE
+              `id` IN(".implode(",", $ids).") AND del_flg = ?
+        ";
+
+        return $this->query($sql, [FLG_OFF]);
+    }
 }

@@ -66,7 +66,11 @@ class Team extends Base_controller
             $this->_redirect("/err/not_found");
         }
 
-        $this->view["requests"] = $this->team_lib->get_requests_by_team_id($team->id);
+        $requests = $this->team_lib->get_requests_by_team_id($team->id);
+        $members = $this->member_lib->get_members(array_column($requests, "t_member_id"));
+
+        $this->view["requests"] = $requests;
+        $this->view["members"]  = $members;
         $this->layout->view("team/request_list", $this->view);
     }
 
@@ -213,9 +217,87 @@ class Team extends Base_controller
      * 参加申請承認
      * @param $id
      */
-    public function accept_join($id)
+    public function accept_request($id)
     {
+        $request = $this->team_lib->get_request_by_id($id);
 
+        if (empty($request))
+        {
+            $this->_redirect("/err/not_found");
+        }
+
+        $team = $this->team_lib->get_team($request->t_team_id);
+
+        if (empty($team))
+        {
+            $this->_redirect("/err/not_found");
+        }
+
+        if (!$this->team_lib->is_admin($this->member_id, $team))
+        {
+            $this->_redirect("/team/request_list?c=".Page::CODE_FAILED_BY_INVALID_VALUE);
+        }
+
+        try
+        {
+            $this->team_lib->begin();
+
+            $this->team_lib->lock($team->id);
+
+            $this->team_lib->regist_member($team->id, [$request->t_member_id]);
+            $this->team_lib->update_request($id, T_team_requests::STATUS_TYPE_RECEIVED);
+
+            $this->team_lib->commit();
+        }
+        catch (Exception $e)
+        {
+            $this->team_lib->rollback();
+        }
+
+        $this->_redirect("/team/request_list/".$team->id."?c=".Page::CODE_ACCEPT);
+    }
+
+    /**
+     * 参加申請却下
+     * @param $id
+     */
+    public function refuse_request($id)
+    {
+        $request = $this->team_lib->get_request_by_id($id);
+
+        if (empty($request))
+        {
+            $this->_redirect("/err/not_found");
+        }
+
+        $team = $this->team_lib->get_team($request->t_team_id);
+
+        if (empty($team))
+        {
+            $this->_redirect("/err/not_found");
+        }
+
+        if (!$this->team_lib->is_admin($this->member_id, $team))
+        {
+            $this->_redirect("/team/request_list/".$team->id."?c=".Page::CODE_FAILED_BY_INVALID_VALUE);
+        }
+
+        try
+        {
+            $this->team_lib->begin();
+
+            $this->team_lib->lock($team->id);
+
+            $this->team_lib->update_request($id, T_team_requests::STATUS_TYPE_LOST);
+
+            $this->team_lib->commit();
+        }
+        catch (Exception $e)
+        {
+            $this->team_lib->rollback();
+        }
+
+        $this->_redirect("/team/request_list/".$team->id."?c=".Page::CODE_REFUSE);
     }
 
     /**

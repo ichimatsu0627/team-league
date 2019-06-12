@@ -7,6 +7,12 @@ class T_team_requests extends Tran_model
     const STATUS_TYPE_RECEIVED = 1;
     const STATUS_TYPE_LOST     = 2;
 
+    /**
+     * @param $member_id
+     * @param int $status
+     * @return array
+     * @throws Exception
+     */
     public function get_by_member_id($member_id, $status = self::STATUS_TYPE_NONE)
     {
         $sql = "
@@ -23,6 +29,12 @@ class T_team_requests extends Tran_model
         return $this->query($sql, [$member_id, $status, FLG_OFF]);
     }
 
+    /**
+     * @param $team_id
+     * @param int $status
+     * @return array
+     * @throws Exception
+     */
     public function get_by_team_id($team_id, $status = self::STATUS_TYPE_NONE)
     {
         $sql = "
@@ -39,6 +51,12 @@ class T_team_requests extends Tran_model
         return $this->query($sql, [$team_id, $status, FLG_OFF]);
     }
 
+    /**
+     * @param $team_id
+     * @param $member_id
+     * @param int $status
+     * @return mixed|null
+     */
     public function get_by_team_member($team_id, $member_id, $status = self::STATUS_TYPE_NONE)
     {
         $sql = "

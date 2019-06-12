@@ -137,6 +137,15 @@ class Team_lib extends Base_lib
     }
 
     /**
+     * @param $id
+     * @return mixed|null
+     */
+    public function get_request_by_id($id)
+    {
+        return $this->CI->T_team_requests->get_by_id($id);
+    }
+
+    /**
      * @param $team_id
      * @param $status
      */
@@ -182,11 +191,21 @@ class Team_lib extends Base_lib
             "modified"    => now(),
         ]);
 
-        $this->CI->T_team_members->regist($id, $team_member_data);
+        $this->regist_member($id, $team_member_data);
 
         $this->CI->T_team_locks->insert(["id" => $id, "created" => now(), "modified" => now()]);
 
         return $id;
+    }
+
+    /**
+     * @param $id
+     * @param $team_member_data
+     * @throws Exception
+     */
+    public function regist_member($id, $team_member_data)
+    {
+        $this->CI->T_team_members->regist($id, $team_member_data);
     }
 
     /**
@@ -209,7 +228,7 @@ class Team_lib extends Base_lib
     }
 
     /**
-     * リーダーへ更新する
+     * 役職を更新する
      * @param $member_id
      * @param $team_id
      */
@@ -219,23 +238,33 @@ class Team_lib extends Base_lib
     }
 
     /**
-     * チーム申請を登録
-     * @param $id
+     * 参加申請を登録
+     * @param $team_id
      * @param $member_id
      */
-    public function regist_request($id, $member_id)
+    public function regist_request($team_id, $member_id)
     {
         $request = $this->CI->T_team_requests->get_by_member_id($member_id);
         $request = array_column($request, null, "t_team_id");
 
-        if (!isset($request[$id]))
+        if (!isset($request[$team_id]))
         {
             $this->CI->T_team_requests->insert([
-                "t_team_id"   => $id,
+                "t_team_id"   => $team_id,
                 "t_member_id" => $member_id,
                 "status"      => T_team_requests::STATUS_TYPE_NONE
             ]);
         }
+    }
+
+    /**
+     * 参加申請を更新
+     * @param $id
+     * @param $status
+     */
+    public function update_request($id, $status)
+    {
+        $this->CI->T_team_requests->update($id, ["status" => $status]);
     }
 
     /**
