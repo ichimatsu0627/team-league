@@ -9,10 +9,6 @@
                     <td><?php echo $member->name;?></td>
                 </tr>
                 <tr>
-                    <th><?php echo MAIL_ADDRESS_NAME;?></th>
-                    <td><?php echo $member->email;?></td>
-                </tr>
-                <tr>
                     <th><?php echo USER_ID_NAME;?></th>
                     <td><?php echo $member->login_id;?></td>
                 </tr>

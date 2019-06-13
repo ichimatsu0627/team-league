@@ -93,11 +93,6 @@ class Account extends Base_controller
                 throw new Exception("duplicate used id", Page::CODE_FAILED_BY_EXISTS_USER_ID);
             }
 
-            if ($this->member_lib->exists_member_by_email($member_data["email"]))
-            {
-                throw new Exception("duplicate email", Page::CODE_FAILED_BY_EXISTS_EMAIL);
-            }
-
             if(!password_verify($this->input->post('conf_password'), $member_data["password"]))
             {
                 throw new Exception("invalid password", Page::CODE_FAILED_BY_NOT_MATCH_PASSWORD);
@@ -229,7 +224,6 @@ class Account extends Base_controller
         $member_data = [
             "login_id"  => $this->input->post('login_id'),
             "name"     => $this->input->post('name'),
-            "email"    => $this->input->post('email'),
             "password" => password_hash($this->input->post('password'), PASSWORD_BCRYPT)
         ];
 

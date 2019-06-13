@@ -84,6 +84,42 @@ defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
-require(APPPATH."config/constants/".ENVIRONMENT."/settings.php");
+// common
+define("FLG_ON", 1);
+define("FLG_OFF", 0);
+
+// Member
+define("USER_ID_NAME", "User ID");
+define("USER_NAME_NAME", "Name");
+define("MAIL_ADDRESS_NAME", "E-mail");
+define("TWITTER_NAME", "Twitter");
+define("DISCORD_NAME", "Discord");
+define("PLATFORM_NAME", "Platform");
+define("PASSWORD_NAME", "Password");
+define("CONFIRM_PASSWORD_NAME", "Confirm Password");
+
+// Team
+define("TEAM_NAME_NAME", "Name");
+define("TEAM_DESCRIPTION_NAME", "Introduction");
+define("TEAM_MEMBERS_NAME", "Members");
+define("TEAM_RANK_NAME", "Rank");
+define("TEAM_RATING_NUMERIC_NAME", "Rating");
+define("TEAM_ROLE_LIST", [
+    1 => "Leader",
+    2 => "Sub-Leader",
+    0 => "Member",
+]);
+
+// Rank
+define("RANK_NAME_LIST", [
+    1 => "Bronze",
+    2 => "Silver",
+    3 => "Gold",
+    4 => "Platinum",
+    5 => "Diamond",
+    6 => "Champion",
+    7 => "Grand Champion",
+]);
+
 require(APPPATH."helpers/functions.php");
 require(APPPATH."helpers/html_helper.php");

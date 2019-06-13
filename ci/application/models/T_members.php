@@ -9,7 +9,6 @@ class T_members extends Tran_model
     const REQUIRED_COLUMNS = [
         "login_id",
         "name",
-        "email",
         "password",
     ];
 

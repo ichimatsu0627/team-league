@@ -9,8 +9,8 @@
             <input type="text" class="form-control" name="name" placeholder="<?php echo mb_strtolower(USER_NAME_NAME);?>" value="<?php echo $member->name;?>">
         </div>
         <div class="form-group">
-            <label for="email"><?php echo MAIL_ADDRESS_NAME;?></label>
-            <input type="text" class="form-control" name="email" placeholder="<?php echo mb_strtolower(MAIL_ADDRESS_NAME);?>" value="<?php echo $member->email;?>">
+            <label for="login_id"><?php echo USER_ID_NAME;?></label>
+            <input type="text" class="form-control" name="login_id" placeholder="<?php echo mb_strtolower(USER_ID_NAME);?>" value="<?php echo $member->login_id;?>">
         </div>
         <div class="form-group">
             <label for="twitter"><?php echo TWITTER_NAME;?></label>
@@ -19,10 +19,6 @@
         <div class="form-group">
             <label for="discord"><?php echo DISCORD_NAME;?></label>
             <input type="text" class="form-control" name="discord" placeholder="discord#1234" value="<?php echo $member->discord ?? "-";?>">
-        </div>
-        <div class="form-group">
-            <label for="login_id"><?php echo USER_ID_NAME;?></label>
-            <input type="text" class="form-control" name="login_id" placeholder="<?php echo mb_strtolower(USER_ID_NAME);?>" value="<?php echo $member->login_id;?>">
         </div>
         <div class="form-group">
             <label for="platform"><?php echo PLATFORM_NAME;?></label>

@@ -216,7 +216,7 @@ class Member_lib extends Base_lib
         $id = $this->CI->T_members->insert([
             "login_id" => $member_data["login_id"],
             "name"     => $member_data["name"],
-            "email"    => $member_data["email"],
+            "email"    => $member_data["email"] ?? "",
             "password" => $member_data["password"],
             "twitter"  => $member_data["twitter"] ?? "",
             "discord"  => $member_data["discord"] ?? "",
