@@ -1,8 +1,8 @@
 <div class="container">
 
-    <h3>Account Regist</h3>
+    <h3>Sign up</h3>
 
-    <form class="form" action="/account/regist" method="POST">
+    <form class="form" action="/account/register" method="POST">
         <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
         <div class="form-group">
             <label for="name"><?php echo USER_NAME_NAME;?><small style="color: red;"> ※ required</small></label>

@@ -52,7 +52,7 @@ class T_member_platforms extends Tran_model
      * @param $member_id
      * @param $platform_ids
      */
-    public function regist($member_id, $platform_ids)
+    public function register($member_id, $platform_ids)
     {
         if (empty($platform_ids))
         {
@@ -68,7 +68,7 @@ class T_member_platforms extends Tran_model
 
             if (!empty($this->get_by_platform_id($m_platform_id, $pfid)))
             {
-                throw new Exception("already registed", Page::CODE_FAILED_BY_EXISTS_PLATFORM_ID);
+                throw new Exception("already registered", Page::CODE_FAILED_BY_EXISTS_PLATFORM_ID);
             }
 
             $this->insert([
@@ -92,7 +92,7 @@ class T_member_platforms extends Tran_model
     {
         if (!empty($this->get_by_platform_id($m_platform_id, $pfid)))
         {
-            throw new Exception("already registed", Page::CODE_FAILED_BY_EXISTS_PLATFORM_ID);
+            throw new Exception("already registered", Page::CODE_FAILED_BY_EXISTS_PLATFORM_ID);
         }
 
         $sql = "

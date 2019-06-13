@@ -108,7 +108,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarAccountMenuLink">
                                 <a class="dropdown-item" href="/account/profile">Profile</a>
                                 <a class="dropdown-item" href="/team/detail">Team</a>
-                                <a class="dropdown-item" href="/account/logout">Logout</a>
+                                <a class="dropdown-item" href="/account/logout">Sign out</a>
                             </div>
                         </li>
                     </ul>
@@ -116,12 +116,12 @@
                     <ul class="navbar-nav mt-2">
                         <li class="nav-item">
                             <a class="nav-link" href="/account/login_form">
-                                <p>Login</p>
+                                <p>SIGN IN</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/account/regist_form">
-                                <p>Regist</p>
+                            <a class="nav-link" href="/account/register_form">
+                                <p>SIGN UP</p>
                             </a>
                         </li>
                     </ul>

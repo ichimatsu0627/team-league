@@ -15,8 +15,8 @@ class Login_lib extends Base_lib
             "index",
         ],
         "account" => [
-            "regist_form",
-            "regist",
+            "register_form",
+            "register",
             "login_form",
             "login",
         ],

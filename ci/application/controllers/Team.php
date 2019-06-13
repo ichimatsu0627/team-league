@@ -29,7 +29,7 @@ class Team extends Base_controller
 
             if (empty($member_teams))
             {
-                $this->_redirect("/team/regist_form");
+                $this->_redirect("/team/register_form");
             }
 
             $team = array_shift($member_teams);
@@ -75,11 +75,11 @@ class Team extends Base_controller
     }
 
     /**
-     * regist form
+     * register form
      */
-    public function regist_form()
+    public function register_form()
     {
-        $this->layout->view("team/regist_form", $this->view);
+        $this->layout->view("team/register_form", $this->view);
     }
 
     /**
@@ -103,7 +103,7 @@ class Team extends Base_controller
     /**
      * 登録 アクション
      */
-    public function regist()
+    public function register()
     {
         $team_data = $this->input_team_data();
 
@@ -117,7 +117,7 @@ class Team extends Base_controller
         {
             $this->team_lib->begin();
 
-            $id = $this->team_lib->regist($team_data, [$this->member_id]);
+            $id = $this->team_lib->register($team_data, [$this->member_id]);
             $this->team_lib->update_member_role($id, $this->member_id, T_team_members::ROLE_LEADER);
 
             $this->team_lib->commit();
@@ -126,7 +126,7 @@ class Team extends Base_controller
         {
             $this->team_lib->rollback();
             $c = $e->getCode();
-            $this->_redirect("/team/regist_form?c=".$c);
+            $this->_redirect("/team/register_form?c=".$c);
         }
 
         $this->_redirect("/team/detail?c=".Page::CODE_REGISTED);
@@ -201,7 +201,7 @@ class Team extends Base_controller
 
             $this->member_lib->lock($this->member_id);
 
-            $this->team_lib->regist_request($id, $this->member_id);
+            $this->team_lib->register_request($id, $this->member_id);
 
             $this->member_lib->commit();
         }
@@ -244,7 +244,7 @@ class Team extends Base_controller
 
             $this->team_lib->lock($team->id);
 
-            $this->team_lib->regist_member($team->id, [$request->t_member_id]);
+            $this->team_lib->register_member($team->id, [$request->t_member_id]);
             $this->team_lib->update_request($id, T_team_requests::STATUS_TYPE_RECEIVED);
 
             $this->team_lib->commit();

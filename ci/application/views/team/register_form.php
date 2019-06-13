@@ -1,8 +1,8 @@
 <div class="container">
 
-    <h3>Team Regist</h3>
+    <h3>Create Team</h3>
 
-    <form class="form" action="/team/regist" method="POST">
+    <form class="form" action="/team/register" method="POST">
         <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
         <div class="form-group">
             <label for="name"><?php echo TEAM_NAME_NAME;?><small style="color: red;"> ※ required</small></label>

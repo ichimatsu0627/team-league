@@ -4,7 +4,7 @@
             <form class="form" action="/account/login" method="POST">
                 <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
                 <div class="card-header text-center">
-                    <h3 class="card-title title-up">Login</h3>
+                    <h3 class="card-title title-up">Sign in</h3>
                 </div>
                 <div class="card-body">
                     <div class="input-group no-border">
@@ -25,8 +25,8 @@
                     </div>
                 </div>
                 <div class="card-footer text-center">
-                    <input type="submit" value="Login" class="btn btn-info btn-round btn-lg"><br />
-                    <a href="/account/regist_form" class="btn btn-link btn-info">create account</a>
+                    <input type="submit" value="Sign In" class="btn btn-info btn-round btn-lg"><br />
+                    <a href="/account/register_form" class="btn btn-link btn-info">sign up</a>
                 </div>
             </form>
         </div>

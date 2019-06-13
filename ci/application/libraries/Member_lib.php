@@ -92,7 +92,7 @@ class Member_lib extends Base_lib
      * @param array $data
      * @return bool
      */
-    public function validate_regist_memberdata($data)
+    public function validate_register_memberdata($data)
     {
         foreach($data as $key => $value)
         {
@@ -194,14 +194,14 @@ class Member_lib extends Base_lib
             {
                 if (!empty($this->CI->T_member_platforms->get_by_platform_id($m_platform_id, $pfid)))
                 {
-                    throw new Exception("already registed", Page::CODE_FAILED_BY_EXISTS_PLATFORM_ID);
+                    throw new Exception("already registered", Page::CODE_FAILED_BY_EXISTS_PLATFORM_ID);
                 }
 
                 $this->CI->T_member_platforms->update_platform($member->id, $m_platform_id, $pfid);
             }
         }
 
-        $this->CI->T_member_platforms->regist($member->id, $insert_platform_data);
+        $this->CI->T_member_platforms->register($member->id, $insert_platform_data);
     }
 
     /**
@@ -210,7 +210,7 @@ class Member_lib extends Base_lib
      * @param array $platform_data
      * @return int
      */
-    public function regist($member_data, $platform_data)
+    public function register($member_data, $platform_data)
     {
         // 会員データ作成
         $id = $this->CI->T_members->insert([
@@ -225,7 +225,7 @@ class Member_lib extends Base_lib
         ]);
 
         // プラットフォームデータ作成
-        $this->CI->T_member_platforms->regist($id, $platform_data);
+        $this->CI->T_member_platforms->register($id, $platform_data);
 
         // ロックデータ作成
         $this->CI->T_member_locks->insert(["id" => $id, "created" => now(), "modified" => now()]);

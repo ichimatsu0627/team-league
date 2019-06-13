@@ -40,12 +40,12 @@ class Account extends Base_controller
     }
 
     /**
-     * regist_form
+     * register_form
      */
-    public function regist_form()
+    public function register_form()
     {
         $this->view["platforms"] = $this->platform_lib->platforms;
-        $this->layout->view('account/regist_form', $this->view);
+        $this->layout->view('account/register_form', $this->view);
     }
 
     /**
@@ -61,27 +61,27 @@ class Account extends Base_controller
     }
 
     /**
-     * regist
+     * register
      */
-    public function regist()
+    public function register()
     {
         $member_data   = $this->input_member_post();
         $platform_data = $this->input_platform_post();
         $check         = $this->input->post('check');
 
-        if (!$this->member_lib->validate_regist_memberdata($member_data))
+        if (!$this->member_lib->validate_register_memberdata($member_data))
         {
-            $this->_redirect("/account/regist_form?c=".Page::CODE_FAILED_BY_NOT_ENOUGH);
+            $this->_redirect("/account/register_form?c=".Page::CODE_FAILED_BY_NOT_ENOUGH);
         }
 
         if (empty($check))
         {
-            $this->_redirect("/account/regist_form?c=".Page::CODE_FAILED_BY_NOT_ENOUGH);
+            $this->_redirect("/account/register_form?c=".Page::CODE_FAILED_BY_NOT_ENOUGH);
         }
 
         if (!$check)
         {
-            $this->_redirect("/account/regist_form?c=".Page::CODE_FAILED_BY_NOT_ENOUGH);
+            $this->_redirect("/account/register_form?c=".Page::CODE_FAILED_BY_NOT_ENOUGH);
         }
 
         try
@@ -104,11 +104,11 @@ class Account extends Base_controller
             }
 
             // データ作成
-            $id = $this->member_lib->regist($member_data, $platform_data);
+            $id = $this->member_lib->register($member_data, $platform_data);
 
             if (empty($id))
             {
-                throw new Exception("Fail regist", Page::CODE_FAILED);
+                throw new Exception("Fail register", Page::CODE_FAILED);
             }
 
             // ログインしとく
@@ -120,7 +120,7 @@ class Account extends Base_controller
         {
             $this->member_lib->rollback();
             $c = $e->getCode();
-            $this->_redirect("/account/regist_form?c=".$c);
+            $this->_redirect("/account/register_form?c=".$c);
         }
 
         $this->_redirect("/top/index?c=".Page::CODE_REGISTED);

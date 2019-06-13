@@ -182,7 +182,7 @@ class Team_lib extends Base_lib
      * @param array $team_member_data
      * @return int
      */
-    public function regist($team_data, $team_member_data)
+    public function register($team_data, $team_member_data)
     {
         $id = $this->CI->T_teams->insert([
             "name"        => $team_data["name"],
@@ -191,7 +191,7 @@ class Team_lib extends Base_lib
             "modified"    => now(),
         ]);
 
-        $this->regist_member($id, $team_member_data);
+        $this->register_member($id, $team_member_data);
 
         $this->CI->T_team_locks->insert(["id" => $id, "created" => now(), "modified" => now()]);
 
@@ -203,9 +203,9 @@ class Team_lib extends Base_lib
      * @param $team_member_data
      * @throws Exception
      */
-    public function regist_member($id, $team_member_data)
+    public function register_member($id, $team_member_data)
     {
-        $this->CI->T_team_members->regist($id, $team_member_data);
+        $this->CI->T_team_members->register($id, $team_member_data);
     }
 
     /**
@@ -242,7 +242,7 @@ class Team_lib extends Base_lib
      * @param $team_id
      * @param $member_id
      */
-    public function regist_request($team_id, $member_id)
+    public function register_request($team_id, $member_id)
     {
         $request = $this->CI->T_team_requests->get_by_member_id($member_id);
         $request = array_column($request, null, "t_team_id");

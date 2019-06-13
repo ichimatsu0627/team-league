@@ -116,7 +116,7 @@ class T_team_members extends Tran_model
      * @param array $team_member_data
      * @throws Exception
      */
-    public function regist($id, $team_member_data)
+    public function register($id, $team_member_data)
     {
         if (empty($team_member_data))
         {
