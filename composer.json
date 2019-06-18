@@ -1,0 +1,8 @@
+{
+    "config": {
+        "vendor-dir": "ci/application/vendor"
+    },
+    "require": {
+        "fabpot/goutte": "^3.2"
+    }
+}

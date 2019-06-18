@@ -24,7 +24,7 @@
             <label for="platform"><?php echo PLATFORM_NAME;?></label>
             <ul class="list-inline" style="margin-left: 20px">
             <?php foreach($platforms as $id => $platform) { ?>
-                <li><?php echo $platform->name;?>:<input type="text" class="form-control" name="pf-<?php echo $id; ?>" placeholder="<?php echo $platform->id_name;?>" <?php if (isset($member->platforms[$id])) { echo "value=\"".$member->platforms[$id]."\""; }?>></li>
+                <li><?php echo $platform->name;?>:<input type="text" class="form-control" name="pf-<?php echo $id; ?>" placeholder="<?php echo $platform->id_name;?>" <?php if (isset($member->platforms[$id])) { echo "value=\"".$member->platforms[$id]->pfid."\""; }?>></li>
             <?php } ?>
             </ul>
         </div>

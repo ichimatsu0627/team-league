@@ -5,7 +5,7 @@
 ci/application/cache/*
 ci/application/logs/*
 !ci/application/*/.htaccess
-/vendor/
+ci/application/vendor/*
 
 # Docker
 .mysql

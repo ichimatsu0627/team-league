@@ -51,8 +51,9 @@ class T_member_platforms extends Tran_model
      * 複数レコード登録
      * @param $member_id
      * @param $platform_ids
+     * @param $scrape
      */
-    public function register($member_id, $platform_ids)
+    public function register($member_id, $platform_ids, $scrape)
     {
         if (empty($platform_ids))
         {
@@ -71,12 +72,27 @@ class T_member_platforms extends Tran_model
                 throw new Exception("already registered", Page::CODE_FAILED_BY_EXISTS_PLATFORM_ID);
             }
 
+
+            if (!$scrape->exists($pfid, $m_platform_id))
+            {
+                throw new Exception("not found player", Page::CODE_FAILED_BY_NOT_FOUND);
+            }
+
+            $mmr = $scrape->get_mmr($pfid, $m_platform_id);
+
             $this->insert([
-                "t_member_id" => $member_id,
+                "t_member_id"   => $member_id,
                 "m_platform_id" => $m_platform_id,
-                "pfid" => $pfid,
-                "created" => now(),
-                "modified" => now(),
+                "pfid"          => $pfid,
+                "casual_mmr"    => $mmr["casual"]["mmr"] ?? "0",
+                "duel_mmr"      => $mmr["duel"]["mmr"] ?? "0",
+                "duel_rank"     => $mmr["duel"]["rank"] ?? "Unranked",
+                "doubles_mmr"   => $mmr["doubles"]["mmr"] ?? "0",
+                "doubles_rank"  => $mmr["doubles"]["rank"] ?? "Unranked",
+                "standard_mmr"  => $mmr["standard"]["mmr"] ?? "0",
+                "standard_rank" => $mmr["standard"]["rank"] ?? "Unranked",
+                "created"       => now(),
+                "modified"      => now(),
             ]);
         }
     }

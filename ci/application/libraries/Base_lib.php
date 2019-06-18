@@ -11,16 +11,18 @@ class Base_lib
     protected $CI;
 
     // モデル
-    protected $_models = array(
-    );
+    protected $_models = [];
 
     // ライブラリ
-    protected $_libraries = array(
-    );
+    protected $_libraries = [];
+
+    // 読み込みファイル
+    protected $_requires = [];
 
     public function __construct()
     {
         $this->CI = get_instance();
+        $this->require_files();
         $this->load_models();
         $this->load_libraries();
     }
@@ -34,4 +36,13 @@ class Base_lib
     {
         $this->CI->load->library($this->_libraries);
     }
+
+    private function require_files()
+    {
+        foreach($this->_requires as $file)
+        {
+            require_once $file;
+        }
+    }
+
 }

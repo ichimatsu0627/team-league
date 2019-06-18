@@ -25,6 +25,7 @@ class Page
     const CODE_FAILED_BY_JOINED             = 20007;
     const CODE_FAILED_BY_MAX_JOINED         = 20008;
     const CODE_FAILED_BY_PERMISSION_DENIED  = 20009;
+    const CODE_FAILED_BY_NOT_FOUND          = 20010;
 
     private $messages = [
         "top" => [
@@ -49,6 +50,7 @@ class Page
                 self::CODE_FAILED_BY_EXISTS_EMAIL    => "指定された Email は既に登録されています",
                 self::CODE_FAILED_BY_EXISTS_PLATFORM_ID => "指定された Platform id の中に既に登録済みのものがあります",
                 self::CODE_FAILED_BY_NOT_MATCH_PASSWORD => "パスワードが一致しませんでした",
+                self::CODE_FAILED_BY_NOT_FOUND       => "指定されたプラットフォームのユーザーが見つかりませんでした",
             ],
             "login_form" => [
                 self::CODE_LOGOUT                  => "ログアウトしました",

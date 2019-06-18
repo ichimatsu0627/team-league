@@ -12,6 +12,10 @@ class Member_lib extends Base_lib
         "T_member_locks",
     ];
 
+    protected $_libraries = [
+        "scraping",
+    ];
+
     const SESSION_KEY = "member";
 
     const PASSWORD_CHARA_MIN = 6;
@@ -173,7 +177,7 @@ class Member_lib extends Base_lib
 
         $update_platform_data = array_filter($platform_data, function($v, $k) use($member) {
             if (!isset($member->platforms[$k])) return false;
-            if ($member->platforms[$k] == $v) return false;
+            if ($member->platforms[$k]->pfid == $v) return false;
             return true;
         }, ARRAY_FILTER_USE_BOTH);
 
@@ -201,7 +205,7 @@ class Member_lib extends Base_lib
             }
         }
 
-        $this->CI->T_member_platforms->register($member->id, $insert_platform_data);
+        $this->CI->T_member_platforms->register($member->id, $insert_platform_data, $this->CI->scraping);
     }
 
     /**
@@ -225,7 +229,7 @@ class Member_lib extends Base_lib
         ]);
 
         // プラットフォームデータ作成
-        $this->CI->T_member_platforms->register($id, $platform_data);
+        $this->CI->T_member_platforms->register($id, $platform_data, $this->CI->scraping);
 
         // ロックデータ作成
         $this->CI->T_member_locks->insert(["id" => $id, "created" => now(), "modified" => now()]);
@@ -279,7 +283,7 @@ class Member_lib extends Base_lib
         }
 
         $platforms = $this->CI->T_member_platforms->get_by_member_id($member->id);
-        $member->platforms = array_column($platforms, "pfid", "m_platform_id");
+        $member->platforms = array_column($platforms, null, "m_platform_id");
 
         return $member;
     }
