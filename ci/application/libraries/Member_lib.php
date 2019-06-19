@@ -196,16 +196,36 @@ class Member_lib extends Base_lib
         {
             foreach($update_platform_data as $m_platform_id => $pfid)
             {
-                if (!empty($this->CI->T_member_platforms->get_by_platform_id($m_platform_id, $pfid)))
-                {
-                    throw new Exception("already registered", Page::CODE_FAILED_BY_EXISTS_PLATFORM_ID);
-                }
+                // if (!empty($this->CI->T_member_platforms->get_by_platform_id($m_platform_id, $pfid)))
+                // {
+                //     throw new Exception("already registered", Page::CODE_FAILED_BY_EXISTS_PLATFORM_ID);
+                // }
 
                 $this->CI->T_member_platforms->update_platform($member->id, $m_platform_id, $pfid);
+
+                $this->update_mmr($member->id, $m_platform_id, $pfid);
             }
         }
 
         $this->CI->T_member_platforms->register($member->id, $insert_platform_data, $this->CI->scraping);
+    }
+
+    /**
+     * MMR更新
+     * @param $member_id
+     * @param $m_platform_id
+     * @param $pfid
+     * @throws Exception
+     */
+    public function update_mmr($member_id, $m_platform_id, $pfid)
+    {
+        if (!empty($pfid) && $this->CI->scraping->is_target($m_platform_id) && !$this->CI->scraping->exists($pfid, $m_platform_id))
+        {
+            throw new Exception("not found platform player", Page::CODE_FAILED_BY_NOT_FOUND);
+        }
+
+        $mmr = $this->CI->scraping->get_mmr($pfid, $m_platform_id);
+        $this->CI->T_member_platforms->update_mmr($member_id, $m_platform_id, $mmr);
     }
 
     /**
@@ -229,7 +249,13 @@ class Member_lib extends Base_lib
         ]);
 
         // プラットフォームデータ作成
-        $this->CI->T_member_platforms->register($id, $platform_data, $this->CI->scraping);
+        $this->CI->T_member_platforms->register($id, $platform_data);
+
+        // MMR更新
+        foreach($platform_data as $m_platform_id => $pfid)
+        {
+            $this->update_mmr($id, $m_platform_id, $pfid);
+        }
 
         // ロックデータ作成
         $this->CI->T_member_locks->insert(["id" => $id, "created" => now(), "modified" => now()]);
@@ -283,6 +309,16 @@ class Member_lib extends Base_lib
         }
 
         $platforms = $this->CI->T_member_platforms->get_by_member_id($member->id);
+
+        foreach($platforms as $key => $platform)
+        {
+            if (strtotime($platform->modified." + ".T_member_platforms::MMR_CACHE_HOUR." hours") < strtotime(now()))
+            {
+                $this->update_mmr($member->id, $platform->m_platform_id, $platform->pfid);
+                $platforms[$key] = $this->CI->T_member_platforms->get_by_id($platform->id);
+            }
+        }
+
         $member->platforms = array_column($platforms, null, "m_platform_id");
 
         return $member;

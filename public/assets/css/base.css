@@ -15,4 +15,10 @@
   margin: 0;
   padding: 0; }
 
+.dl-table > dt {
+  float: left;
+  clear: left;
+  margin-right: .5em;
+  width: 60px; }
+
 /*# sourceMappingURL=base.css.map */

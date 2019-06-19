@@ -2213,6 +2213,48 @@ textarea.form-control {
     background-color: #FFFFFF;
     color: #FFFFFF; }
 
+.badge-unranked {
+  color: inherit !important; }
+  .badge-unranked, .badge-unranked[href]:focus, .badge-unranked[href]:hover {
+    border-color: "#FFFFFF";
+    background-color: "#FFFFFF";
+    color: #FFFFFF; }
+
+.badge-bronze, .badge-bronze[href]:focus, .badge-bronze[href]:hover {
+  border-color: #CD7f32;
+  background-color: #CD7f32;
+  color: #FFFFFF; }
+
+.badge-silver, .badge-silver[href]:focus, .badge-silver[href]:hover {
+  border-color: #C0C0C0;
+  background-color: #C0C0C0;
+  color: #FFFFFF; }
+
+.badge-gold, .badge-gold[href]:focus, .badge-gold[href]:hover {
+  border-color: #FFD700;
+  background-color: #FFD700;
+  color: #FFFFFF; }
+
+.badge-platinum, .badge-platinum[href]:focus, .badge-platinum[href]:hover {
+  border-color: #89C4F4;
+  background-color: #89C4F4;
+  color: #FFFFFF; }
+
+.badge-diamond, .badge-diamond[href]:focus, .badge-diamond[href]:hover {
+  border-color: #1F4788;
+  background-color: #1F4788;
+  color: #FFFFFF; }
+
+.badge-champion, .badge-champion[href]:focus, .badge-champion[href]:hover {
+  border-color: #884898;
+  background-color: #884898;
+  color: #FFFFFF; }
+
+.badge-grand-champion, .badge-grand-champion[href]:focus, .badge-grand-champion[href]:hover {
+  border-color: #884898;
+  background-color: #884898;
+  color: #FFFFFF; }
+
 .pagination .page-item .page-link {
   border: 0;
   border-radius: 30px !important;

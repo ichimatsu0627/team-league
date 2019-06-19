@@ -41,6 +41,7 @@ class Page
             "edit_form" => [
                 self::CODE_FAILED_BY_INVALID_VALUE => "編集に失敗しました",
                 self::CODE_FAILED_BY_EXISTS_PLATFORM_ID => "指定された Platform id の中に既に登録済みのものがあります",
+                self::CODE_FAILED_BY_NOT_FOUND       => "指定されたプラットフォームのユーザーが見つかりませんでした",
             ],
             "register_form" => [
                 self::CODE_FAILED                    => "登録に失敗しました",

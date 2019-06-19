@@ -71,6 +71,13 @@ $danger-states-color:        lighten($danger-color, 6%) !default;
 $danger-color-opacity:       rgba(255, 54, 54, .3) !default;
 $danger-color-alert:         rgba(255, 54, 54, .8) !default;
 
+$bronze-color:               #CD7f32 !default;
+$silver-color:               #C0C0C0 !default;
+$gold-color:                 #FFD700 !default;
+$platinum-color:             #89C4F4 !default;
+$diamond-color:              #1F4788 !default;
+$champion-color:             #884898 !default;
+
 /*     brand Colors              */
 $brand-primary:              $primary-color !default;
 $brand-info:                 $info-color !default;

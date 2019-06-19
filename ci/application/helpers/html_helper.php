@@ -33,3 +33,29 @@ if ( ! function_exists('js_nocache_tag'))
         return "<script type=\"text/javascript\" src=\"{$filepath}\" ></script>";
     }
 }
+
+if ( ! function_exists('get_rank_class'))
+{
+    function get_rank_class($user_rank)
+    {
+        $rank_classes = [
+            "grand champion" => "grand-champion",
+            "champion"       => "champion",
+            "diamond"        => "diamond",
+            "platinum"       => "platinum",
+            "gold"           => "gold",
+            "silver"         => "silver",
+            "bronze"         => "bronze",
+        ];
+
+        foreach($rank_classes as $rank => $class)
+        {
+            if (strpos(mb_strtolower($user_rank), $rank) !== false)
+            {
+                return $class;
+            }
+        }
+
+        return "unranked";
+    }
+}

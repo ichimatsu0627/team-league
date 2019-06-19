@@ -27,7 +27,21 @@
                 <?php foreach($platforms as $id => $platform) { ?>
                     <tr>
                         <th><?php echo $platform->name;?></th>
-                        <td><?php echo isset($member->platforms[$id]) && !empty($member->platforms[$id]) ? $member->platforms[$id] : "-";?></td>
+                        <td>
+                            <?php if (isset($member->platforms[$id]) && !empty($member->platforms[$id]->pfid)) { ?>
+                                <?php echo $member->platforms[$id]->pfid;?><br>
+                                <dl class="dl-table" style="margin-top: 20px;">
+                                    <dt>1v1</dt>
+                                    <dd><span class="badge badge-<?php echo get_rank_class($member->platforms[$id]->duel_rank);?>"><?php echo $member->platforms[$id]->duel_rank;?></span></dd>
+                                    <dt>2v2</dt>
+                                    <dd><span class="badge badge-<?php echo get_rank_class($member->platforms[$id]->doubles_rank);?>"><?php echo $member->platforms[$id]->doubles_rank;?></span></dd>
+                                    <dt>3v3</dt>
+                                    <dd><span class="badge badge-<?php echo get_rank_class($member->platforms[$id]->standard_rank);?>"><?php echo $member->platforms[$id]->standard_rank;?></span></dd>
+                                </dl>
+                            <?php } else { ?>
+                                -
+                            <?php } ?>
+                        </td>
                     </tr>
                 <?php } ?>
             </table>

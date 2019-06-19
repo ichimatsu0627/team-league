@@ -9,16 +9,35 @@ class Scraping extends Base_lib
 
     const TRN_URL = "https://rocketleague.tracker.network/";
     const URL_PLATFORM_PATH_LIST = [
-        1 => "/profile/steam/",
-        2 => "/profile/ps/",
-        3 => "/profile/xbox/",
+        PLATFORM_ID_STEAM => "/profile/steam/",
+        PLATFORM_ID_PS4   => "/profile/ps/",
+        // PLATFORM_ID_XBOX  => "/profile/xbox/",
     ];
 
+    /**
+     * Scraping constructor.
+     */
     public function __construct()
     {
         $this->client = new Client();
     }
 
+    /**
+     * スクレイピングをしてレートが取得出来るプラットフォームなのか
+     * @param $platform
+     * @return bool
+     */
+    public function is_target($platform)
+    {
+        return isset(self::URL_PLATFORM_PATH_LIST[$platform]);
+    }
+
+    /**
+     * ロケットリーグをプレイした履歴があるかどうか
+     * @param $id
+     * @param null $platform
+     * @return bool
+     */
     public function exists($id, $platform = null)
     {
         $url = self::TRN_URL.$this->get_url_path($id, $platform);
@@ -43,15 +62,19 @@ class Scraping extends Base_lib
             "standard"=> $this->get_data($crawler, "Ranked Standard 3v3"),
         ];
 
-        return array_filter($user_rate);
+        return $user_rate;
     }
 
-    public function get_data($crawler, $name)
+    /**
+     * 詳細データを整形して取得
+     * @param $crawler
+     * @param $search_name
+     * @return array
+     */
+    public function get_data($crawler, $search_name)
     {
-
         for($position = 1; $position < 10; $position++)
         {
-
             $elements = $crawler->filter('.card-table')
                                 ->eq(1)
                                 ->filter('tr')
@@ -66,7 +89,7 @@ class Scraping extends Base_lib
                                                    ->eq(3)
                                                    ->text());
 
-                if ($dom_rank[1] != $name)
+                if ($dom_rank[1] != $search_name)
                 {
                     continue;
                 }
@@ -80,15 +103,21 @@ class Scraping extends Base_lib
         }
 
         return [
-            "name" => $name,
+            "name" => $search_name,
             "rank" => "Unranked",
             "mmr"  => "0",
         ];
     }
 
+    /**
+     * URL生成
+     * @param $id
+     * @param $platform
+     * @return string
+     */
     private function get_url_path($id, $platform)
     {
-        $platform_path = self::URL_PLATFORM_PATH_LIST[1];
+        $platform_path = self::URL_PLATFORM_PATH_LIST[PLATFORM_ID_STEAM];
         if (isset(self::URL_PLATFORM_PATH_LIST[$platform]))
         {
             $platform_path = self::URL_PLATFORM_PATH_LIST[$platform];

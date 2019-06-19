@@ -121,5 +121,11 @@ define("RANK_NAME_LIST", [
     7 => "Grand Champion",
 ]);
 
+// Platform
+define('PLATFORM_ID_STEAM'  , 1);
+define('PLATFORM_ID_PS4'    , 2);
+define('PLATFORM_ID_XBOX'   , 3);
+define('PLATFORM_ID_SWITCH' , 4);
+
 require(APPPATH."helpers/functions.php");
 require(APPPATH."helpers/html_helper.php");

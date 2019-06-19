@@ -45,3 +45,29 @@
     @include badge-color($white-color);
     color: inherit !important;
 }
+.badge-unranked{
+  @include badge-color("#FFFFFF");
+  color: inherit !important;
+}
+.badge-bronze{
+  @include badge-color($bronze-color);
+}
+.badge-silver{
+  @include badge-color($silver-color);
+}
+.badge-gold{
+  @include badge-color($gold-color);
+}
+.badge-platinum{
+  @include badge-color($platinum-color);
+}
+.badge-diamond{
+  @include badge-color($diamond-color);
+}
+.badge-champion{
+  @include badge-color($champion-color);
+}
+.badge-grand-champion{
+  @include badge-color($champion-color);
+}
+
