@@ -13,7 +13,7 @@ class Account extends Base_controller
     {
         if (empty($member_id))
         {
-            $member_id = $this->member_id;
+            $this->_redirect("/err/not_found");
         }
         $member = $this->member_lib->get_member($member_id);
 
@@ -130,7 +130,7 @@ class Account extends Base_controller
 
         if (empty($id))
         {
-            $this->_redirect("/account/profile");
+            $this->_redirect("/err/not_found");
         }
 
         if ($id != $this->member_id)
@@ -160,7 +160,7 @@ class Account extends Base_controller
             $this->_redirect("/account/edit_form?c=".$c);
         }
 
-        $this->_redirect("/account/profile?c=".Page::CODE_EDITED);
+        $this->_redirect("/account/profile/".$id."?c=".Page::CODE_EDITED);
     }
 
     /**

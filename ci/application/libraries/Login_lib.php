@@ -19,6 +19,10 @@ class Login_lib extends Base_lib
             "register",
             "login_form",
             "login",
+            "profile",
+        ],
+        "team" => [
+            "detail",
         ],
         "err" => [
             "general",

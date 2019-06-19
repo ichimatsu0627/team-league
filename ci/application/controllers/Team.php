@@ -25,6 +25,11 @@ class Team extends Base_controller
     {
         if (empty($id))
         {
+            if (!$this->login_lib->validate())
+            {
+                $this->_redirect("/err/not_found");
+            }
+
             $member_teams = $this->team_lib->get_teams_by_member_id($this->member_id, true);
 
             if (empty($member_teams))
