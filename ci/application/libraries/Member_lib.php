@@ -38,6 +38,7 @@ class Member_lib extends Base_lib
     {
         $member = $this->CI->T_members->get_by_id($id);
         $member = $this->add_platform($member);
+        $member = $this->add_max_rate($member);
 
         return $member;
     }
@@ -64,6 +65,7 @@ class Member_lib extends Base_lib
         foreach($members as $k => $member)
         {
             $members[$k] = $this->add_platform($member);
+            $members[$k] = $this->add_max_rate($member);
         }
 
         return array_column($members, null, "id");
@@ -78,6 +80,7 @@ class Member_lib extends Base_lib
     {
         $member = $this->CI->T_members->get_by_login_id($login_id);
         $member = $this->add_platform($member);
+        $member = $this->add_max_rate($member);
 
         return $member;
     }
@@ -202,12 +205,15 @@ class Member_lib extends Base_lib
                 // }
 
                 $this->CI->T_member_platforms->update_platform($member->id, $m_platform_id, $pfid);
-
                 $this->update_mmr($member->id, $m_platform_id, $pfid);
             }
         }
 
-        $this->CI->T_member_platforms->register($member->id, $insert_platform_data, $this->CI->scraping);
+        $this->CI->T_member_platforms->register($member->id, $insert_platform_data);
+        foreach($insert_platform_data as $m_platform_id => $pfid)
+        {
+            $this->update_mmr($member->id, $m_platform_id, $pfid);
+        }
     }
 
     /**
@@ -320,6 +326,59 @@ class Member_lib extends Base_lib
         }
 
         $member->platforms = array_column($platforms, null, "m_platform_id");
+
+        return $member;
+    }
+
+    private function add_max_rate($member)
+    {
+        if (!isset($member->platforms))
+        {
+            return $member;
+        }
+
+        $max_rates = [
+            "casual_mmr"    => 0,
+            "duel_mmr"      => 0,
+            "duel_rank"     => "Unranked",
+            "doubles_mmr"   => 0,
+            "doubles_rank"  => "Unranked",
+            "standard_mmr"  => 0,
+            "standard_rank" => "Unranked",
+        ];
+        foreach ($member->platforms as $platform)
+        {
+            if ($platform->casual_mmr > $max_rates["casual_mmr"])
+            {
+                $max_rates["casual_mmr"] = $platform->casual_mmr;
+            }
+
+            if ($platform->duel_mmr > $max_rates["duel_mmr"] && $platform->duel_rank != "Unranked")
+            {
+                $max_rates["duel_mmr"]  = $platform->duel_mmr;
+                $max_rates["duel_rank"] = $platform->duel_rank;
+            }
+
+            if ($platform->doubles_mmr > $max_rates["doubles_mmr"] && $platform->doubles_rank != "Unranked")
+            {
+                $max_rates["doubles_mmr"]  = $platform->doubles_mmr;
+                $max_rates["doubles_rank"] = $platform->doubles_rank;
+            }
+
+            if ($platform->standard_mmr > $max_rates["standard_mmr"] && $platform->standard_rank != "Unranked")
+            {
+                $max_rates["standard_mmr"]  = $platform->standard_mmr;
+                $max_rates["standard_rank"] = $platform->standard_rank;
+            }
+        }
+
+        $member->max_casual_mmr    = $max_rates["casual_mmr"];
+        $member->max_duel_mmr      = $max_rates["duel_mmr"];
+        $member->max_duel_rank     = $max_rates["duel_rank"];
+        $member->max_doubles_mmr   = $max_rates["doubles_mmr"];
+        $member->max_doubles_rank  = $max_rates["doubles_rank"];
+        $member->max_standard_mmr  = $max_rates["standard_mmr"];
+        $member->max_standard_rank = $max_rates["standard_rank"];
 
         return $member;
     }
