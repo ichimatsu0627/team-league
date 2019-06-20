@@ -57,6 +57,10 @@ class Team extends Base_controller
         $this->layout->view("team/detail", $this->view);
     }
 
+    /**
+     * request_list
+     * @param int|null $id
+     */
     public function request_list($id = null)
     {
         if (empty($id))

@@ -330,6 +330,11 @@ class Member_lib extends Base_lib
         return $member;
     }
 
+    /**
+     * 各プラットフォーム内で最大ランクをセットする
+     * @param $member
+     * @return obj
+     */
     private function add_max_rate($member)
     {
         if (!isset($member->platforms))
