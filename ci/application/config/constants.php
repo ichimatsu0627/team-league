@@ -88,6 +88,8 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 define("FLG_ON", 1);
 define("FLG_OFF", 0);
 
+define("DEFAULT_PAGER_PER", 10);
+
 // Member
 define("USER_ID_NAME", "User ID");
 define("USER_NAME_NAME", "Name");

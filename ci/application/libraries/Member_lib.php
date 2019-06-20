@@ -72,6 +72,31 @@ class Member_lib extends Base_lib
     }
 
     /**
+     * @param $keyword
+     * @param int $limit
+     * @param int $offset
+     * @return array
+     * @throws Exception
+     */
+    public function get_members_by_keyword($keyword, $limit = DEFAULT_PAGER_PER, $offset = 0)
+    {
+        $members = $this->CI->T_members->get_by_keyword($keyword, $limit, $offset);
+
+        if (empty($members))
+        {
+            return [];
+        }
+
+        foreach($members as $k => $member)
+        {
+            $members[$k] = $this->add_platform($member);
+            $members[$k] = $this->add_max_rate($member);
+        }
+
+        return array_column($members, null, "id");
+    }
+
+    /**
      * ユーザーIDで会員データを取得
      * @param int $login_id
      * @return object

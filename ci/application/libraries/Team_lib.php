@@ -27,9 +27,11 @@ class Team_lib extends Base_lib
     public function get_team($id, $add_members = true)
     {
         $team = $this->CI->T_teams->get_by_id($id);
+        $team->members = [];
+        $team->standard_mmr_avr = 0;
         if (!empty($team) && $add_members)
         {
-            $team->members = $this->get_members($id);
+            $team = $this->add_detail($team);
         }
 
         return $team;
@@ -47,6 +49,25 @@ class Team_lib extends Base_lib
         {
             $teams[$id] = $this->get_team($id, $add_members);
         }
+        return $teams;
+    }
+
+    /**
+     * @param $keyword
+     * @param $limit
+     * @param $offset
+     * @return array
+     * @throws Exception
+     */
+    public function get_teams_by_keyword($keyword, $limit = DEFAULT_PAGER_PER, $offset = 0)
+    {
+        $teams = $this->CI->T_teams->get_by_keyword($keyword, $limit, $offset);
+
+        foreach($teams as $key => $team)
+        {
+            $teams[$key] = $this->add_detail($team);
+        }
+
         return $teams;
     }
 
@@ -135,6 +156,7 @@ class Team_lib extends Base_lib
 
         return $team->members[$member_id]->role == T_team_members::ROLE_SUB_LEADER;
     }
+
 
     /**
      * @param $id
@@ -300,4 +322,38 @@ class Team_lib extends Base_lib
         $this->CI->T_team_locks->get_lock($id);
     }
 
+    /**
+     * @param $team
+     * @return mixed
+     */
+    private function add_detail($team)
+    {
+        $team->members = $this->get_members($team->id);
+        $team->standard_mmr_avr = $this->get_average_mmr($team->members, "max_standard_mmr");
+
+        return $team;
+    }
+
+    /**
+     * @param array  $members
+     * @param string $column
+     * @return float
+     */
+    private function get_average_mmr($members, $column)
+    {
+        if (empty($members))
+        {
+            return 0;
+        }
+
+        $sum   = 0;
+        $count = 0;
+        foreach($members as $member)
+        {
+            $sum += $member->detail->$column;
+            $count++;
+        }
+
+        return floor($sum / $count);
+    }
 }
