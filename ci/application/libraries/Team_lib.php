@@ -329,7 +329,13 @@ class Team_lib extends Base_lib
     private function add_detail($team)
     {
         $team->members = $this->get_members($team->id);
-        $team->standard_mmr_avr = $this->get_average_mmr($team->members, "max_standard_mmr");
+        $standard_mmr_avr = $this->get_average_mmr($team->members, "max_standard_mmr");
+
+        if ($standard_mmr_avr != $team->standard_mmr_avr)
+        {
+            $team->standard_mmr_avr = $standard_mmr_avr;
+            $this->CI->T_teams->update_standard_mmr_avr($team->id, $standard_mmr_avr);
+        }
 
         return $team;
     }
@@ -354,6 +360,8 @@ class Team_lib extends Base_lib
             $count++;
         }
 
-        return floor($sum / $count);
+        $mmr_average = floor($sum / $count);
+
+        return $mmr_average;
     }
 }

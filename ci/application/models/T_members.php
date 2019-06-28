@@ -80,22 +80,27 @@ class T_members extends Tran_model
      */
     public function get_by_keyword($keyword, $limit, $offset)
     {
+        $params = [];
+        $keyword_where = "";
+
+        if (!empty($keyword))
+        {
+            $params[] = "%".$keyword."%";
+            $keyword_where = "`name` LIKE ? AND ";
+        }
+
         $sql = "
             SELECT
               *
             FROM
               `{$this->_table}`
             WHERE
-              `name` LIKE ? AND `del_flg` = ? 
+              {$keyword_where} `del_flg` = ?
+            ORDER BY `id` DESC 
             LIMIT ?, ?
         ";
 
-        $params = [
-            "%".$keyword."%",
-            FLG_OFF,
-            $offset,
-            $limit,
-        ];
+        $params = array_merge($params, [FLG_OFF, $offset, $limit]);
 
         return $this->query($sql, $params);
     }
