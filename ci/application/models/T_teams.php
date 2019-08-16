@@ -35,7 +35,7 @@ class T_teams extends Tran_model
             FROM
               `{$this->_table}`
             WHERE
-              {$keyword_where} AND `del_flg` = ? 
+              {$keyword_where} `del_flg` = ? 
             LIMIT ?, ?
         ";
 

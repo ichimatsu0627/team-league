@@ -13,13 +13,12 @@ class Search extends Base_controller
     const SEARCH_TYPE_MEMBER = 1;
     const SEARCH_TYPE_TEAM   = 2;
 
-
-
     /**
      * Search constructor.
      */
     public function __construct()
     {
+        parent::__construct();
         $this->load->library("member_lib");
         $this->load->library("team_lib");
     }
@@ -29,7 +28,7 @@ class Search extends Base_controller
      */
     public function all()
     {
-        $keyword = $this->input->get("keyword");
+        $keyword = $this->input->post("keyword");
 
         $members = $this->member_lib->get_members_by_keyword($keyword, DEFAULT_PAGER_PER, 0);
         $teams   = $this->team_lib->get_teams_by_keyword($keyword, DEFAULT_PAGER_PER, 0);
