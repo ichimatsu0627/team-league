@@ -89,7 +89,7 @@ class Scraping extends Base_lib
                                                    ->eq(3)
                                                    ->text());
 
-                if ($dom_rank[1] != $search_name)
+                if (str_replace(" ", "", $dom_rank[1]) != str_replace(" ", "", $search_name))
                 {
                     continue;
                 }
