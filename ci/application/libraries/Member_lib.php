@@ -402,13 +402,13 @@ class Member_lib extends Base_lib
             }
         }
 
-        $member->max_casual_mmr    = $max_rates["casual_mmr"];
-        $member->max_duel_mmr      = $max_rates["duel_mmr"];
-        $member->max_duel_rank     = $max_rates["duel_rank"];
-        $member->max_doubles_mmr   = $max_rates["doubles_mmr"];
-        $member->max_doubles_rank  = $max_rates["doubles_rank"];
-        $member->max_standard_mmr  = $max_rates["standard_mmr"];
-        $member->max_standard_rank = $max_rates["standard_rank"];
+        $member->casual_mmr    = $max_rates["casual_mmr"];
+        $member->duel_mmr      = $max_rates["duel_mmr"];
+        $member->duel_rank     = $max_rates["duel_rank"];
+        $member->doubles_mmr   = $max_rates["doubles_mmr"];
+        $member->doubles_rank  = $max_rates["doubles_rank"];
+        $member->standard_mmr  = $max_rates["standard_mmr"];
+        $member->standard_rank = $max_rates["standard_rank"];
 
         return $member;
     }
