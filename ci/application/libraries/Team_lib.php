@@ -356,6 +356,12 @@ class Team_lib extends Base_lib
         $count = 0;
         foreach($members as $member)
         {
+            // skip mmr 0 player
+            if ($member->detail->$column <= 0)
+            {
+                continue;
+            }
+
             $sum += $member->detail->$column;
             $count++;
         }
