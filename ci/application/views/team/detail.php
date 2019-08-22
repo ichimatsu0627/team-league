@@ -48,7 +48,7 @@
                                     <a href="/account/profile/<?php echo $team_member_id;?>"><?php echo $team_member->detail->name;?>
                                     <?php if ($team_member->role != 0) { echo " <span style='color: red; font-size: .7rem;'>".T_team_members::ROLE_LIST[$team_member->role]."</span>"; } ?>
                                 </td>
-                                <td><span class="badge badge-<?php echo get_rank_class($team_member->detail->standard_rank);?>"><?php echo $team_member->detail->max_standard_rank;?></span></td>
+                                <td><span class="badge badge-<?php echo get_rank_class($team_member->detail->standard_rank);?>"><?php echo $team_member->detail->standard_rank;?></span></td>
                             </tr>
                         <?php } ?>
                     </tbody>

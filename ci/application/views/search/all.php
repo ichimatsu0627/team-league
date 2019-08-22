@@ -19,8 +19,8 @@
                         <td>
                             <a href="/account/profile/<?php echo $member->id;?>"><?php echo $member->name;?></a>
                         </td>
-                        <td><span class="badge badge-<?php echo get_rank_class($member->max_standard_rank);?>"><?php echo $member->max_standard_rank;?></span></td>
-                        <td><?php echo $member->max_standard_mmr;?></td>
+                        <td><span class="badge badge-<?php echo get_rank_class($member->standard_rank);?>"><?php echo $member->standard_rank;?></span></td>
+                        <td><?php echo $member->standard_mmr;?></td>
                     </tr>
                 <?php } ?>
             </tbody>
