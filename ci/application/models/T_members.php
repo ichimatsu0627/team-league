@@ -65,13 +65,14 @@ class T_members extends Tran_model
             FROM
               `{$this->_table}`
             WHERE
-              `id` IN(".implode(",", $ids).") AND del_flg = ?
+              `id` IN(".implode(",", $ids).") AND `del_flg` = ?
         ";
 
         return $this->query($sql, [FLG_OFF]);
     }
 
     /**
+     * キーワード検索
      * @param string $keyword
      * @param int    $limit
      * @param int    $offset
@@ -103,5 +104,102 @@ class T_members extends Tran_model
         $params = array_merge($params, [FLG_OFF, $offset, $limit]);
 
         return $this->query($sql, $params);
+    }
+
+    /**
+     * 様々な条件で検索
+     * @param array  $conditions
+     * @param int    $limit
+     * @param int    $offset
+     * @return array
+     * @throws Exception
+     */
+    public function get_by_conditions($conditions, $limit, $offset)
+    {
+        $params = [];
+        $conditions_where = "";
+
+        if (isset($conditions["twitter"]) && !empty($conditions["twitter"]))
+        {
+            $params[] = "%".$conditions["twitter"]."%";
+            $conditions_where .= "`twitter` LIKE ? AND ";
+        }
+
+        if (isset($conditions["discord"]) && !empty($conditions["discord"]))
+        {
+            $params[] = "%".$conditions["discord"]."%";
+            $conditions_where .= "`discord` LIKE ? AND ";
+        }
+
+        if (isset($conditions["keyword"]) && !empty($conditions["keyword"]))
+        {
+            $params[] = "%".$conditions["keyword"]."%";
+            $conditions_where .= "`name` LIKE ? AND ";
+        }
+
+        $sql = "
+            SELECT
+              *
+            FROM
+              `{$this->_table}`
+            WHERE
+              {$conditions_where} `del_flg` = ?
+            ORDER BY `id` DESC 
+            LIMIT ?, ?
+        ";
+
+        $params = array_merge($params, [FLG_OFF, $offset, $limit]);
+
+        return $this->query($sql, $params);
+    }
+
+    /**
+     * キーワード検索 件数
+     * @param array  $conditions
+     * @return int
+     * @throws Exception
+     */
+    public function count_by_conditions($conditions)
+    {
+        $params = [];
+        $conditions_where = "";
+
+        if (isset($conditions["twitter"]) && !empty($conditions["twitter"]))
+        {
+            $params[] = "%".$conditions["twitter"]."%";
+            $conditions_where .= "`twitter` LIKE ? AND ";
+        }
+
+        if (isset($conditions["discord"]) && !empty($conditions["discord"]))
+        {
+            $params[] = "%".$conditions["discord"]."%";
+            $conditions_where .= "`discord` LIKE ? AND ";
+        }
+
+        if (isset($conditions["keyword"]) && !empty($conditions["keyword"]))
+        {
+            $params[] = "%".$conditions["keyword"]."%";
+            $conditions_where .= "`name` LIKE ? AND ";
+        }
+
+        $sql = "
+            SELECT
+              count(id) as cnt
+            FROM
+              `{$this->_table}`
+            WHERE
+              {$conditions_where} `del_flg` = ?
+        ";
+
+        $params = array_merge($params, [FLG_OFF]);
+
+        $result =  $this->query_one($sql, $params);
+
+        if (empty($result))
+        {
+            return 0;
+        }
+
+        return $result->cnt;
     }
 }

@@ -11,22 +11,23 @@ class T_teams extends Tran_model
     ];
 
     /**
-     * @param string $keyword
+     * 様々な条件で検索
+     * @param string $conditions
      * @param int    $limit
      * @param int    $offset
      * @return array
      * @throws Exception
      */
-    public function get_by_keyword($keyword, $limit, $offset)
+    public function get_by_conditions($conditions, $limit, $offset)
     {
 
         $params = [];
-        $keyword_where = "";
+        $conditions_where = "";
 
-        if (!empty($keyword))
+        if (isset($conditions["keyword"]) && !empty($conditions["keyword"]))
         {
-            $params[] = "%".$keyword."%";
-            $keyword_where = "`name` LIKE ? AND ";
+            $params[] = "%".$conditions["keyword"]."%";
+            $conditions_where .= "`name` LIKE ? AND ";
         }
 
         $sql = "
@@ -35,13 +36,52 @@ class T_teams extends Tran_model
             FROM
               `{$this->_table}`
             WHERE
-              {$keyword_where} `del_flg` = ? 
+              {$conditions_where} `del_flg` = ? 
             LIMIT ?, ?
         ";
 
         $params = array_merge($params, [FLG_OFF, $offset, $limit]);
 
         return $this->query($sql, $params);
+    }
+
+    /**
+     * キーワード検索 件数
+     * @param array  $conditions
+     * @return int
+     * @throws Exception
+     */
+    public function count_by_conditions($conditions)
+    {
+
+        $params = [];
+        $conditions_where = "";
+
+        if (isset($conditions["keyword"]) && !empty($conditions["keyword"]))
+        {
+            $params[] = "%".$conditions["keyword"]."%";
+            $conditions_where .= "`name` LIKE ? AND ";
+        }
+
+        $sql = "
+            SELECT
+              count(id) as cnt
+            FROM
+              `{$this->_table}`
+            WHERE
+              {$conditions_where} `del_flg` = ?
+        ";
+
+        $params = array_merge($params, [FLG_OFF]);
+
+        $result = $this->query_one($sql, $params);
+
+        if (empty($result))
+        {
+            return 0;
+        }
+
+        return $result->cnt;
     }
 
     /**

@@ -145,4 +145,25 @@ class Page
 
         return "";
     }
+
+    /**
+     * ページャーのスタートを取得
+     * @param $page
+     * @param $all
+     * @param int $limit
+     */
+    public function get_pager_start($page, $all, $limit = DEFAULT_PAGER_PER)
+    {
+        if ($page <= 2)
+        {
+            return 1;
+        }
+
+        if ($page * $limit >= $all)
+        {
+            return ($page - 2);
+        }
+
+        return ($page - 1);
+    }
 }

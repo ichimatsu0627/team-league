@@ -53,15 +53,16 @@ class Team_lib extends Base_lib
     }
 
     /**
-     * @param $keyword
-     * @param $limit
-     * @param $offset
+     * キーワード検索
+     * @param array $conditions
+     * @param int $limit
+     * @param int $offset
      * @return array
      * @throws Exception
      */
-    public function get_teams_by_keyword($keyword, $limit = DEFAULT_PAGER_PER, $offset = 0)
+    public function search_teams($conditions, $limit = DEFAULT_PAGER_PER, $offset = 0)
     {
-        $teams = $this->CI->T_teams->get_by_keyword($keyword, $limit, $offset);
+        $teams = $this->CI->T_teams->get_by_conditions($conditions, $limit, $offset);
 
         foreach($teams as $key => $team)
         {
@@ -69,6 +70,17 @@ class Team_lib extends Base_lib
         }
 
         return $teams;
+    }
+
+    /**
+     * キーワード検索 件数
+     * @param $keyword
+     * @return int
+     * @throws Exception
+     */
+    public function count_search_teams($conditions)
+    {
+        return $this->CI->T_teams->count_by_conditions($conditions);
     }
 
     /**
@@ -364,6 +376,10 @@ class Team_lib extends Base_lib
 
             $sum += $member->detail->$column;
             $count++;
+        }
+
+        if ($count <= 0) {
+            return 0;
         }
 
         $mmr_average = floor($sum / $count);

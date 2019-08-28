@@ -60,7 +60,7 @@
                     <ul class="navbar-nav mt-2">
                         <li class="nav-item dropdown">
                             <?php if (!empty($notification)) { ?>
-                                <a href="#" class="nav-link" id="icon-information" data-toggle="dropdown">
+                                <a href="#" class="nav-link" idbutton="icon-information" data-toggle="dropdown">
                                     <i class="now-ui-icons ui-1_bell-53" aria-hidden="true"></i>
                                     <span class="badge badge-pill badge-danger"><?php echo count($notification); ?></span>
                                 </a>
@@ -96,8 +96,8 @@
                                 </p>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarSearchBoardMenuLink">
-                                <a class="dropdown-item" href="#">Members</a>
-                                <a class="dropdown-item" href="#">Teams</a>
+                                <a class="dropdown-item" href="/search/member">Members</a>
+                                <a class="dropdown-item" href="/search/team">Teams</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">

@@ -1,8 +1,11 @@
 <div class="container">
+
+    <p>Keyword: <span style="color: darkorange; font-weight: bold;"><?php echo $keyword;?></span></p>
+
     <h3>Members</h3>
 
     <?php if (!empty($members)) { ?>
-        <table class="table col-10 text-center">
+        <table class="table col-12 text-center">
             <thead class="thead-dark">
             <tr>
                 <th>No.</th>
@@ -25,6 +28,13 @@
                 <?php } ?>
             </tbody>
         </table>
+        <?php if (count($members) >= DEFAULT_PAGER_PER) { ?>
+            <form class="text-right col-12" action="/search/member" method="POST" name="memberForm">
+                <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
+                <input type="hidden" name="keyword" value="<?php echo $keyword;?>" />
+                <a href="javascript:document.memberForm.submit();">more...</a>
+            </form>
+        <?php } ?>
     <?php } else { ?>
         <p>No members.</p>
     <?php } ?>
@@ -32,7 +42,7 @@
 
     <h3>Teams</h3>
     <?php if (!empty($teams)) { ?>
-        <table class="table col-10 text-center">
+        <table class="table col-12 text-center">
             <thead class="thead-dark">
             <tr>
                 <th>No.</th>
@@ -55,6 +65,13 @@
             <?php } ?>
             </tbody>
         </table>
+        <?php if (count($teams) >= DEFAULT_PAGER_PER) { ?>
+            <form class="text-right col-12" action="/search/team" method="POST" name="teamForm">
+                <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
+                <input type="hidden" name="keyword" value="<?php echo $keyword;?>" />
+                <a href="javascript:document.teamForm.submit();">more...</a>
+            </form>
+        <?php } ?>
     <?php } else { ?>
         <p>No teams.</p>
     <?php } ?>

@@ -72,6 +72,7 @@ class Member_lib extends Base_lib
     }
 
     /**
+     * キーワード検索
      * @param $keyword
      * @param int $limit
      * @param int $offset
@@ -94,6 +95,42 @@ class Member_lib extends Base_lib
         }
 
         return array_column($members, null, "id");
+    }
+
+    /**
+     * 検索用
+     * @param array $conditions
+     * @param int $limit
+     * @param int $offset
+     * @return array
+     */
+    public function search_members($conditions, $limit = DEFAULT_PAGER_PER, $offset = 0)
+    {
+        $members = $this->CI->T_members->get_by_conditions($conditions, $limit, $offset);
+
+        if (empty($members))
+        {
+            return [];
+        }
+
+        foreach($members as $k => $member)
+        {
+            $members[$k] = $this->add_platform($member);
+            $members[$k] = $this->add_max_rate($member);
+        }
+
+        return array_column($members, null, "id");
+    }
+
+    /**
+     * キーワード検索 件数
+     * @param $keyword
+     * @return int
+     * @throws Exception
+     */
+    public function count_search_members($conditions)
+    {
+        return $this->CI->T_members->count_by_conditions($conditions);
     }
 
     /**
