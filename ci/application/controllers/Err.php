@@ -18,4 +18,9 @@ class Err extends Base_controller
     {
         $this->layout->view("err/not_found", $this->view);
     }
+
+    public function under_construction()
+    {
+        $this->layout->view("err/under_construction", $this->view);
+    }
 }

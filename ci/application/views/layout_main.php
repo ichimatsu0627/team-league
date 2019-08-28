@@ -80,12 +80,12 @@
                             <?php } ?>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/err/under_construction">
                                 <p>League</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/err/under_construction">
                                 <p>Scrim</p>
                             </a>
                         </li>
