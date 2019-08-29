@@ -94,9 +94,12 @@ class Scraping extends Base_lib
                     continue;
                 }
 
+                $result = [];
+                preg_match('/('.array_to_preg_text(array_merge(RANK_NAME_LIST)).')\sI+$/', $dom_rank[3], $result);
+
                 return [
                     "name" => $dom_rank[1],
-                    "rank" => $dom_rank[3],
+                    "rank" => isset($result[0]) ? $result[0] : $dom_rank[3],
                     "mmr"  => str_replace(",", "", $dom_mmr[1]),
                 ];
             }

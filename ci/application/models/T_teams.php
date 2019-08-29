@@ -37,6 +37,7 @@ class T_teams extends Tran_model
               `{$this->_table}`
             WHERE
               {$conditions_where} `del_flg` = ? 
+            ORDER BY `id` DESC 
             LIMIT ?, ?
         ";
 

@@ -13,6 +13,8 @@ class Search extends Base_controller
     const SEARCH_TYPE_MEMBER = 1;
     const SEARCH_TYPE_TEAM   = 2;
 
+    const ALL_PAGE_LIMIT = 3;
+
     /**
      * Search constructor.
      */
@@ -30,12 +32,15 @@ class Search extends Base_controller
     {
         $keyword = $this->input->post("keyword");
 
-        $members = $this->member_lib->search_members(["keyword" => $keyword]);
-        $teams   = $this->team_lib->search_teams(["keyword" => $keyword]);
+        $limit = self::ALL_PAGE_LIMIT;
+
+        $members = $this->member_lib->search_members(["keyword" => $keyword], $limit);
+        $teams   = $this->team_lib->search_teams(["keyword" => $keyword], $limit);
 
         $this->view["keyword"] = $keyword;
         $this->view["members"] = $members;
         $this->view["teams"]   = $teams;
+        $this->view["limit"]   = $limit;
         $this->layout->view('search/all', $this->view);
     }
 

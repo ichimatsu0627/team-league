@@ -1,6 +1,8 @@
 <div class="container">
 
-    <p>Keyword: <span style="color: darkorange; font-weight: bold;"><?php echo $keyword;?></span></p>
+    <?php if (!empty($keyword)) { ?>
+        <p>Keyword: <span style="color: darkorange; font-weight: bold;"><?php echo $keyword;?></span></p>
+    <?php } ?>
 
     <h3>Members</h3>
 
@@ -8,17 +10,16 @@
         <table class="table col-12 text-center">
             <thead class="thead-dark">
             <tr>
-                <th>No.</th>
+                <th><?php echo USER_ID_NAME;?></th>
                 <th><?php echo USER_NAME_NAME;?></th>
                 <th><?php echo USER_RATE_NAME;?></th>
                 <th><?php echo USER_RATING_NUMERIC_NAME;?></th>
             </tr>
             </thead>
             <tbody>
-                <?php $i = 0; ?>
                 <?php foreach($members as $member) { ?>
                     <tr>
-                        <th><?php echo ++$i;?></th>
+                        <th><?php echo $member->id;?></th>
                         <td>
                             <a href="/account/profile/<?php echo $member->id;?>"><?php echo $member->name;?></a>
                         </td>
@@ -28,8 +29,8 @@
                 <?php } ?>
             </tbody>
         </table>
-        <?php if (count($members) >= DEFAULT_PAGER_PER) { ?>
-            <form class="text-right col-12" action="/search/member" method="POST" name="memberForm">
+        <?php if (count($members) >= $limit) { ?>
+            <form class="text-right col-12" style="margin-bottom: 50px;" action="/search/member" method="POST" name="memberForm">
                 <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
                 <input type="hidden" name="keyword" value="<?php echo $keyword;?>" />
                 <a href="javascript:document.memberForm.submit();">more...</a>
@@ -45,17 +46,17 @@
         <table class="table col-12 text-center">
             <thead class="thead-dark">
             <tr>
-                <th>No.</th>
+                <th><?php echo TEAM_ID_NAME;?></th>
                 <th><?php echo TEAM_NAME_NAME;?></th>
                 <th><?php echo TEAM_DESCRIPTION_NAME;?></th>
-                <th><?php echo TEAM_RATING_NUMERIC_NAME;?></th>
+                <th><?php echo TEAM_MMR_AVR_NAME;?></th>
             </tr>
             </thead>
             <tbody>
             <?php $i = 0; ?>
             <?php foreach($teams as $team) { ?>
                 <tr>
-                    <th><?php echo ++$i;?></th>
+                    <th><?php echo $team->id;?></th>
                     <td>
                         <a href="/team/detail/<?php echo $team->id;?>"><?php echo $team->name;?></a>
                     </td>
@@ -65,8 +66,8 @@
             <?php } ?>
             </tbody>
         </table>
-        <?php if (count($teams) >= DEFAULT_PAGER_PER) { ?>
-            <form class="text-right col-12" action="/search/team" method="POST" name="teamForm">
+        <?php if (count($teams) >= $limit) { ?>
+            <form class="text-right col-12" style="margin-bottom: 50px;" action="/search/team" method="POST" name="teamForm">
                 <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
                 <input type="hidden" name="keyword" value="<?php echo $keyword;?>" />
                 <a href="javascript:document.teamForm.submit();">more...</a>

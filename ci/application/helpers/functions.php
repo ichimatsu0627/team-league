@@ -39,3 +39,11 @@ if ( ! function_exists('now'))
     }
 }
 
+if ( ! function_exists('array_to_preg_ortext()'))
+{
+    function array_to_preg_text($array)
+    {
+        return '('.implode("|", $array).')';
+    }
+}
+

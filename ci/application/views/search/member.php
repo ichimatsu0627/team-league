@@ -1,5 +1,24 @@
 <div class="container">
 
+    <form class="col-8" action="/search/member" method="POST">
+        <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
+        <div class="form-group row">
+            <label for="name" class="col-2 col-form-label"">keyword</label>
+            <input type="text" class="col-6 form-control" name="keyword" placeholder="Keyword">
+        </div>
+        <div class="form-group row">
+            <label for="rank" class="col-2 col-form-label"">rank</label>
+            <select class="col-6 form-control" name="rank">
+                <?php foreach(array_merge("Unranked", RANK_NAME_LIST) as $rank) { ?>
+                    <option value="<?php echo $rank; ?>"><?php echo $rank; ?></option>
+                <?php } ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success btn-round">Submit</button>
+        </div>
+    </form>
+
     <p>
         <?php foreach($conditions as $condition_key => $condition) { ?>
             <?php echo $condition_key; ?>: <span style="color: darkorange; font-weight: bold;"><?php echo $condition;?></span><br>
@@ -12,7 +31,7 @@
         <table class="table col-12 text-center">
             <thead class="thead-dark"  style="width: 100%">
             <tr>
-                <th>No.</th>
+                <th><?php echo USER_ID_NAME;?></th>
                 <th><?php echo USER_NAME_NAME;?></th>
                 <th><?php echo USER_RATE_NAME;?></th>
                 <th><?php echo USER_RATING_NUMERIC_NAME;?></th>
@@ -22,7 +41,7 @@
             <?php $i = 0; ?>
             <?php foreach($members as $member) { ?>
                 <tr>
-                    <th><?php echo ++$i;?></th>
+                    <th><?php echo $member->id;?></th>
                     <td>
                         <a href="/account/profile/<?php echo $member->id;?>"><?php echo $member->name;?></a>
                     </td>

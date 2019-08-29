@@ -91,7 +91,7 @@ define("FLG_OFF", 0);
 define("DEFAULT_PAGER_PER", 10);
 
 // Member
-define("USER_ID_NAME", "User ID");
+define("USER_ID_NAME", "ID");
 define("USER_NAME_NAME", "Name");
 define("USER_RATE_NAME", "Rank");
 define("USER_RATING_NUMERIC_NAME", "MMR");
@@ -104,11 +104,12 @@ define("PASSWORD_NAME", "Password");
 define("CONFIRM_PASSWORD_NAME", "Confirm Password");
 
 // Team
+define("TEAM_ID_NAME", "ID");
 define("TEAM_NAME_NAME", "Name");
 define("TEAM_DESCRIPTION_NAME", "Introduction");
 define("TEAM_MEMBERS_NAME", "Members");
 define("TEAM_RANK_NAME", "Rank");
-define("TEAM_RATING_NUMERIC_NAME", "MMR");
+define("TEAM_MMR_AVR_NAME", "MMR AVR.");
 define("TEAM_ROLE_LIST", [
     1 => "Leader",
     2 => "Sub-Leader",

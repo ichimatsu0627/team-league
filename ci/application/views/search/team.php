@@ -11,17 +11,17 @@
         <table class="table col-12 text-center">
             <thead class="thead-dark">
             <tr>
-                <th>No.</th>
+                <th><?php echo TEAM_ID_NAME;?></th>
                 <th><?php echo TEAM_NAME_NAME;?></th>
                 <th><?php echo TEAM_DESCRIPTION_NAME;?></th>
-                <th><?php echo TEAM_RATING_NUMERIC_NAME;?></th>
+                <th><?php echo TEAM_MMR_AVR_NAME;?></th>
             </tr>
             </thead>
             <tbody>
             <?php $i = 0; ?>
             <?php foreach($teams as $team) { ?>
                 <tr>
-                    <th><?php echo ++$i;?></th>
+                    <th><?php echo $team->id;?></th>
                     <td>
                         <a href="/team/detail/<?php echo $team->id;?>"><?php echo $team->name;?></a>
                     </td>

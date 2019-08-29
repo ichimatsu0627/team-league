@@ -11,7 +11,7 @@
             <div class="form-group col-6 col-md-9 col-lg-12">
                 <label><?php echo TEAM_NAME_NAME;?></label>
                 <p><?php echo $team->name;?></p>
-                <label><?php echo TEAM_RATING_NUMERIC_NAME;?></label>
+                <label><?php echo TEAM_MMR_AVR_NAME;?></label>
                 <p><?php echo $team->standard_mmr_avr;?></p>
                 <label><?php echo TEAM_DESCRIPTION_NAME;?></label>
                 <p style="font-size: .9rem; min-height: 90px;"><?php echo str_replace(["\r\n", "\n", "\r"], "<br>", $team->description);?></p>
