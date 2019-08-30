@@ -6,6 +6,7 @@ CREATE TABLE `t_members` (
   `password` varchar(200) NOT NULL DEFAULT '' COMMENT 'パスワード',
   `twitter` varchar(50) NOT NULL DEFAULT '' COMMENT 'TwitterID',
   `discord` varchar(50) NOT NULL DEFAULT '' COMMENT 'Discord tag',
+  `steam_avatar` varchar(100) NOT NULL DEFAULT '' COMMENT 'Steam Avatar URL',
   `admin` tinyint(1) NOT NULL DEFAULT '0',
   `ban` tinyint(1) NOT NULL DEFAULT '0',
   `del_flg` tinyint(1) NOT NULL DEFAULT '0' COMMENT '削除フラグ',

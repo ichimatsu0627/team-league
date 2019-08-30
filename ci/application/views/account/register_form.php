@@ -28,13 +28,6 @@
             <label for="discord"><?php echo DISCORD_NAME;?></label>
             <input type="text" class="form-control" name="discord" placeholder="discord#1234">
         </div>
-        <div class="form-group">
-            <label for="platform"><?php echo PLATFORM_NAME;?></label>
-            <ul class="list-inline" style="margin-left: 20px">
-            <?php foreach($platforms as $id => $platform) { ?>
-                <li><?php echo $platform->name;?>:<input type="text" class="form-control" name="pf-<?php echo $id; ?>" placeholder="<?php echo $platform->id_name;?>"></li>
-            <?php } ?>
-        </div>
         <div class="form-check">
             <label class="form-check-label">
                 <input class="form-check-input" type="checkbox" name="check">

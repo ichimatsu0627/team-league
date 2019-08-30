@@ -43,6 +43,9 @@ class Page
                 self::CODE_FAILED_BY_EXISTS_PLATFORM_ID => "指定された Platform id の中に既に登録済みのものがあります",
                 self::CODE_FAILED_BY_NOT_FOUND       => "指定されたプラットフォームのユーザーが見つかりませんでした",
             ],
+            "edit_platform_form" => [
+                self::CODE_FAILED_BY_NOT_FOUND => "指定されたプラットフォームのユーザーが見つかりませんでした",
+            ],
             "register_form" => [
                 self::CODE_FAILED                    => "登録に失敗しました",
                 self::CODE_FAILED_BY_NOT_ENOUGH      => "必須項目に入力漏れがありました",

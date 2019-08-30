@@ -3,13 +3,13 @@
     <form class="col-8" action="/search/member" method="POST">
         <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
         <div class="form-group row">
-            <label for="name" class="col-2 col-form-label"">keyword</label>
+            <label for="name" class="col-2 col-form-label""><?php echo USER_NAME_NAME;?></label>
             <input type="text" class="col-6 form-control" name="keyword" placeholder="Keyword">
         </div>
         <div class="form-group row">
-            <label for="rank" class="col-2 col-form-label"">rank</label>
+            <label for="rank" class="col-2 col-form-label""><?php echo USER_RANK_NAME;?></label>
             <select class="col-6 form-control" name="rank">
-                <?php foreach(array_merge("Unranked", RANK_NAME_LIST) as $rank) { ?>
+                <?php foreach(array_merge(["Unranked"], RANK_NAME_LIST) as $rank) { ?>
                     <option value="<?php echo $rank; ?>"><?php echo $rank; ?></option>
                 <?php } ?>
             </select>
@@ -33,7 +33,7 @@
             <tr>
                 <th><?php echo USER_ID_NAME;?></th>
                 <th><?php echo USER_NAME_NAME;?></th>
-                <th><?php echo USER_RATE_NAME;?></th>
+                <th><?php echo USER_RANK_NAME;?></th>
                 <th><?php echo USER_RATING_NUMERIC_NAME;?></th>
             </tr>
             </thead>

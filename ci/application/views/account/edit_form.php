@@ -2,7 +2,7 @@
 
     <h3>Account Edit</h3>
 
-    <form class="form" action="/account/edit" method="POST">
+    <form class="form col-11" action="/account/edit" method="POST">
         <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
         <div class="form-group">
             <label for="name"><?php echo USER_NAME_NAME;?></label>
@@ -21,17 +21,13 @@
             <input type="text" class="form-control" name="discord" placeholder="discord#1234" value="<?php echo $member->discord ?? "-";?>">
         </div>
         <div class="form-group">
-            <label for="platform"><?php echo PLATFORM_NAME;?></label>
-            <ul class="list-inline" style="margin-left: 20px">
-            <?php foreach($platforms as $id => $platform) { ?>
-                <li><?php echo $platform->name;?>:<input type="text" class="form-control" name="pf-<?php echo $id; ?>" placeholder="<?php echo $platform->id_name;?>" <?php if (isset($member->platforms[$id])) { echo "value=\"".$member->platforms[$id]->pfid."\""; }?>></li>
-            <?php } ?>
-            </ul>
-        </div>
-        <div class="form-group">
             <input type="hidden" name="id" value="<?php echo $member_id;?>">
             <button type="submit" class="btn btn-success btn-round">Submit</button>
         </div>
     </form>
+
+    <div class="col-2">
+        <a href="/account/edit_platform_form"><button class="btn btn-primary btn-round"><i class="now-ui-icons ui-2_settings-90"></i> Platform</button></a>
+    </div>
 
 </div>

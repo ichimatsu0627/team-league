@@ -109,6 +109,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * ---- libraries ----
  * @property Layout           $layout
  * @property Page             $page
+ * @property Steam            $steam
  * @property Login_lib        $login_lib
  * @property Member_lib       $member_lib
  * @property Team_lib         $team_lib

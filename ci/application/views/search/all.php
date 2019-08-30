@@ -12,7 +12,7 @@
             <tr>
                 <th><?php echo USER_ID_NAME;?></th>
                 <th><?php echo USER_NAME_NAME;?></th>
-                <th><?php echo USER_RATE_NAME;?></th>
+                <th><?php echo USER_RANK_NAME;?></th>
                 <th><?php echo USER_RATING_NUMERIC_NAME;?></th>
             </tr>
             </thead>

@@ -61,12 +61,27 @@ class Account extends Base_controller
     }
 
     /**
+     * edit_platform_form
+     */
+    public function edit_platform_form()
+    {
+        $member = $this->member_lib->get_member($this->member_id);
+
+        $steam_profile = $this->session->userdata("steam_profile") ?? null;
+
+        $this->view["member"]        = $member;
+        $this->view["platforms"]     = $this->platform_lib->platforms;
+        $this->view["steam_profile"] = $steam_profile;
+        $this->layout->view('account/edit_platform_form', $this->view);
+    }
+
+    /**
      * register
      */
     public function register()
     {
-        $member_data   = $this->input_member_post();
-        $platform_data = $this->input_platform_post();
+        $member_data   = $this->input_member("post");
+        $platform_data = $this->input_platform("post");
         $check         = $this->input->post('check');
 
         if (!$this->member_lib->validate_register_memberdata($member_data))
@@ -140,8 +155,56 @@ class Account extends Base_controller
 
         $member = $this->member_lib->get_member($this->member_id);
 
-        $member_data   = $this->input_member_post();
-        $platform_data = $this->input_platform_post();
+        $member_data   = $this->input_member("post");
+        $platform_data = $this->input_platform("post");
+
+        try
+        {
+            $this->member_lib->begin();
+
+            $this->member_lib->lock($this->member_id);
+
+            $this->member_lib->update($member, $member_data, $platform_data);
+
+            $this->member_lib->commit();
+        }
+        catch(Exception $e)
+        {
+            $this->member_lib->rollback();
+            $c = $e->getCode() ?? Page::CODE_FAILED_BY_INVALID_VALUE;
+            $this->_redirect("/account/edit_form?c=".$c);
+        }
+
+        $this->_redirect("/account/profile/".$id."?c=".Page::CODE_EDITED);
+    }
+
+    /**
+     * edit_platform
+     */
+    public function edit_platform()
+    {
+        $id = $this->input->post("id");
+
+        if (empty($id))
+        {
+            $this->_redirect("/err/not_found");
+        }
+
+        if ($id != $this->member_id)
+        {
+            $this->_redirect("/account/profile/".$id);
+        }
+
+        $member = $this->member_lib->get_member($this->member_id);
+
+        $platform_data = $this->input_platform("post");
+        $steam_avatar = $this->input->post("steam_avatar");
+
+        $member_data = [];
+        if (!empty($steam_avatar))
+        {
+            $member_data = ["steam_avatar" => $steam_avatar];
+        }
 
         try
         {
@@ -216,19 +279,32 @@ class Account extends Base_controller
     }
 
     /**
+     * auth steam
+     */
+    public function auth_steam()
+    {
+        $this->input_member("post");
+
+        $this->load->library('steam');
+
+        $this->steam->set_url_param();
+        $this->steam->get_auth_mode();
+    }
+
+    /**
      * 会員データPOST取得
      * @return array
      */
-    private function input_member_post()
+    private function input_member($method = "get")
     {
         $member_data = [
-            "login_id"  => $this->input->post('login_id'),
-            "name"     => $this->input->post('name'),
-            "password" => password_hash($this->input->post('password'), PASSWORD_BCRYPT)
+            "login_id"  => $this->input->$method('login_id'),
+            "name"     => $this->input->$method('name'),
+            "password" => password_hash($this->input->$method('password'), PASSWORD_BCRYPT)
         ];
 
-        $twitter = $this->input->post('twitter');
-        $discord = $this->input->post('discord');
+        $twitter = $this->input->$method('twitter');
+        $discord = $this->input->$method('discord');
 
         if (isset($twitter))
         {
@@ -247,12 +323,12 @@ class Account extends Base_controller
      * 会員プラットフォームデータPOST取得
      * @return array
      */
-    private function input_platform_post()
+    private function input_platform($method = "get")
     {
         $platform_data = [];
         foreach($this->platform_lib->platforms as $pf)
         {
-            $pfid = $this->input->post("pf-".$pf->id);
+            $pfid = $this->input->$method("pf-".$pf->id);
             if (isset($pfid))
             {
                 $platform_data[$pf->id] = $pfid;
