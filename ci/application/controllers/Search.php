@@ -44,6 +44,11 @@ class Search extends Base_controller
         $this->layout->view('search/all', $this->view);
     }
 
+    /**
+     * メンバーサーチ
+     * @param int $page
+     * @throws Exception
+     */
     public function member($page = 1)
     {
         $keyword = $this->input->post("keyword");
@@ -64,6 +69,11 @@ class Search extends Base_controller
         $this->layout->view('search/member', $this->view);
     }
 
+    /**
+     * チームサーチ
+     * @param int $page
+     * @throws Exception
+     */
     public function team($page = 1)
     {
         $keyword = $this->input->post("keyword");
