@@ -21,3 +21,21 @@
 {
     opacity: .3;
 }
+@media screen and (max-width: 768px) {
+    .navbar
+    {
+        margin-bottom: -2px;
+    }
+    .wrapper {
+        margin-top: 0;
+    }
+    .carousel
+    {
+        position: relative;
+    }
+    .carousel-item > p
+    {
+        font-size: 1rem;
+        top: 40%;
+    }
+}
