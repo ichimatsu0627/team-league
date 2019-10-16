@@ -14,7 +14,7 @@
     <meta name="format-detection" content="telephone=no" />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-    <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/vnd.microsoft.icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />
     <!-- css -->
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <?php

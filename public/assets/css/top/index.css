@@ -1,0 +1,32 @@
+.navbar
+{
+    padding-bottom: 0;
+    margin-bottom:  0;
+}
+.wrapper
+{
+    margin-top: 0;
+}
+.carousel
+{
+    position: absolute;
+    top: 0;
+    z-index: -1;
+}
+.carousel-item
+{
+    background: #000;
+}
+.carousel-item > p
+{
+    position: absolute;
+    color: white;
+    top: 45%;
+    width: 100%;
+    font-size: 3rem;
+    font-weight: bold;
+}
+.filter-img
+{
+    opacity: .3;
+}
