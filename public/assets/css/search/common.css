@@ -1,0 +1,9 @@
+.ranks-wrapper {
+    font-size: .75rem;
+    margin-left: 2rem;
+}
+@media screen and (max-width: 768px) {
+    .ranks-wrapper {
+        font-size: .6rem;
+    }
+}

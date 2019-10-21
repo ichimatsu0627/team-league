@@ -127,6 +127,28 @@ define("RANK_NAME_LIST", [
     7 => "Grand Champion",
 ]);
 
+define("RANK_DETAIL_LIST", [
+    "Bronze I",
+    "Bronze II",
+    "Bronze III",
+    "Silver I",
+    "Silver II",
+    "Silver III",
+    "Gold I",
+    "Gold II",
+    "Gold III",
+    "Platinum I",
+    "Platinum II",
+    "Platinum III",
+    "Diamond I",
+    "Diamond II",
+    "Diamond III",
+    "Champion I",
+    "Champion II",
+    "Champion III",
+    "Grand Champion",
+]);
+
 // Platform
 define('PLATFORM_ID_STEAM'  , 1);
 define('PLATFORM_ID_PS4'    , 2);

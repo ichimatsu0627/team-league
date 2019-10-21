@@ -23,6 +23,8 @@ class Search extends Base_controller
         parent::__construct();
         $this->load->library("member_lib");
         $this->load->library("team_lib");
+
+        $this->view["css"] = "search/common";
     }
 
     /**
@@ -52,12 +54,18 @@ class Search extends Base_controller
     public function member($page = 1)
     {
         $keyword = $this->input->post("keyword");
+        $ranks = $this->input->post("ranks");
 
         $conditions = [];
 
         if (!empty($keyword))
         {
             $conditions["keyword"] = $keyword;
+        }
+
+        if (!empty($ranks))
+        {
+            $conditions["ranks"] = $ranks;
         }
 
         $this->view["members"]    = $this->member_lib->search_members($conditions, DEFAULT_PAGER_PER, ($page - 1) * DEFAULT_PAGER_PER);

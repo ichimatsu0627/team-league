@@ -50,6 +50,37 @@ class T_member_platforms extends Tran_model
     }
 
     /**
+     * レート検索用
+     * @param $conditions
+     * @return array
+     * @throws Exception
+     */
+    public function get_by_conditions($conditions)
+    {
+        $params = [];
+        $conditions_where = "";
+
+        if (isset($conditions["ranks"]) && !empty($conditions["ranks"]))
+        {
+            $conditions_where .= "(`standard_rank` IN(\"".implode('","', $conditions["ranks"])."\")) AND ";
+        }
+
+        $conditions_where .= " `del_flg` = ?";
+        $params[] = FLG_OFF;
+
+        $sql = "
+            SELECT
+              *
+            FROM
+                `{$this->_table}`
+            WHERE
+              {$conditions_where}
+        ";
+
+        return $this->query($sql, $params);
+    }
+
+    /**
      * 複数レコード登録
      * @param $member_id
      * @param $platform_ids
@@ -68,6 +99,7 @@ class T_member_platforms extends Tran_model
                 continue;
             }
 
+            // 同じプラットフォームで同じIDのユーザーを許可しない場合は、コメントアウトを外す
             // if (!empty($this->get_by_platform_id($m_platform_id, $pfid)))
             // {
             //     throw new Exception("already registered", Page::CODE_FAILED_BY_EXISTS_PLATFORM_ID);
@@ -99,6 +131,7 @@ class T_member_platforms extends Tran_model
      */
     public function update_platform($member_id, $m_platform_id, $pfid)
     {
+        // 同じプラットフォームで同じIDのユーザーを許可しない場合は、コメントアウトを外す
         // if (!empty($this->get_by_platform_id($m_platform_id, $pfid)))
         // {
         //     throw new Exception("already registered", Page::CODE_FAILED_BY_EXISTS_PLATFORM_ID);

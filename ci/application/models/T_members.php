@@ -114,41 +114,45 @@ class T_members extends Tran_model
      * @return array
      * @throws Exception
      */
-    public function get_by_conditions($conditions, $limit, $offset)
+    public function get_by_conditions($conditions, $limit = null, $offset = 0)
     {
         $params = [];
         $conditions_where = "";
 
-        if (isset($conditions["twitter"]) && !empty($conditions["twitter"]))
+        if (isset($conditions["ids"]) && !empty($conditions["ids"]))
         {
-            $params[] = "%".$conditions["twitter"]."%";
-            $conditions_where .= "`twitter` LIKE ? AND ";
-        }
-
-        if (isset($conditions["discord"]) && !empty($conditions["discord"]))
-        {
-            $params[] = "%".$conditions["discord"]."%";
-            $conditions_where .= "`discord` LIKE ? AND ";
+            $conditions_where .= "`id` IN(".implode(",",$conditions["ids"]).") AND ";
         }
 
         if (isset($conditions["keyword"]) && !empty($conditions["keyword"]))
         {
             $params[] = "%".$conditions["keyword"]."%";
-            $conditions_where .= "`name` LIKE ? AND ";
+            $params[] = "%".$conditions["keyword"]."%";
+            $params[] = "%".$conditions["keyword"]."%";
+            $conditions_where .= "(`name` LIKE ? OR `discord` LIKE ? OR `twitter` LIKE ?) AND ";
+        }
+
+        $conditions_where .= "`del_flg` = ?";
+        $params[] = FLG_OFF;
+
+        $limit_sql = "";
+        if (!empty($limit))
+        {
+            $limit_sql = " LIMIT ?, ?";
+            $params[] = $offset;
+            $params[] = $limit;
         }
 
         $sql = "
             SELECT
               *
             FROM
-              `{$this->_table}`
+                `{$this->_table}`
             WHERE
-              {$conditions_where} `del_flg` = ?
+              {$conditions_where}
             ORDER BY `id` DESC 
-            LIMIT ?, ?
+            {$limit_sql}
         ";
-
-        $params = array_merge($params, [FLG_OFF, $offset, $limit]);
 
         return $this->query($sql, $params);
     }
@@ -164,23 +168,21 @@ class T_members extends Tran_model
         $params = [];
         $conditions_where = "";
 
-        if (isset($conditions["twitter"]) && !empty($conditions["twitter"]))
+        if (isset($conditions["ids"]) && !empty($conditions["ids"]))
         {
-            $params[] = "%".$conditions["twitter"]."%";
-            $conditions_where .= "`twitter` LIKE ? AND ";
-        }
-
-        if (isset($conditions["discord"]) && !empty($conditions["discord"]))
-        {
-            $params[] = "%".$conditions["discord"]."%";
-            $conditions_where .= "`discord` LIKE ? AND ";
+            $conditions_where .= "`id` IN(".implode(",",$conditions["ids"]).") AND ";
         }
 
         if (isset($conditions["keyword"]) && !empty($conditions["keyword"]))
         {
             $params[] = "%".$conditions["keyword"]."%";
-            $conditions_where .= "`name` LIKE ? AND ";
+            $params[] = "%".$conditions["keyword"]."%";
+            $params[] = "%".$conditions["keyword"]."%";
+            $conditions_where .= "(`name` LIKE ? OR `discord` LIKE ? OR `twitter` LIKE ?) AND ";
         }
+
+        $conditions_where .= "`del_flg` = ?";
+        $params[] = FLG_OFF;
 
         $sql = "
             SELECT
@@ -188,10 +190,8 @@ class T_members extends Tran_model
             FROM
               `{$this->_table}`
             WHERE
-              {$conditions_where} `del_flg` = ?
+              {$conditions_where}
         ";
-
-        $params = array_merge($params, [FLG_OFF]);
 
         $result =  $this->query_one($sql, $params);
 

@@ -15,5 +15,6 @@ CREATE TABLE `t_member_platforms` (
   `modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
   PRIMARY KEY (`id`),
   KEY `t_member_id` (`t_member_id`),
-  KEY `platform` (`m_platform_id`,`pfid`)
+  KEY `platform` (`m_platform_id`,`pfid`),
+  KEY `member_rate` (`t_member_id`,`standard_rank`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

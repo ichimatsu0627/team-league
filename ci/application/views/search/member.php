@@ -1,18 +1,25 @@
 <div class="container">
 
-    <form class="col-8" action="/search/member" method="POST">
+    <form class="col-9" action="/search/member" method="POST">
         <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
         <div class="form-group row">
-            <label for="name" class="col-2 col-form-label""><?php echo USER_NAME_NAME;?></label>
+            <label for="name" class="col-2 col-form-label"><?php echo USER_NAME_NAME;?></label>
             <input type="text" class="col-6 form-control" name="keyword" placeholder="Keyword">
         </div>
-        <div class="form-group row">
-            <label for="rank" class="col-2 col-form-label""><?php echo USER_RANK_NAME;?></label>
-            <select class="col-6 form-control" name="rank">
-                <?php foreach(array_merge(["Unranked"], RANK_NAME_LIST) as $rank) { ?>
-                    <option value="<?php echo $rank; ?>"><?php echo $rank; ?></option>
+        <div class="form-group">
+            <label for="ranks" class="col-2 col-form-label text-left"><?php echo USER_RANK_NAME;?></label>
+            <div class="ranks-wrapper">
+                <?php foreach(RANK_DETAIL_LIST as $key => $rank) { ?>
+                    <?php
+                      $checked = "";
+                      if (in_array($rank, $conditions["ranks"])) $checked = 'checked="checked"';
+                    ?>
+                    <div class="col-3 form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="<?php echo $rank;?>" name="ranks[]" id="ranks<?php echo $key;?>" <?php echo $checked;?>>
+                        <label class="form-check-label" for="ranks<?php echo $key;?>"><?php echo $rank;?></label>
+                    </div>
                 <?php } ?>
-            </select>
+            </div>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-success btn-round">Submit</button>
@@ -21,7 +28,11 @@
 
     <p>
         <?php foreach($conditions as $condition_key => $condition) { ?>
-            <?php echo $condition_key; ?>: <span style="color: darkorange; font-weight: bold;"><?php echo $condition;?></span><br>
+            <?php if (is_array($condition)) { ?>
+                <?php echo $condition_key; ?>: <span style="color: darkorange; font-weight: bold;"><?php echo implode(", ",$condition);?></span><br>
+            <?php } else { ?>
+                <?php echo $condition_key; ?>: <span style="color: darkorange; font-weight: bold;"><?php echo $condition;?></span><br>
+            <?php } ?>
         <?php } ?>
     </p>
 
