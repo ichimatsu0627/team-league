@@ -30,6 +30,10 @@ team_league/var/log/nginx/*
 # Google App Engine
 gae/secret.yaml
 
+# carpenter
+export-production.sh
+migrate-production.sh
+
 # Other
 package-lock.json
 !.gitkeep
