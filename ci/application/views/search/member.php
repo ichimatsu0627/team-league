@@ -1,20 +1,20 @@
 <div class="container">
 
-    <form class="col-9" action="/search/member" method="POST">
+    <form class="col-12" action="/search/member" method="POST">
         <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
         <div class="form-group row">
-            <label for="name" class="col-2 col-form-label"><?php echo USER_NAME_NAME;?></label>
-            <input type="text" class="col-6 form-control" name="keyword" placeholder="Keyword">
+            <label for="name" class="col-2 col-form-label text-left">Keyword</label>
+            <input type="text" class="col-12 col-md-6 form-control" name="keyword" placeholder="Keyword" value="<?php if (isset($conditions["keyword"])) { echo $conditions["keyword"]; } ?>">
         </div>
-        <div class="form-group">
+        <div class="form-group row">
             <label for="ranks" class="col-2 col-form-label text-left"><?php echo USER_RANK_NAME;?></label>
-            <div class="ranks-wrapper">
+            <div class="ranks-wrapper col-12 col-md-9">
                 <?php foreach(RANK_DETAIL_LIST as $key => $rank) { ?>
                     <?php
                       $checked = "";
-                      if (in_array($rank, $conditions["ranks"])) $checked = 'checked="checked"';
+                      if (isset($conditions["ranks"]) && in_array($rank, $conditions["ranks"])) $checked = 'checked="checked"';
                     ?>
-                    <div class="col-3 form-check-inline">
+                    <div class="col-3 col-md-3 form-check-inline">
                         <input class="form-check-input" type="checkbox" value="<?php echo $rank;?>" name="ranks[]" id="ranks<?php echo $key;?>" <?php echo $checked;?>>
                         <label class="form-check-label" for="ranks<?php echo $key;?>"><?php echo $rank;?></label>
                     </div>
