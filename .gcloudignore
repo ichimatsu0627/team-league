@@ -41,7 +41,7 @@ assets/.sass-cache/*
 *.sublime-project
 
 # database
-database/*
+/database/*
 
 # other
 gae/secret.yaml
