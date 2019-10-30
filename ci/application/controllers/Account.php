@@ -36,6 +36,7 @@ class Account extends Base_controller
      */
     public function login_form()
     {
+        $this->view["login_id"] = $this->session->userdata(SESSION_KEY_LOGIN_ID);
         $this->layout->view('account/login_form', $this->view);
     }
 
@@ -123,6 +124,7 @@ class Account extends Base_controller
 
             // ログインしとく
             $this->login_lib->save($id);
+            $this->session->set_userdata(SESSION_KEY_LOGIN_ID, $member_data["login_id"]);
 
             $this->member_lib->commit();
         }
@@ -232,6 +234,7 @@ class Account extends Base_controller
     public function login()
     {
         $login_id = $this->input->post('login_id');
+        $remember_id = $this->input->post('remember_id');
 
         if (empty($this->input->post('password')))
         {
@@ -254,6 +257,12 @@ class Account extends Base_controller
 
             // ログイン
             $this->login_lib->save($t_member->id);
+
+            // ログインIDをセッションに保存
+            if ($remember_id)
+            {
+                $this->session->set_userdata(SESSION_KEY_LOGIN_ID, $login_id);
+            }
         }
         catch(Exception $e)
         {

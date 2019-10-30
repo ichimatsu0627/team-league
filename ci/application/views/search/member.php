@@ -1,24 +1,47 @@
 <div class="container">
 
+    <h5>Members</h5>
+
     <form class="col-12" action="/search/member" method="POST">
         <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
         <div class="form-group row">
-            <label for="name" class="col-2 col-form-label text-left">Keyword</label>
-            <input type="text" class="col-12 col-md-6 form-control" name="keyword" placeholder="Keyword" value="<?php if (isset($conditions["keyword"])) { echo $conditions["keyword"]; } ?>">
+            <label for="name" class="col-12 col-lg-2 col-form-label text-left">Keyword</label>
+            <input type="text" class="col-11 col-lg-6 form-control" name="keyword" placeholder="Keyword" value="<?php if (isset($conditions["keyword"])) { echo $conditions["keyword"]; } ?>">
         </div>
-        <div class="form-group row">
+        <div class="form-group row sp-d-none">
             <label for="ranks" class="col-2 col-form-label text-left"><?php echo USER_RANK_NAME;?></label>
-            <div class="ranks-wrapper col-12 col-md-9">
+            <div class="ranks-wrapper col-lg-9">
                 <?php foreach(RANK_DETAIL_LIST as $key => $rank) { ?>
                     <?php
                       $checked = "";
-                      if (isset($conditions["ranks"]) && in_array($rank, $conditions["ranks"])) $checked = 'checked="checked"';
+                      if (isset($conditions["ranks"]) && in_array($rank, $conditions["ranks"]))
+                      {
+                          $checked = 'checked="checked"';
+                      }
                     ?>
-                    <div class="col-3 col-md-3 form-check-inline">
+                    <div class="col-3 col-lg-3 form-check-inline">
                         <input class="form-check-input" type="checkbox" value="<?php echo $rank;?>" name="ranks[]" id="ranks<?php echo $key;?>" <?php echo $checked;?>>
                         <label class="form-check-label" for="ranks<?php echo $key;?>"><?php echo $rank;?></label>
                     </div>
                 <?php } ?>
+            </div>
+        </div>
+        <div class="form-group row pc-d-none">
+            <label for="ranks" class="col-12 col-form-label text-left"><?php echo USER_RANK_NAME;?></label>
+            <div class="col-10">
+                <select name="ranks[]" class="form-control">
+                    <option value="">-</option>
+                    <?php foreach(RANK_DETAIL_LIST as $key => $rank) { ?>
+                      <?php
+                        $selected = '';
+                        if (isset($conditions["ranks"]) && in_array($rank, $conditions["ranks"]))
+                        {
+                            $selected = 'selected="selected"';
+                        }
+                      ?>
+                      <option value="<?php echo $rank;?>" <?php echo $selected ;?>><?php echo $rank; ?></option>
+                    <?php } ?>
+                </select>
             </div>
         </div>
         <div class="form-group">
@@ -35,8 +58,6 @@
             <?php } ?>
         <?php } ?>
     </p>
-
-    <h3>Members</h3>
 
     <?php if (!empty($members)) { ?>
         <table class="table col-12 text-center">
@@ -73,12 +94,12 @@
                                 <?php if (isset($conditions["keyword"])) { ?><input type="hidden" name="keyword" value="<?php echo $conditions["keyword"];?>" /><?php } ?>
                                 <?php if (isset($conditions["tweet"])) { ?><input type="hidden" name="tweet" value="<?php echo $conditions["tweet"];?>" /><?php } ?>
                                 <?php if (isset($conditions["discord"])) { ?><input type="hidden" name="discord" value="<?php echo $conditions["discord"];?>" /><?php } ?>
-                                <a class="page-link" href="javascript:document.prevbtn.submit();">Prewv</a>
+                                <a class="page-link" href="javascript:document.prevbtn.submit();">Prev</a>
                             </form>
                         </li>
                     <?php } else { ?>
                         <li class="page-item disabled">
-                            <span class="page-link">Previous</span>
+                            <span class="page-link">Prev</span>
                         </li>
                     <?php } ?>
 

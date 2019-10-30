@@ -24,7 +24,9 @@ class Search extends Base_controller
         $this->load->library("member_lib");
         $this->load->library("team_lib");
 
+        $this->view["mine"] = $this->member_lib->get_member($this->member_id);
         $this->view["css"] = "search/common";
+        $this->view["javascript"] = "search/common";
     }
 
     /**
@@ -65,7 +67,12 @@ class Search extends Base_controller
 
         if (!empty($ranks))
         {
-            $conditions["ranks"] = $ranks;
+            $ranks = array_filter($ranks, "strlen");
+            $ranks = array_unique($ranks);
+            if (!empty($ranks))
+            {
+                $conditions["ranks"] = $ranks;
+            }
         }
 
         $this->view["members"]    = $this->member_lib->search_members($conditions, DEFAULT_PAGER_PER, ($page - 1) * DEFAULT_PAGER_PER);

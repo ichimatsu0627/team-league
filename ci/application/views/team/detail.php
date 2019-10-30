@@ -5,16 +5,16 @@
 
     <div class="row">
         <div class="col-lg-3 row">
-            <div class="form-group col-6 col-md-3 col-lg-12">
+            <div class="form-group col-5 col-md-3 col-lg-12">
                 <img src="/assets/img/icon.png" class="rounded" width="128" height="128">
             </div>
-            <div class="form-group col-6 col-md-9 col-lg-12">
+            <div class="form-group col-7 col-md-9 col-lg-12">
                 <label><?php echo TEAM_NAME_NAME;?></label>
                 <p><?php echo $team->name;?></p>
                 <label><?php echo TEAM_MMR_AVR_NAME;?></label>
                 <p><?php echo $team->standard_mmr_avr;?></p>
                 <label><?php echo TEAM_DESCRIPTION_NAME;?></label>
-                <p style="font-size: .9rem; min-height: 90px;"><?php echo str_replace(["\r\n", "\n", "\r"], "<br>", $team->description);?></p>
+                <p style="font-size: .9rem;"><?php echo str_replace(["\r\n", "\n", "\r"], "<br>", $team->description);?></p>
                 <?php if ($this->login_lib->validate()) { ?>
                     <?php if ($is_admin) { ?>
                         <a href="/team/edit_form/<?php echo $team->id;?>"><button class="btn btn-primary btn-round"><i class="now-ui-icons ui-2_settings-90"></i> Edit</button></a>

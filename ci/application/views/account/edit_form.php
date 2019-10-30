@@ -2,7 +2,7 @@
 
     <h3>Account Edit</h3>
 
-    <form class="form col-11" action="/account/edit" method="POST">
+    <form class="form col-12" action="/account/edit" method="POST">
         <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
         <div class="form-group">
             <label for="name"><?php echo USER_NAME_NAME;?></label>
@@ -26,7 +26,7 @@
         </div>
     </form>
 
-    <div class="col-2">
+    <div class="col-12">
         <a href="/account/edit_platform_form"><button class="btn btn-primary btn-round"><i class="now-ui-icons ui-2_settings-90"></i> Platform</button></a>
     </div>
 

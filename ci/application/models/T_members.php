@@ -119,8 +119,12 @@ class T_members extends Tran_model
         $params = [];
         $conditions_where = "";
 
-        if (isset($conditions["ids"]) && !empty($conditions["ids"]))
+        if (isset($conditions["ids"]))
         {
+            if (empty($conditions["ids"]))
+            {
+                return [];
+            }
             $conditions_where .= "`id` IN(".implode(",",$conditions["ids"]).") AND ";
         }
 

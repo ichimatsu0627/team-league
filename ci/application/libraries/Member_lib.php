@@ -16,7 +16,7 @@ class Member_lib extends Base_lib
         "scraping",
     ];
 
-    const SESSION_KEY = "member";
+    const SESSION_KEY = SESSION_KEY_MEMBER;
 
     const PASSWORD_CHARA_MIN = 6;
     const PASSWORD_CHARA_MAX = 20;

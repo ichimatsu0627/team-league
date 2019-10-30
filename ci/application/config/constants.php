@@ -90,6 +90,10 @@ define("FLG_OFF", 0);
 
 define("DEFAULT_PAGER_PER", 10);
 
+// Session
+define("SESSION_KEY_MEMBER", "member");
+define("SESSION_KEY_LOGIN_ID", "login_id");
+
 // Member
 define("USER_ID_NAME", "User ID");
 define("USER_NAME_NAME", "Name");

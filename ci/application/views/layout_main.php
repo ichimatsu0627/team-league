@@ -40,7 +40,14 @@
     <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
     <script src="/assets/js/now-ui-kit.js?v=1.3.0" type="text/javascript"></script>
     <!-- User js-->
-    <?php echo js_nocache_tag("/assets/js/base.js"); ?>
+    <?php
+        echo js_nocache_tag("/assets/js/base.js");
+
+        if (isset($javascript))
+        {
+            echo js_nocache_tag("/assets/js/{$javascript}.js");
+        }
+    ?>
 </head>
 <body class="sidebar-collapse">
     <nav class="navbar navbar-expand-lg bg-primary">
