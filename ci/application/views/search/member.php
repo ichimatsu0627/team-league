@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-success btn-round">Submit</button>
+            <button type="submit" class="btn btn-outline-success btn-round">Search</button>
         </div>
     </form>
 

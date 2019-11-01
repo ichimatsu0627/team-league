@@ -3,11 +3,16 @@ use Google\Cloud\Storage\StorageClient;
 
 /**
  * Class Cloud_storage
+ *
+ * @property StorageClient $instance
  */
 class Cloud_storage
 {
     private $instance;
 
+    /**
+     * Cloud_storage constructor.
+     */
     public function __construct()
     {
         $this->instance = new StorageClient();
@@ -23,9 +28,8 @@ class Cloud_storage
      */
     public function upload_object($objectName, $source)
     {
-        $storage = new StorageClient();
         $file = fopen($source, 'r');
-        $bucket = $storage->bucket($_SERVER["GCP_BUCKET_NAME"]);
+        $bucket = $this->instance->bucket($_SERVER["GCP_BUCKET_NAME"]);
         $bucket->upload($file, [
             'name' => $objectName
         ]);

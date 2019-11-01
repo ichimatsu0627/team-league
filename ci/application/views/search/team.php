@@ -2,6 +2,17 @@
 
     <h5>Teams</h5>
 
+    <form class="col-12" action="/search/team" method="POST">
+        <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
+        <div class="form-group row">
+            <label for="name" class="col-12 col-lg-2 col-form-label text-left">Keyword</label>
+            <input type="text" class="col-11 col-lg-6 form-control" name="keyword" placeholder="Keyword" value="<?php if (isset($conditions["keyword"])) { echo $conditions["keyword"]; } ?>">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-outline-success btn-round">Search</button>
+        </div>
+    </form>
+
     <p>
         <?php foreach($conditions as $condition_key => $condition) { ?>
             <?php if (is_array($condition)) { ?>

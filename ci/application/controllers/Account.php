@@ -3,6 +3,8 @@ require_once(APPPATH."controllers/Base_controller.php");
 
 /**
  * Account Controller
+ *
+ * @property Cloud_storage cloud_storage
  */
 class Account extends Base_controller
 {
