@@ -229,6 +229,43 @@ class Account extends Base_controller
     }
 
     /**
+     * Image Update
+     */
+    public function edit_image()
+    {
+        try
+        {
+            if (!isset($_FILES["image"]) || empty($_FILES["image"]) || $_FILES["image"]["size"] <= 0)
+            {
+                throw new Exception("Not found file.", Page::CODE_FAILED_BY_IMAGE_NOT_FOUND);
+            }
+
+            $image = $_FILES["image"];
+
+            if (!in_array($image["type"], ["image/jpeg", "image/png", "image/vnd.microsoft.icon"]))
+            {
+                throw new Exception("File format error.", Page::CODE_FAILED_BY_IMAGE_FORMAT);
+            }
+
+            if ($image["size"] > 516000)
+            {
+                throw new Exception("File size is larger than 516KB.", Page::CODE_FAILED_BY_IMAGE_SIZE);
+            }
+
+            // Cloud Storage
+            $this->load->library("google/Cloud_storage");
+            $this->cloud_storage->upload_object(ENVIRONMENT."/".$this->member_id.".jpg", $image["tmp_name"]);
+        }
+        catch(Exception $e)
+        {
+            $c = $e->getCode() ?? Page::CODE_FAILED_BY_INVALID_VALUE;
+            $this->_redirect("/account/edit_form?c=".$c);
+        }
+
+        $this->_redirect("/account/edit_form");
+    }
+
+    /**
      * login
      */
     public function login()

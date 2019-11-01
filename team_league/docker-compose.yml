@@ -3,6 +3,7 @@ app:
   volumes:
     - ../:/var/www/html/teamleague.com
     - ./var/log:/var/log
+    - ../secret/:/var/www/html/teamleague.com/secret
   tty: true
 php:
   build: ./php

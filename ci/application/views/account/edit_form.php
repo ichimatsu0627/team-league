@@ -2,7 +2,13 @@
 
     <h3>Account Edit</h3>
 
-    <form class="form col-12" action="/account/edit" method="POST">
+    <form id="image-edit" action="/account/edit_image" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
+        <input name="image" type="file">
+        <input id="image-edit" type="submit" value="アップロード">
+    </form>
+
+    <form id="profile-edit" class="form col-12" action="/account/edit" method="POST">
         <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
         <div class="form-group">
             <label for="name"><?php echo USER_NAME_NAME;?></label>
@@ -22,7 +28,7 @@
         </div>
         <div class="form-group">
             <input type="hidden" name="id" value="<?php echo $member_id;?>">
-            <button type="submit" class="btn btn-success btn-round">Submit</button>
+            <button id="profile-edit" type="submit" class="btn btn-success btn-round">Submit</button>
         </div>
     </form>
 

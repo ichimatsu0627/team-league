@@ -44,6 +44,8 @@ assets/.sass-cache/*
 /database/*
 
 # other
+node_modules
 gae/secret.yaml
 /sql
 gulpfile.js
+secret/*

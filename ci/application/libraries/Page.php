@@ -26,6 +26,9 @@ class Page
     const CODE_FAILED_BY_MAX_JOINED         = 20008;
     const CODE_FAILED_BY_PERMISSION_DENIED  = 20009;
     const CODE_FAILED_BY_NOT_FOUND          = 20010;
+    const CODE_FAILED_BY_IMAGE_NOT_FOUND    = 20011;
+    const CODE_FAILED_BY_IMAGE_FORMAT       = 20012;
+    const CODE_FAILED_BY_IMAGE_SIZE         = 20013;
 
     private $messages = [
         "top" => [
@@ -39,9 +42,12 @@ class Page
                 self::CODE_EDITED => "編集しました",
             ],
             "edit_form" => [
-                self::CODE_FAILED_BY_INVALID_VALUE => "編集に失敗しました",
+                self::CODE_FAILED_BY_INVALID_VALUE      => "編集に失敗しました",
                 self::CODE_FAILED_BY_EXISTS_PLATFORM_ID => "指定された Platform id の中に既に登録済みのものがあります",
-                self::CODE_FAILED_BY_NOT_FOUND       => "指定されたプラットフォームのユーザーが見つかりませんでした",
+                self::CODE_FAILED_BY_NOT_FOUND          => "指定されたプラットフォームのユーザーが見つかりませんでした",
+                self::CODE_FAILED_BY_IMAGE_NOT_FOUND    => "ファイルが見つかりませんでした",
+                self::CODE_FAILED_BY_IMAGE_FORMAT       => "このファイルは取り扱いできません(png, jpg, jpeg, ico)",
+                self::CODE_FAILED_BY_IMAGE_SIZE         => "516KB以上のファイルはアップロードできません"
             ],
             "edit_platform_form" => [
                 self::CODE_FAILED_BY_NOT_FOUND => "指定されたプラットフォームのユーザーが見つかりませんでした",

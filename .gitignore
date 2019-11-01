@@ -11,6 +11,8 @@ ci/application/vendor/*
 .mysql
 environment/production/*
 team_league/phpmyadmin/*
+!team_league/var/secret/.gitkeep
+
 ## nginx
 team_league/var/log/nginx/*
 
@@ -37,6 +39,7 @@ migrate-production.sh
 # Other
 package-lock.json
 !.gitkeep
+secret/*
 
 # Sass
 .sass-cache/
