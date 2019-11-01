@@ -153,5 +153,10 @@
     <div class="wrapper">
         <?php echo $content_for_layout; ?>
     </div>
+    <footer class="footer">
+        <div class="container">
+            <p class="copyright">© 2019 TEAM LEAGUE created by Ichimatsu</p>
+        </div>
+    </footer>
 </body>
 </html>
