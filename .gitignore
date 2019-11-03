@@ -11,7 +11,6 @@ ci/application/vendor/*
 .mysql
 environment/production/*
 team_league/phpmyadmin/*
-!team_league/var/secret/.gitkeep
 
 ## nginx
 team_league/var/log/nginx/*
@@ -35,6 +34,7 @@ gae/secret.yaml
 # carpenter
 export-production.sh
 migrate-production.sh
+database/backup/*
 
 # Other
 package-lock.json
