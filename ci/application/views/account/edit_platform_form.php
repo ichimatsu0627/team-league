@@ -11,6 +11,7 @@
                         <label for="<?php echo $platform->name;?>"><?php echo $platform->name;?></label>
                         <input type="text" readonly class="form-control" name="pf-<?php echo $id; ?>" placeholder="<?php echo $platform->id_name;?>" value="<?php echo str_replace(["https://steamcommunity.com/id/", "/"], "", $steam_profile->profileurl);?>">
                         <input type="hidden" name="steam_avatar" value="<?php echo $steam_profile->avatarfull;?>">
+                        <a href="/auth/steam"><img style="margin-top: 20px;" src="https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png"></a>
                     </div>
                 <?php } else { ?>
                     <div class="form-group">
