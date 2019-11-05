@@ -95,7 +95,8 @@ define("SESSION_KEY_MEMBER", "member");
 define("SESSION_KEY_LOGIN_ID", "login_id");
 
 // Member
-define("USER_ID_NAME", "User ID");
+define("USER_ID_NAME", "ID");
+define("USER_LOGIN_ID_NAME", "Login ID");
 define("USER_NAME_NAME", "Name");
 define("USER_RANK_NAME", "Rank");
 define("USER_RATING_NUMERIC_NAME", "MMR");
@@ -108,7 +109,7 @@ define("PASSWORD_NAME", "Password");
 define("CONFIRM_PASSWORD_NAME", "Confirm Password");
 
 // Team
-define("TEAM_ID_NAME", "Team ID");
+define("TEAM_ID_NAME", "ID");
 define("TEAM_NAME_NAME", "Name");
 define("TEAM_DESCRIPTION_NAME", "Introduction");
 define("TEAM_MEMBERS_NAME", "Members");

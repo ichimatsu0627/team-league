@@ -15,8 +15,8 @@
             <input type="text" class="form-control" name="name" placeholder="<?php echo mb_strtolower(USER_NAME_NAME);?>" value="<?php echo $member->name;?>">
         </div>
         <div class="form-group">
-            <label for="login_id"><?php echo USER_ID_NAME;?></label>
-            <input type="text" class="form-control" name="login_id" placeholder="<?php echo mb_strtolower(USER_ID_NAME);?>" value="<?php echo $member->login_id;?>">
+            <label for="login_id"><?php echo USER_LOGIN_ID_NAME;?></label>
+            <input type="text" class="form-control" name="login_id" placeholder="<?php echo mb_strtolower(USER_LOGIN_ID_NAME);?>" value="<?php echo $member->login_id;?>">
         </div>
         <div class="form-group">
             <label for="twitter"><?php echo TWITTER_NAME;?></label>

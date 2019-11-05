@@ -9,8 +9,8 @@
             <input type="text" class="form-control" name="name" placeholder="<?php echo mb_strtolower(USER_NAME_NAME);?>">
         </div>
         <div class="form-group">
-            <label for="login_id"><?php echo USER_ID_NAME;?><small style="color: red;"> ※ required</small></label>
-            <input type="text" class="form-control" name="login_id" placeholder="<?php echo mb_strtolower(USER_ID_NAME);?>">
+            <label for="login_id"><?php echo USER_LOGIN_ID_NAME;?><small style="color: red;"> ※ required</small></label>
+            <input type="text" class="form-control" name="login_id" placeholder="<?php echo mb_strtolower(USER_LOGIN_ID_NAME);?>">
         </div>
         <div class="form-group">
             <label for="password"><?php echo PASSWORD_NAME;?><small style="color: red;"> ※ required</small><br /><small>Make sure it's at least 8 characters.</small></label>

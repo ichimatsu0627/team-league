@@ -34,16 +34,15 @@
                 <table class="table text-center">
                     <thead class="thead-dark">
                         <tr>
-                            <th>No.</th>
-                            <th>Name</th>
-                            <th>Rank</th>
+                            <th><?php echo USER_ID_NAME;?></th>
+                            <th><?php echo USER_NAME_NAME;?></th>
+                            <th><?php echo USER_RANK_NAME;?></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $i = 0; ?>
                         <?php foreach($team->members as $team_member_id => $team_member) { ?>
                             <tr>
-                                <th><?php echo ++$i;?></th>
+                                <th><?php echo $team_member->detail->id;?></th>
                                 <td>
                                     <a href="/account/profile/<?php echo $team_member_id;?>"><?php echo $team_member->detail->name;?>
                                     <?php if ($team_member->role != 0) { echo " <span style='color: red; font-size: .7rem;'>".T_team_members::ROLE_LIST[$team_member->role]."</span>"; } ?>

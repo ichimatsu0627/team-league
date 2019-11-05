@@ -8,16 +8,18 @@
                     <th><?php echo USER_NAME_NAME;?></th>
                     <td><?php echo $member->name;?></td>
                 </tr>
-                <tr>
-                    <th><?php echo USER_ID_NAME;?></th>
-                    <td><?php echo $member->login_id;?></td>
-                </tr>
+                <?php if ($member_id == $member->id) { ?>
+                    <tr>
+                        <th><?php echo USER_LOGIN_ID_NAME;?></th>
+                        <td><?php echo $member->login_id;?></td>
+                    </tr>
+                <?php } ?>
                 <tr>
                     <th><?php echo TWITTER_NAME;?></th>
                     <?php if (empty($member->twitter)) { ?>
                         <td>-</td>
                     <?php } else { ?>
-                        <td><a href="https://twitter.com/<?php echo str_replace("@", "", $member->twitter);?>"><?php echo $member->twitter;?></a></td>
+                        <td><u><a href="https://twitter.com/<?php echo str_replace("@", "", $member->twitter);?>"><?php echo $member->twitter;?></a></u></td>
                     <?php } ?>
                 </tr>
                 <tr>
