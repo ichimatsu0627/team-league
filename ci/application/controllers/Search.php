@@ -13,6 +13,9 @@ class Search extends Base_controller
     const SEARCH_TYPE_MEMBER = 1;
     const SEARCH_TYPE_TEAM   = 2;
 
+    const SEARCH_MMR_MIN = 0;
+    const SEARCH_MMR_MAX = 9999;
+
     const ALL_PAGE_LIMIT = 3;
 
     /**
@@ -57,6 +60,8 @@ class Search extends Base_controller
     {
         $keyword = $this->input->post("keyword");
         $ranks = $this->input->post("ranks");
+        $mmr_from = $this->input->post("mmr_from");
+        $mmr_to   = $this->input->post("mmr_to");
 
         $conditions = [];
 
@@ -75,6 +80,27 @@ class Search extends Base_controller
             }
         }
 
+        if (!empty($mmr_from))
+        {
+            $conditions["mmr_from"] = $mmr_from;
+        }
+
+        if (!empty($mmr_to))
+        {
+            $conditions["mmr_to"] = $mmr_to;
+        }
+
+        // 表示用
+        $from = $conditions["mmr_from"] ?? null;
+        $to   = $conditions["mmr_to"]   ?? null;
+        if (!empty($from) || !empty($to))
+        {
+            $conditions["mmr avr"] = "";
+            $conditions["mmr avr"] .= $from ?: "";
+            $conditions["mmr avr"] .= "〜";
+            $conditions["mmr avr"] .= $to ?: "";
+        }
+
         $this->view["members"]    = $this->member_lib->search_members($conditions, DEFAULT_PAGER_PER, ($page - 1) * DEFAULT_PAGER_PER);
         $this->view["all"]        = $this->member_lib->count_search_members($conditions);
         $this->view["page"]       = $page;
@@ -91,13 +117,36 @@ class Search extends Base_controller
      */
     public function team($page = 1)
     {
-        $keyword = $this->input->post("keyword");
+        $keyword  = $this->input->post("keyword");
+        $mmr_from = $this->input->post("mmr_from");
+        $mmr_to   = $this->input->post("mmr_to");
 
         $conditions = [];
 
         if (!empty($keyword))
         {
             $conditions["keyword"] = $keyword;
+        }
+
+        if (!empty($mmr_from))
+        {
+            $conditions["mmr_from"] = $mmr_from;
+        }
+
+        if (!empty($mmr_to))
+        {
+            $conditions["mmr_to"] = $mmr_to;
+        }
+
+        // 表示用
+        $from = $conditions["mmr_from"] ?? null;
+        $to   = $conditions["mmr_to"]   ?? null;
+        if (!empty($from) || !empty($to))
+        {
+            $conditions["mmr avr"] = "";
+            $conditions["mmr avr"] .= $from ?: "";
+            $conditions["mmr avr"] .= "〜";
+            $conditions["mmr avr"] .= $to ?: "";
         }
 
         $this->view["teams"]      = $this->team_lib->search_teams($conditions, DEFAULT_PAGER_PER, ($page - 1) * DEFAULT_PAGER_PER);

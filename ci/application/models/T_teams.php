@@ -30,6 +30,18 @@ class T_teams extends Tran_model
             $conditions_where .= "`name` LIKE ? AND ";
         }
 
+        if (isset($conditions["mmr_from"]) && !empty($conditions["mmr_from"]))
+        {
+            $params[] = $conditions["mmr_from"];
+            $conditions_where .= "`standard_mmr_avr` >= ? AND ";
+        }
+
+        if (isset($conditions["mmr_to"]) && !empty($conditions["mmr_to"]))
+        {
+            $params[] = $conditions["mmr_to"];
+            $conditions_where .= "`standard_mmr_avr` <= ? AND ";
+        }
+
         $sql = "
             SELECT
               *

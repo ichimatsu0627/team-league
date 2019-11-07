@@ -1,20 +1,27 @@
 <div class="container">
 
-    <h5>Teams</h5>
+    <h5>Teams <label id="toggle-label" for="toggle-input"><u>▼</u></label></h5>
+    <input type="checkbox" id="toggle-input">
 
-    <form class="col-12" action="/search/team" method="POST">
+    <form class="toggle_show col-12" action="/search/team" method="POST">
         <input type="hidden" name="<?php echo $csrf['name'];?>" value="<?php echo $csrf['hash'];?>" />
         <div class="form-group row">
             <label for="name" class="col-12 col-lg-2 col-form-label text-left">Keyword</label>
             <input type="text" class="col-11 col-lg-6 form-control" name="keyword" placeholder="Keyword" value="<?php if (isset($conditions["keyword"])) { echo $conditions["keyword"]; } ?>">
+        </div>
+        <div class="form-group row">
+            <label for="name" class="col-12 col-lg-2 col-form-label text-left">MMR</label>
+            <input type="text" class="col-5 col-lg-3 form-control" name="mmr_from" placeholder="from" value="<?php if (isset($conditions["mmr_from"])) { echo $conditions["mmr_from"]; } ?>">
+            <input type="text" class="col-5 col-lg-3 form-control" name="mmr_to" placeholder="to" value="<?php if (isset($conditions["mmr_to"])) { echo $conditions["mmr_to"]; } ?>">
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-outline-success btn-round">Search</button>
         </div>
     </form>
 
-    <p>
+    <p class="small">
         <?php foreach($conditions as $condition_key => $condition) { ?>
+            <?php if (in_array($condition_key, ["mmr_from", "mmr_to"])) { continue; } ?>
             <?php if (is_array($condition)) { ?>
                 <?php echo $condition_key; ?>: <span style="color: darkorange; font-weight: bold;"><?php echo implode(", ",$condition);?></span><br>
             <?php } else { ?>

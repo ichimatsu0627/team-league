@@ -106,7 +106,8 @@ class Member_lib extends Base_lib
      */
     public function search_members($conditions, $limit = DEFAULT_PAGER_PER, $offset = 0)
     {
-        if (isset($conditions["ranks"]) && !empty($conditions["ranks"]))
+        if (isset($conditions["ranks"]) && !empty($conditions["ranks"]) ||
+            (isset($conditions["mmr_from"]) || isset($conditions["mmr_to"])))
         {
             $member_platforms = $this->CI->T_member_platforms->get_by_conditions($conditions);
 
