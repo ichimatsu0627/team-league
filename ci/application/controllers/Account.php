@@ -321,7 +321,7 @@ class Account extends Base_controller
             $this->_redirect("/account/login_form");
         }
 
-        $this->login_lib->refresh();
+        $this->login_lib->refresh($this->member_id);
 
         $this->_redirect("/account/login_form?c=".Page::CODE_LOGOUT);
     }

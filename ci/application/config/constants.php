@@ -94,6 +94,8 @@ define("DEFAULT_PAGER_PER", 10);
 define("SESSION_KEY_MEMBER", "member");
 define("SESSION_KEY_LOGIN_ID", "login_id");
 
+define("SESSION_EXPIRED_H", 6);
+
 // Member
 define("USER_ID_NAME", "ID");
 define("USER_LOGIN_ID_NAME", "Login ID");

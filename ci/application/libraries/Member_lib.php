@@ -161,15 +161,6 @@ class Member_lib extends Base_lib
     }
 
     /**
-     * get_id_by_session
-     * @return object|null
-     */
-    public function get_id_by_session()
-    {
-        return $this->CI->session->userdata(self::SESSION_KEY);
-    }
-
-    /**
      * 入力値 チェック
      * @param array $data
      * @return bool

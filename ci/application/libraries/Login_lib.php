@@ -6,8 +6,8 @@ require_once(APPPATH."libraries/Base_lib.php");
  */
 class Login_lib extends Base_lib
 {
-    protected $_libraries = [
-        "member_lib",
+    protected $_models = [
+        "T_login_sessions"
     ];
 
     private $nologin_page = [
@@ -39,13 +39,32 @@ class Login_lib extends Base_lib
     }
 
     /**
-     * save
-     * @param $t_member
+     * get_id
+     * @return id|null
      */
-    public function save($member_data)
+    public function get_id()
     {
+        // セッションから取得
+        $token = $this->CI->session->userdata(SESSION_KEY_MEMBER);
+
+        return $this->CI->T_login_sessions->get_member_id_by_token($token);
+    }
+
+    /**
+     * save
+     * @param $id
+     */
+    public function save($id)
+    {
+        if ($this->CI->T_login_sessions->has_token_by_member_id($id))
+        {
+            $this->CI->T_login_sessions->reflesh($id);
+        }
+
+        $token = $this->CI->T_login_sessions->register($id);
+
         // セッション保存
-        $this->CI->session->set_userdata(Member_lib::SESSION_KEY, $member_data);
+        $this->CI->session->set_userdata(SESSION_KEY_MEMBER, $token);
     }
 
     /**
@@ -54,15 +73,29 @@ class Login_lib extends Base_lib
      */
     public function validate()
     {
-        return $this->CI->session->has_userdata(Member_lib::SESSION_KEY);
+        $token = $this->CI->session->userdata(SESSION_KEY_MEMBER);
+
+        if (empty($token))
+        {
+            return false;
+        }
+
+        $id = $this->CI->T_login_sessions->get_member_id_by_token($token);
+        if (empty($id))
+        {
+            return false;
+        }
+
+        return true;
     }
 
     /**
      * refresh
      */
-    public function refresh()
+    public function refresh($id)
     {
-        $this->CI->session->unset_userdata(Member_lib::SESSION_KEY);
+        $this->CI->T_login_sessions->reflesh($id);
+        $this->CI->session->unset_userdata(SESSION_KEY_MEMBER);
     }
 
     /**

@@ -109,7 +109,7 @@ class Base_controller extends CI_Controller
      */
     private function set_member_id()
     {
-        $this->member_id = $this->member_lib->get_id_by_session();
+        $this->member_id = $this->login_lib->get_id();
         $this->view["member_id"] = $this->member_id;
     }
 

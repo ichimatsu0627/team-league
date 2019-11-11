@@ -98,23 +98,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * ---- models ----
  * @property M_platforms        $M_platforms
- * @property T_members          $T_members
+ * @property T_login_sessions   $T_login_sessions
  * @property T_member_locks     $T_member_locks
  * @property T_member_platforms $T_member_platforms
- * @property T_teams            $T_teams
- * @property T_team_requests    $T_team_requests
+ * @property T_members          $T_members
  * @property T_team_locks       $T_team_locks
  * @property T_team_members     $T_team_members
+ * @property T_team_requests    $T_team_requests
+ * @property T_teams            $T_teams
  *
  * ---- libraries ----
  * @property Layout           $layout
- * @property Page             $page
- * @property Steam            $steam
  * @property Login_lib        $login_lib
  * @property Member_lib       $member_lib
- * @property Team_lib         $team_lib
- * @property Platform_lib     $platform_lib
  * @property Notice_lib       $notice_lib
+ * @property Page             $page
+ * @property Platform_lib     $platform_lib
+ * @property Scraping         $scraping
+ * @property Steam            $steam
+ * @property Team_lib         $team_lib
  */
 class CI_Controller {
 
