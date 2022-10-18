@@ -19,7 +19,7 @@ class Scraping extends Base_lib
      */
     public function __construct()
     {
-        $this->client = new Client();
+        // $this->client = new Client();
     }
 
     /**
